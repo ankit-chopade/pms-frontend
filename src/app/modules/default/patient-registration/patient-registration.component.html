@@ -1,0 +1,73 @@
+<mat-card-content>
+    <div fxLayoutAlign="center center" fxFlexFill>
+        <form [formGroup]="patientRegistration" (submit)="submitregistrationForm()">
+            <div fxLayoutAlign="center center" fxFlexFill>
+                <h1>Patient Registration</h1>
+            </div>
+            <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+            <mat-form-field appearance="fill" class="title">
+                <mat-label>Title</mat-label>
+                <mat-select>
+                  <mat-option value="physician">Mr.</mat-option>
+                  <mat-option value="nurse">Ms.</mat-option>
+                  <mat-option value="admin">Mrs.</mat-option>
+                  <mat-option value="admin">Dr.</mat-option>
+                </mat-select>
+              </mat-form-field>
+             
+              <mat-form-field appearance="fill" >
+                <mat-label >First Name</mat-label>
+                <input matInput [(ngModel)]="firstname" formControlName="firstname" required>
+                <span *ngIf="patientRegistration.controls['firstname'].invalid && patientRegistration.controls['firstname'].dirty" class="error">Please enter  First Name</span>
+              </mat-form-field>
+             
+              <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput [(ngModel)]="lastName" formControlName="lastName" required>
+                <span *ngIf="patientRegistration.controls['lastName'].invalid && patientRegistration.controls['lastName'].dirty" class="error">Please enter  Last Name</span>
+              </mat-form-field>
+            </div>
+              <br>
+            <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+            <mat-form-field appearance="fill" class="dob">
+                <mat-label>DOB:</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Email address</mat-label>
+                <input matInput placeholder="Ex. pat@example.com" [(ngModel)]="email" formControlName="email" required>
+                <span *ngIf="patientRegistration.controls['lastName'].invalid && patientRegistration.controls['lastName'].dirty" class="error">Please enter Email Address</span>
+            </mat-form-field>                                      
+              
+            <mat-form-field appearance="fill" >
+                <mat-label>Contact number</mat-label>
+                <input matInput type="number" [(ngModel)]="cnumber" formControlName="cnumber" required>
+                <span *ngIf="patientRegistration.controls['cnumber'].invalid && patientRegistration.controls['cnumber'].dirty" class="error">Please enter proper contact number</span>
+            </mat-form-field>
+            </div>
+            <div fxLayout ="row" fxLayoutGap="8%" fxLayoutAlign="center center" fxLayout.xs="column" >
+              <mat-form-field appearance="fill">
+                <mat-label>Enter password</mat-label>
+                <input matInput [(ngModel)]="password_reg" formControlName="password_reg" required type="password"> 
+                <span *ngIf="patientRegistration.controls['password_reg'].invalid && patientRegistration.controls['password_reg'].dirty" class="error">password should be 1 Uppercase 1 Lowercase and one numeric value</span>
+              </mat-form-field>                          
+           
+              <mat-form-field appearance="fill">
+                <mat-label>Confirm password</mat-label>
+                  <input matInput [(ngModel)]="confirmPassword_reg" formControlName="confirmPassword_reg" required type="password" (change)="checkpwd()">
+                  <span *ngIf="patientRegistration.controls['confirmPassword_reg'].invalid && patientRegistration.controls['confirmPassword_reg'].dirty || flag_pwd==false" class="error">Password is not matching</span>
+                </mat-form-field>
+            </div>
+              <!-- <span *ngIf="patientRegistration.hasError('notSame')" class="error">password not match</span> -->
+              <br>
+              <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+                <button [disabled]="patientRegistration.invalid" mat-raised-button color='primary'>Submit</button>
+                <button mat-raised-button color='primary'routerLink="/login">Login</button>
+                
+              </div>
+        </form>
+    </div>
+</mat-card-content>

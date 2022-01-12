@@ -1,0 +1,32 @@
+<mat-card-content>
+    <div fxLayoutAlign="center center" fxFlexFill>
+
+        <form [formGroup]="form" (submit)="submitloginForm()">
+            <div fxLayoutAlign="center center" fxFlexFill>
+                <h1>Login</h1>
+            </div>
+
+            <mat-form-field appearance="fill" class="username">
+                <mat-label>Username</mat-label>
+                <input type="email" matInput formControlName="username" required  name="username">
+                <span *ngIf="checkTouchedAndInvalid('username')"
+                    class="error">{{errormessage.USERNAME_REQUIRED}} </span>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="fill" class="password">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password" required 
+                    name="password">
+                <span *ngIf="checkTouchedAndInvalid('password')"
+                    class="error">{{errormessage.PASSWORD_REQUIRED}}</span>
+            </mat-form-field><br>
+            <div fxLayout="row" fxLayoutGap="90px">
+                <a routerLink="/forgot">Forgot Password</a> <a routerLink="/change">Change Password</a>
+            </div><br>
+            <div fxLayoutAlign="center center" fxLayoutGap="30px">
+                <button [disabled]="form.invalid" mat-raised-button color="primary">Login </button>
+                <button mat-raised-button color="primary" routerLink="/register">Register</button>
+            </div>
+        </form>
+    </div>
+</mat-card-content>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+  <div class="content-body">
+    <img src="../../assets/logo.png" style=" width: 10%;height: 15%; margin-top: 0.5%;">
+    <div fxLayoutAlign="center center" fxFlexFill >
+        <mat-card fxFlex="80" >
+            <mat-card-content>
+                <div fxLayout ="row" fxLayoutGap="10px" fxLayout.xs="column">
+                    <!-- Mat Card 1.1-->
+                    <mat-card fxFlex="50%" fxLayoutAlign="center center" id="imgchange">
+                        <mat-card-content>
+                            <div fxLayoutAlign="center center" fxFlexFill *ngIf = "imgvar == 1">
+                                <img src="../../assets/hospital1.jpg"  class="img-login">
+                           </div>
+                           <div fxLayoutAlign="center center" fxFlexFill *ngIf = "imgvar == 2">
+                             <img src="../../assets/hospital2.jfif"  class="img-login">
+                           </div>
+                            <div fxLayoutAlign="center center" fxFlexFill *ngIf = "imgvar == 3">
+                             <img src="../../assets/hospital3.jpg"  class="img-login">
+                            </div>
+                       </mat-card-content>
+                    </mat-card>
+                    <!-- Mat Card 2 dyanamic-->
+                    <mat-card fxFlex="70%">
+                        <router-outlet></router-outlet>
+                    </mat-card>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+        
+  </div>
+</body>
+
+</html>
