@@ -6,6 +6,7 @@ import { FormBaseController } from '../../common/utility/form-base-controller';
 import { formErrorMessages } from '../constant/message.constant';
 import { ApiService } from '../service/api.service';
 import { FormUtilServie } from '../service/form-util.service';
+import { NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { FormUtilServie } from '../service/form-util.service';
 export class LoginComponent extends FormBaseController<any> {
 
   errormessage = formErrorMessages;
-  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router) {
+  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
     super(formConfig.loginForm, '')
   }
   ngOnInit(): void {
@@ -31,12 +32,11 @@ export class LoginComponent extends FormBaseController<any> {
     this.apiCommonService.login(param).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          console.log(res)
           sessionStorage.setItem('roleId', res.result["roleId"])
-          console.log(sessionStorage)
           this.router.navigate(['../dashboard'])
         }
         else {
+          this.notifyService.showError("Invalid Username and Password","Error");
           console.log("Login Failed")
         }
       })

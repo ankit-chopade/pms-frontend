@@ -40,12 +40,11 @@ submitregistrationForm()
   this.apiCommonService.registration(param).subscribe(
     res => {
       if (res && res['result'] && res['status'] === 200) {
-        this.notifyService.showSuccess("Login Successful","Success")
+        this.notifyService.showSuccess("Registered Successfully","Success")
         this.router.navigate(['../login'])
       }
       else {
         this.notifyService.showError("Please try again","Error")
-        console.log("Login Failed")
       }
     })
 }
