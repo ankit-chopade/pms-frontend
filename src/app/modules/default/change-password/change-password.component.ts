@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormBaseController } from '../../common/utility/form-base-controller';
+import { formErrorMessages } from '../constant/message.constant';
+import { ApiService } from '../service/api.service';
 import { FormUtilServie } from '../service/form-util.service';
+import { NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-change-password',
@@ -11,26 +15,39 @@ import { FormUtilServie } from '../service/form-util.service';
 export class ChangePasswordComponent extends FormBaseController<any>{
 
    flag_pwd:boolean=true;
-  // password_reg:string="";
-  // confirmPassword_reg:string="";
-  // form_user:number=1;
-  // //change password
-  // change_email:string="";
-  // password_change_pwd:string="";
-  // confirmPassword_change_pwd:string="";
-  constructor(private formConfig:FormUtilServie){
-    super(formConfig.changePassForm,'')
+   errormessage = formErrorMessages;
+
+   constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
+    super(formConfig.changePasswordForm,'')
   }
 
 
   submitchangePassword()
   {
-      //  let email= this.changepassword_formgrp.controls["change_email"].value
+    const param = {
+      emailId: this.getControlValue('username'),
+      oldPassword: this.getControlValue('oldpassword'),
+      newPassword: this.getControlValue('password'),
+
+    }
+
+    this.apiCommonService.changePassword(param).subscribe(
+      res => {
+        if (res && res['result'] && res['status'] === 200) {
+          sessionStorage.setItem('roleId', res.result["roleId"]);
+          this.notifyService.showSuccess("Your Password has been changed successfully","Success")
+          this.router.navigate(['../login'])
+        }
+        else {
+          this.notifyService.showError("Please try again","Error")
+          console.log("Login Failed")
+        }
+      })
   }
 
   checkpwd()
   {
-     if(this.getControlValue('password_change_pwd') ==this.getControlValue('confirmPassword_change_pwd'))
+     if(this.getControlValue('password') ==this.getControlValue('confirmpassword'))
      {
        this.flag_pwd =true;
      }

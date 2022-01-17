@@ -16,12 +16,20 @@ export class ApiService {
 
   login(param: any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.VALIDATE_USER}`,param);
-
   }
   getMenus(param: any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_MENUS}`,param);
-
   }
 
+  changePassword(param: any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.CHANGE_PASSWORD}`,param);
+  }
+
+  forgotPassword(param: any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.FORGOT_PASSWORD}`,param);
+  }
+  registration(param: any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.REGISTRATION}`,param);
+  }
  
 }

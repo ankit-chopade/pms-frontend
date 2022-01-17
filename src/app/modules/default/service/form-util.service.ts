@@ -15,10 +15,26 @@ export class FormUtilServie {
         password: ['', Validators.required]
     });
 
-    changePassForm = this.fb.group({
-        change_email: ["", Validators.email],
-        password_change_pwd: ["", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
-        confirmPassword_change_pwd: ["", Validators.required],
+    changePasswordForm = this.fb.group({
+        username: ["", Validators.email],
+        oldpassword: ["", Validators.required],
+        password: ["", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
+        confirmpassword: ["", Validators.required],
+    });
+
+    forgotPasswordForm = this.fb.group({
+        username: ["", Validators.email]
+    });
+
+    registrationForm = this.fb.group({
+        title:["",Validators.required],
+        firstname:["",Validators.required],
+        lastname: ["", Validators.required],
+        dob: ["", Validators.required],
+        username :   ["", Validators.email],
+        contactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
+        password:  ["", [Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
+        confirmpassword: ["", Validators.required],
     });
 
 

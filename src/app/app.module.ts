@@ -9,6 +9,7 @@ import { HeaderComponent } from './modules/dashboard/header/header.component';
 import { SidebarComponent } from './modules/dashboard/sidebar/sidebar.component';
 import { FooterComponent } from './modules/dashboard/footer/footer.component';
 import { LayoutComponent } from './modules/dashboard/layout/layout.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { LayoutComponent } from './modules/dashboard/layout/layout.component';
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-IN'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,17 +6,16 @@
                 <h1>Login</h1>
             </div>
 
-            <mat-form-field appearance="fill" class="username">
+            <mat-form-field appearance="outline" class="username">
                 <mat-label>Username</mat-label>
-                <input type="email" matInput formControlName="username" required  name="username">
+                <input type="email" matInput formControlName="username" required>
                 <span *ngIf="checkTouchedAndInvalid('username')"
                     class="error">{{errormessage.USERNAME_REQUIRED}} </span>
             </mat-form-field><br>
 
-            <mat-form-field appearance="fill" class="password">
+            <mat-form-field appearance="outline" class="password">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput formControlName="password" required 
-                    name="password">
+                <input type="password" matInput formControlName="password" required>
                 <span *ngIf="checkTouchedAndInvalid('password')"
                     class="error">{{errormessage.PASSWORD_REQUIRED}}</span>
             </mat-form-field><br>

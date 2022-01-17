@@ -1,24 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBaseController } from '../../common/utility/form-base-controller';
+import { formErrorMessages } from '../constant/message.constant';
+import { ApiService } from '../service/api.service';
+import { FormUtilServie } from '../service/form-util.service';
+import { NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent {
-form_user:number=1;
-  // Forgot Password
-forgot_email:string="";
-forgotPassword_formgrp : FormGroup = new FormGroup({
-  forgot_email :  new FormControl("", Validators.email),
- },
-  
-);
+export class ForgotPasswordComponent extends FormBaseController<any>{
+  errormessage = formErrorMessages;
+
+  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
+    super(formConfig.forgotPasswordForm, '')
+  }
 
 submitforgotPassword()
 {
+  const param = {
+    emailId: this.getControlValue('username'),
+  }
 
+  this.apiCommonService.forgotPassword(param).subscribe(
+    res => {
+      if (res && res['result'] && res['status'] === 200) {
+        this.notifyService.showSuccess("Email has been sent","Success")
+        this.router.navigate(['../login'])
+      }
+      else {
+        this.notifyService.showError("Please try again","Error")
+        console.log("Login Failed")
+      }
+    })
 }
 
 
