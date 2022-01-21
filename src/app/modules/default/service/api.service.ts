@@ -11,25 +11,32 @@ import { APIConst } from '../constant/api.constant';
 export class ApiService {
 
   private baseUrl = environment.baseUrl;
+
+
   constructor(private httpClient: HttpClient) {
   }
 
   login(param: any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.VALIDATE_USER}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.VALIDATE_USER}`, param);
   }
   getMenus(param: any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_MENUS}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_MENUS}`, param);
   }
 
   changePassword(param: any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.CHANGE_PASSWORD}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.CHANGE_PASSWORD}`, param);
   }
 
   forgotPassword(param: any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.FORGOT_PASSWORD}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.FORGOT_PASSWORD}`, param);
   }
   registration(param: any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.REGISTRATION}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.REGISTRATION}`, param);
   }
- 
+  getMenusHeaders(param: any,header:any) {
+    console.log(JSON.stringify(header))
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_MENUS}`, param,header);
+  }
+
+
 }
