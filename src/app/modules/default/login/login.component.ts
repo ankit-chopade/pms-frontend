@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBaseController } from '../../common/utility/form-base-controller';
+import { StorageService } from '../../common/services/storage.service';
 import { formErrorMessages } from '../constant/message.constant';
 import { ApiService } from '../service/api.service';
 import { FormUtilServie } from '../service/form-util.service';
@@ -13,12 +14,13 @@ import { NotificationService } from '../service/notification.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends FormBaseController<any> {
+export class LoginComponent extends FormBaseController<any>  {
 
   errormessage = formErrorMessages;
   constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService,private route:ActivatedRoute) {
     super(formConfig.loginForm, '')
   }
+
   ngOnInit(): void {
 
   }
@@ -32,7 +34,7 @@ export class LoginComponent extends FormBaseController<any> {
     this.apiCommonService.login(param).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          sessionStorage.setItem('roleId', res.result["roleId"])
+          StorageService.setSessionDetails(res['result'])
           this.router.navigate(['../dashboard'])
         }
         else {
@@ -41,6 +43,7 @@ export class LoginComponent extends FormBaseController<any> {
         }
       })
   }
+
 }
 
 

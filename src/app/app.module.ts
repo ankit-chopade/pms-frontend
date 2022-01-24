@@ -5,29 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
-import { HeaderComponent } from './modules/dashboard/header/header.component';
-import { SidebarComponent } from './modules/dashboard/sidebar/sidebar.component';
-import { FooterComponent } from './modules/dashboard/footer/footer.component';
-import { LayoutComponent } from './modules/dashboard/layout/layout.component';
+
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ConfirmPasswordDirective } from './shared/confirm-password.directive';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorsService } from './modules/common/services/http-interceptor.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    FooterComponent,
-    LayoutComponent,
     ConfirmPasswordDirective,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-IN'}],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-IN' },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorsService, multi: true },
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
