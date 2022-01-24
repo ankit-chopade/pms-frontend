@@ -55,21 +55,23 @@
             <div fxLayout ="row" fxLayoutGap="8%" fxLayoutAlign="center center" fxLayout.xs="column" >
               <mat-form-field appearance="outline" class="password">
                 <mat-label>Password</mat-label>
-                <input type="password" matInput formControlName="password" required>
+                <input type="password" matInput formControlName="password" required [(ngModel)]="password">
                 <span *ngIf="checkTouchedAndInvalid('password')"
                     class="error">{{errormessage.PASSWORD_REQUIRED}}</span>
             </mat-form-field><br>                          
            
             <mat-form-field appearance="outline">
               <mat-label>Confirm Password</mat-label>
-                <input matInput formControlName="confirmpassword" required type="password" (change)="checkpwd()">
-                <span *ngIf="checkTouchedAndInvalid('confirmpassword') || flag_pwd==false" class="error">
+                <input matInput formControlName="confirmpassword"  required type="password"  [(ngModel)]="confirmpassword">
+                <span *ngIf="checkTouchedAndInvalid('confirmpassword')" class="error">
+                    {{errormessage.PASSWORD_REQUIRED}} </span>
+                <span *ngIf="password!=confirmpassword" class="error">
                     {{errormessage.PASSWORD_MATCH}} </span>
             </mat-form-field><br>
             </div>
               <br>
               <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center">
-                <button [disabled]="form.invalid" mat-raised-button color='primary'>Submit</button>
+                <button [disabled]="!(form.invalid==false  && (password==confirmpassword)==true)" mat-raised-button color='primary'>Submit</button>
                 <button mat-raised-button color='primary'routerLink="/login">Login</button>
                 
               </div>

@@ -5,6 +5,7 @@ import { DefaultComponent } from './default/default.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+import { RegistrationdeactivateauthguardService } from './service/registrationdeactivateauthguard.service';
 
 const routes: Routes = [
 {
@@ -12,7 +13,7 @@ const routes: Routes = [
    component: DefaultComponent,
    children: [
     { 
-      path: 'register', component: PatientRegistrationComponent
+      path: 'register', component: PatientRegistrationComponent,canDeactivate:[RegistrationdeactivateauthguardService]
     },
     { 
       path: 'forgot', component: ForgotPasswordComponent

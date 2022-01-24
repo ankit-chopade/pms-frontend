@@ -10,6 +10,7 @@ import { SidebarComponent } from './modules/dashboard/sidebar/sidebar.component'
 import { FooterComponent } from './modules/dashboard/footer/footer.component';
 import { LayoutComponent } from './modules/dashboard/layout/layout.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ConfirmPasswordDirective } from './shared/confirm-password.directive';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     SidebarComponent,
     FooterComponent,
     LayoutComponent,
+    ConfirmPasswordDirective,
   ],
   imports: [
     BrowserModule,

@@ -16,6 +16,8 @@ export class PatientRegistrationComponent extends FormBaseController<any>{
 
   flag_pwd:boolean=true;
   errormessage = formErrorMessages;
+  password:string="";
+  confirmpassword:string="";
   constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
     super(formConfig.registrationForm, '')
   }
@@ -47,17 +49,28 @@ submitregistrationForm()
         this.notifyService.showError("Please try again","Error")
       }
     })
+
 }
 
-checkpwd()
-  {
-     if(this.getControlValue('password') ==this.getControlValue('confirmpassword'))
-     {
-       this.flag_pwd =true;
-     }
-     else{
-      this.flag_pwd=false;
-    }
-  }
+confirmExit():boolean
+{
+  return confirm("Do you wish to leave this page?");
+}
+
+// checkpwd()
+//   {
+//     if(this.getControlValue('password')=="" && this.getControlValue('confirmpassword')=="")
+//     return false
+    
+//      if(this.getControlValue('password') ==this.getControlValue('confirmpassword'))
+//      {
+//        //this.flag_pwd =true;
+//        return true;
+//      }
+//      else{
+//       //this.flag_pwd=false;
+//       return false;
+//     }
+//   }
 
 }

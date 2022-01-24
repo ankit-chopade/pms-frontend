@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormBaseController } from '../../common/utility/form-base-controller';
 import { formErrorMessages } from '../constant/message.constant';
@@ -16,7 +16,7 @@ import { NotificationService } from '../service/notification.service';
 export class LoginComponent extends FormBaseController<any> {
 
   errormessage = formErrorMessages;
-  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
+  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService,private route:ActivatedRoute) {
     super(formConfig.loginForm, '')
   }
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class LoginComponent extends FormBaseController<any> {
   submitloginForm() {
 
     const param = {
-      firstName: this.getControlValue('username'),
+      emailId: this.getControlValue('username'),
       password: this.getControlValue('password')
     }
 
@@ -36,7 +36,7 @@ export class LoginComponent extends FormBaseController<any> {
           this.router.navigate(['../dashboard'])
         }
         else {
-          this.notifyService.showError("Invalid Username and Password","Error");
+          this.notifyService.showError("Invalid Username or Password","Error");
           console.log("Login Failed")
         }
       })

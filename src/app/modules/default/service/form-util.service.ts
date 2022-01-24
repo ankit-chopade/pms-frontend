@@ -34,7 +34,7 @@ export class FormUtilServie {
         username :   ["", Validators.email],
         contactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
         password:  ["", [Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
-        confirmpassword: ["", Validators.required],
+        confirmpassword: ["", Validators.required,],
     });
 
 
