@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Allergy ID</mat-label>
+        <mat-select  [(value)]="selectedId" (selectionChange)="getAllergyDetailsById()" formControlName="allergyid" >
+          <mat-option *ngFor="let allergy of allergydata" [value]="allergy.allergyDetailsId" >
+            {{allergy.allergyDetailsId}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Allergy Type</mat-label>
+        <mat-select (selectionChange)="getAllergyDetailsByType()" [(value)]="selectedType" formControlName="allergytype" >
+            <mat-option *ngFor="let type of allergyTypes" [value]="type" >{{type}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Allergy Name</mat-label>
+        <mat-select (selectionChange)="getAllergyDetailsByName()" [(value)]="selectedName" formControlName="allergyname" >
+            <mat-option *ngFor="let allergy of allergydata" [value]="allergy.allergyName" >
+                {{allergy.allergyName}}
+              </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <!-- </div>
+                <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">     -->
+    <mat-form-field appearance="outline">
+        <mat-label>Allergy Description </mat-label>
+        <textarea matInput formControlName="allergydesc"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Allergy Clinical Information </mat-label>
+        <input matInput formControlName="allergyclinicalinfo">
+    </mat-form-field>
+</form>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="add()" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+
+</div>

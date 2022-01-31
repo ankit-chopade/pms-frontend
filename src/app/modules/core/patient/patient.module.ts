@@ -5,12 +5,14 @@ import { PatientRoutingModule } from './patient-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AllergyDetailsDialogComponent } from './patient-details/allergy-details-dialog/allergy-details-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     PatientDetailsComponent,
+    AllergyDetailsDialogComponent,
   ],
   imports: [
     CommonModule,

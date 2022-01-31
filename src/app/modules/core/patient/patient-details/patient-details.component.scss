@@ -22,7 +22,7 @@
 
 .dob
 {
-    width: 30%;
+    width: 23%;
 }
     
 
@@ -31,4 +31,14 @@
     {
       width: 37%;
     }
+}
+
+.error 
+{   
+    color : Red; font-size: 12px; 
+}
+
+table{
+    width: 100%;
+    overflow: auto;
 }

@@ -18,14 +18,6 @@ export class SidebarComponent implements OnInit {
   getMenus() {
    
     let roleId=Number(sessionStorage.getItem('roleId')?.toString())
-    let header = {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Access-Control-Allow-Origin', '*')
-        .set('Access-Control-Allow-Headers', 'Content-Type')
-        .set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT')
-        .set('Authorization', `${sessionStorage.getItem('token')}`)
-    }
      const param = {
       roleId:roleId
     }

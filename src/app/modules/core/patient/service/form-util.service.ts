@@ -38,4 +38,13 @@ export class FormUtilServie {
         allergydesc:["",Validators.required],
         allergyclinicalinfo:["",Validators.required],
     });
+
+    allergyDetailsForm=this.fb.group({
+        allergy_details:["",Validators.required],
+        allergyid:["",Validators.required],
+        allergytype:["",Validators.required],
+        allergyname:["",Validators.required],
+        allergydesc:["",Validators.required],
+        allergyclinicalinfo:["",Validators.required],
+    });
 }

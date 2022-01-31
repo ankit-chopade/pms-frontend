@@ -21,6 +21,8 @@ export class LoginComponent extends FormBaseController<any>  {
     super(formConfig.loginForm, '')
   }
 
+  user:string="kvmanish.chaudhary@gmail.com";
+
   ngOnInit(): void {
 
   }
@@ -41,7 +43,11 @@ export class LoginComponent extends FormBaseController<any>  {
           this.notifyService.showError("Invalid Username or Password","Error");
           console.log("Login Failed")
         }
+      },
+      (err=>{
+        this.notifyService.showError("Invalid Username or Password","Error");
       })
+      )
   }
 
 }
