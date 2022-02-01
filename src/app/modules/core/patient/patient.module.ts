@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AllergyDetailsDialogComponent } from './patient-details/allergy-details-dialog/allergy-details-dialog.component';
+import { AllergyFilterPipe } from './patient-details/search-filter/allergy-filter.pipe';
 
 
 
@@ -13,6 +14,7 @@ import { AllergyDetailsDialogComponent } from './patient-details/allergy-details
   declarations: [
     PatientDetailsComponent,
     AllergyDetailsDialogComponent,
+    AllergyFilterPipe,
   ],
   imports: [
     CommonModule,

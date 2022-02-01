@@ -94,7 +94,7 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Home Address</mat-label>
-                            <input matInput placeholder="Ex. pat@example.com" formControlName="homeaddress" required
+                            <input matInput formControlName="homeaddress" required
                                 type="text">
                             <span *ngIf="checkTouchedAndInvalid('homeaddress')"
                                 class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </span>
@@ -149,7 +149,7 @@
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-checkbox formControlName="addrsameaspatient">Address same as Patient </mat-checkbox>
+                        <mat-checkbox formControlName="addrsameaspatient" [(ngModel)]="addrsameaspatient" (change)="sameAddres()">Address same as Patient </mat-checkbox>
                         <mat-form-field appearance="outline">
                             <mat-label>Home Address</mat-label>
                             <input matInput placeholder="Ex. pat@example.com"
@@ -184,33 +184,6 @@
                     </mat-radio-group><br>
                 </div><br>
                 <div *ngIf="allergy_details =='yes'">
-                    <!-- <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Allergy ID </mat-label>
-                                    <input matInput formControlName="allergyid">
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Allergy Type </mat-label>
-                                    <input matInput formControlName="allergytype">
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Allergy Name </mat-label>
-                                    <input matInput formControlName="allergyname">
-                                </mat-form-field>
-                            </div>
-                            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Allergy Description </mat-label>
-                                    <textarea matInput formControlName="allergydesc"></textarea>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Allergy Clinical Information </mat-label>
-                                    <input matInput formControlName="allergyclinicalinfo">
-                                </mat-form-field>
-                            </div> -->
                     <div fxLayoutAlign="end"><button mat-icon-button (click)="addAllergies()">
                             <mat-icon>add</mat-icon>
                         </button></div>

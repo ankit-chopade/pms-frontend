@@ -25,7 +25,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
 
   allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo'];
-
+  addrsameaspatient:string;
 
   allergydatasource: AllergyDetails[] = [];
   // allergy_details_dto: AllergyDetails[] = [];
@@ -105,4 +105,10 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   // }
 
   ngOnInit(): void { }
+
+  sameAddres(){
+    if(this.addrsameaspatient){
+      this.setControlValue("emergencycontacthomeaddress",this.getControlValue("homeaddress"))
+    }
+  }
 }

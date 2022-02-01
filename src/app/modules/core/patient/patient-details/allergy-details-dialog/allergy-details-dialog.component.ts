@@ -4,6 +4,8 @@ import { FormBaseController } from 'src/app/modules/common/utility/form-base-con
 import { AllergyDetails } from '../../models/AllergyDetails';
 import { FormUtilServie } from '../../service/form-util.service';
 import { ApiService } from '../../service/api.service';
+import { map, Observable, startWith } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -16,9 +18,11 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   allergydata: AllergyDetails[];
   allergydatBackup: AllergyDetails[];
   selectedId: string;
-  selectedType:string;
-  selectedName:string;
-  allergyTypes:string[] =['Animal', 'Bacteria airway', 'Bacteria skin', 'Contact', 'Drug', 'Food', 'Fungi', 'Insect', 'Mite', 'Parasite', 'Plant', 'Vaccine', 'Venom or Salivary', 'Others'];
+  selectedType: string;
+  selectedName: string;
+  allergyTypes: string[] = ['Animal', 'Bacteria airway', 'Bacteria skin', 'Contact', 'Drug', 'Food', 'Fungi', 'Insect', 'Mite', 'Parasite', 'Plant', 'Vaccine', 'Venom or Salivary', 'Others'];
+  flag: boolean = false;
+
   constructor(private apiCommonService: ApiService, private formConfig: FormUtilServie, public dialogRef: MatDialogRef<AllergyDetailsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: AllergyDetails) {
     super(formConfig.allergyDetailsForm);
     dialogRef.disableClose = true;
@@ -35,6 +39,8 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
     );
   }
 
+
+
   getAllergyDetailsById() {
     let allergyDataFromId = this.allergydata.filter(x => x.allergyDetailsId == this.selectedId);
     this.setControlValue('allergyname', allergyDataFromId[0].allergyName);
@@ -43,11 +49,22 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
     this.setControlValue('allergyclinicalinfo', allergyDataFromId[0].allergyClinicalInfo);
   }
 
-  getAllergyDetailsByType(){
-    if(this.allergydata.length < this.allergydatBackup.length){
-      this.allergydata=this.allergydatBackup;
+  getAllergyDetailsByType() {
+    this.allergydata = this.allergydatBackup;
+
+    if (this.selectedType != "Others") {
+      this.allergydata = this.allergydata.filter(x => x.allergyType == this.selectedType);
+      this.flag = false;
+
     }
-    this.allergydata = this.allergydata.filter(x => x.allergyType == this.selectedType);
+
+    else {
+      this.flag = true;
+      this.setControlValue('allergyid', "");
+      this.setControlValue('allergyname', "");
+      this.setControlValue('allergydesc', "");
+      this.setControlValue('allergyclinicalinfo', "");
+    }
 
   }
 
@@ -56,29 +73,24 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   }
 
   cancel() {
+    this.clear()
     this.dialogRef.close();
   }
+  clear() {
+    this.setControlValue('allergyid', "");
+    this.setControlValue('allergyname', "");
+    this.setControlValue('allergytype', "");
+    this.setControlValue('allergydesc', "");
+    this.setControlValue('allergyclinicalinfo', "");
+  }
 
-  getAllergyDetailsByName(){
+  getAllergyDetailsByName() {
     let allergyDataFromId = this.allergydata.filter(x => x.allergyName == this.selectedName);
     this.setControlValue('allergyid', allergyDataFromId[0].allergyDetailsId);
     this.setControlValue('allergytype', allergyDataFromId[0].allergyType);
     this.setControlValue('allergydesc', allergyDataFromId[0].allergyDescription);
     this.setControlValue('allergyclinicalinfo', allergyDataFromId[0].allergyClinicalInfo);
+
   }
-
-  // allergyDetails() {
-  //  if (this.allergydata == null) {
-  //     this.apiCommonService.getAllergyDetails().subscribe(
-  //       resp => {
-  //         if (resp['status'] === 200 && resp['result'] && resp != null) {
-  //           this.allergydata = resp['result'];
-  //           console.log(this.allergydata);
-  //         }
-  //       }
-  //     );
-  //   }
-  // }
-
 
 }

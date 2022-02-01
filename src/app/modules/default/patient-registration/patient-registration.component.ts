@@ -18,6 +18,7 @@ export class PatientRegistrationComponent extends FormBaseController<any>{
   errormessage = formErrorMessages;
   password:string="";
   confirmpassword:string="";
+  maxDate:Date=new Date();
   constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
     super(formConfig.registrationForm, '')
   }
