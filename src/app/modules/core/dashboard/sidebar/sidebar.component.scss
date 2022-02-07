@@ -3,7 +3,9 @@
         vertical-align: middle;
         margin-right: 20px;
     }
+    
 }
+
 
 
 .profile-card{
@@ -15,4 +17,9 @@
         object-fit: cover;
         border-radius: 50%;
     }
+}
+
+.mat-list-item:hover
+{    
+    background-color: rgb(88, 88, 252);
 }

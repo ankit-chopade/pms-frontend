@@ -1,0 +1,27 @@
+<!-- <ejs-dropdownlist id='ddlelement' #samples [fields]="fields" [itemTemplate]="itemTemplate" [valueTemplate]="valueTemplate" [dataSource]='physician' [(value)]='specialistselected' [(ngModel)]="specialistselected"  placeholder='Choose Specialist' (change)="specialistSelected()">
+  <ng-template #itemTemplate="" let-data="">
+    <span>{{ data.title }}  {{ data.firstName }} {{ data.lastName }}</span>
+</ng-template>
+<ng-template #valueTemplate="" let-data="">
+  <span>{{ data.title }} - {{ data.firstName}}</span>
+</ng-template>
+</ejs-dropdownlist> -->
+
+<mat-form-field appearance="legacy" class="title" >
+  <mat-label>Choose Specialist</mat-label>
+  <mat-select (selectionChange)="specialistSelected()" [(ngModel)]='specialistselected' >
+      <mat-option *ngFor="let data of physician" [value]="data.userId"> {{data.title}} {{data.firstName}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<!-- 
+<ejs-dropdownlist  placeholder='Choose Specialist' (selectionChange)="specialistSelected()" [(ngModel)]='specialistselected' *ngFor="let data of physician" [value]="data.userId"> {{data.title}} {{data.firstName}}
+
+</ejs-dropdownlist> -->
+
+
+
+<div class="control-section">
+  <ejs-schedule #scheduleObj width='100%' height='550px' [eventSettings]="eventSettings" 
+    (navigating)="onNavigating($event)" (actionComplete)="onActionComplete($event)" [readonly]="disable">
+  </ejs-schedule>
+</div>
