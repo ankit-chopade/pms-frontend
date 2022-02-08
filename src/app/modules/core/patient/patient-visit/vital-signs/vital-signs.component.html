@@ -1,0 +1,38 @@
+<br>
+<form [formGroup]="form">
+    <div>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline">
+                <mat-label>Height (in cm)</mat-label>
+                <input matInput type="number" [readonly]="disabled" formControlName="height" min="0" max="250">
+                <span></span>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <mat-label>Weight (in kg)</mat-label>
+                <input matInput type="number" [readonly]="disabled" formControlName="weight">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <mat-label>Blood Pressure (in mm Hg) </mat-label>
+                <input matInput type="number" [readonly]="disabled" formControlName="bloodPressure">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline">
+                <mat-label>Body Temperature (in Fahrenheit)</mat-label>
+                <input matInput type="number" [readonly]="disabled" formControlName="bodyTemperature">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Respiration Rate(in BPM)</mat-label>
+                <input matInput type="number" [readonly]="disabled" formControlName="respirationRate" value="20">
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center center"> 
+            <button mat-raised-button color="primary" (click)="saveVitalSignsClick()" [disabled] = 'disabled'>Submit</button>
+        </div>
+    <!-- <mat-form-field></mat-form-field> -->
+    </div>
+</form>

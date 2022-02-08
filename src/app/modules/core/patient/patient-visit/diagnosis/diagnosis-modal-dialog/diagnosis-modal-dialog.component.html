@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Diagnosis Details</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div fxLayoutGap="10px">
+        <mat-form-field  >
+            <mat-label>Diagnosis Code</mat-label>
+            <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" >
+            <mat-autocomplete name="pcode" #getCode="matAutocomplete">
+                <mat-option *ngFor="let value of diagCode | searchFilter : getSearchValueForCode()" value="{{value}}" on-focusout="getDiagnosisDescFromInp()">{{value}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <br>
+        <mat-form-field  >
+            <mat-label>Diagnosis Description</mat-label>
+            <input matInput type="text" formControlName="description" [matAutocomplete]="getDesc" on-focusout="getDiagnosisCodeFromInp()">
+            <mat-autocomplete name="pdesc" #getDesc="matAutocomplete">
+                <mat-option *ngFor="let value of diagDesc | searchFilter : getSearchValueForDescription()" value="{{value}}" >{{value}}</mat-option>
+                <!-- <mat-option value="other">Other</mat-option> -->
+            </mat-autocomplete>
+        </mat-form-field>
+        <br>
+            <div>
+            <mat-label>Diagnosis Depricated &nbsp;</mat-label><br>
+            <mat-radio-group  formControlName="isDepricated" name="pdepri" >
+                &nbsp;&nbsp;&nbsp;<mat-radio-button value="yes">Yes &nbsp;</mat-radio-button> 
+                <mat-radio-button value="no">No </mat-radio-button>
+            </mat-radio-group>
+              <br><br>
+            </div>
+        </div>
+    </form>
+<div mat-dialog-actions style="margin-bottom: 0;">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" (click)="submit()" cdkFocusInitial>Ok</button>
+</div>

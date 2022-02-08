@@ -1,0 +1,274 @@
+<div fxLayoutAlign="end">
+    <button mat-icon-button (click)="editButtonClick()">
+        <mat-icon>create</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveButtonClick()" [disabled]="disabled">
+        <mat-icon>save</mat-icon>
+    </button>
+</div>
+<form [formGroup]="form" (submit)="submitPatientDetailsForm()" >
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+        <div fxLayoutAlign="strech center" fxFlexFill class="box">
+            <mat-tab label="Patient Profile">
+                <br>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
+                    class="tabsmargin">
+                    <mat-form-field appearance="outline" class="title">
+                        <mat-label>Title</mat-label>
+                        <mat-select formControlName="title" [disabled]='disabled'>
+                            <mat-option value="Mr.">Mr.</mat-option>
+                            <mat-option value="Ms.">Ms.</mat-option>
+                            <mat-option value="Mrs.">Mrs.</mat-option>
+                            <mat-option value="Dr.">Dr.</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstname" required [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('firstname')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastname" required [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('lastname')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <mat-form-field appearance="outline" class="dob">
+                        <mat-label>DOB:</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob" required [disabled]="disabled">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Age</mat-label>
+                        <input matInput formControlName="age" type="number" required [disabled]="disabled">
+                        <span *ngIf="checkTouchedAndInvalid('age')" class="error">{{errormessage}}
+                        </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender" [disabled]='disabled'>
+                            <mat-option value="Male">Male</mat-option>
+                            <mat-option value="Female">Female</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Race</mat-label>
+                        <input matInput formControlName="race" type="text" required [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('race')" class="error">{{errormessage}}
+                        </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ethnicity </mat-label>
+                        <input matInput formControlName="ethnicity" type="text" required [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('ethnicity')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Languages Known </mat-label>
+                        <input matInput formControlName="languages" type="text" required [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('languages')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput placeholder="Ex. pat@example.com" formControlName="emailid" required
+                            type="email" [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('emailid')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Home Address</mat-label>
+                        <input matInput placeholder="Ex. pat@example.com" formControlName="homeaddress" required
+                            type="text" [disabled]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('homeaddress')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact number</mat-label>
+                        <input matInput type="number" formControlName="contactnumber" [disabled]='disabled' required>
+                        <span *ngIf="checkTouchedAndInvalid('contactnumber')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <!-- Emergency Contact Info -->
+            <mat-tab label="Emergency Contact Information">
+                <br>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
+                    class="tabsmargin">
+                    <mat-form-field appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input matInput [disabled]="disabled" formControlName="emergencycontactfirstname" required type="text" >
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontactfirstname')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="emergencycontactlastname" required [readonly]='disabled'>
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Relationship </mat-label>
+                        <input matInput formControlName="emergencycontactrelation" required [readonly]="disabled">
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput placeholder="Ex. pat@example.com" formControlName="emergencycontactemailid"
+                            required type="email" [disabled]="disabled">
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontactemailid')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Contact number</mat-label>
+                        <input matInput type="number" formControlName="emergencycontactnumber" required [disabled]="disabled">
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontactnumber')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <mat-checkbox formControlName="addrsameaspatient" [disabled]='disabled'>Address same as Patient </mat-checkbox>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Home Address</mat-label>
+                        <input matInput placeholder="Ex. pat@example.com"
+                            formControlName="emergencycontacthomeaddress" required type="text">
+                        <span *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
+                            class="error">{{errormessage}} </span>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" class="radiooverflow"
+                    fxLayoutGap="10px">
+                    <label id="access-portal-radio-group">Do you need access to patient portal?</label>
+                    <mat-radio-group fxLayoutGap="10px" aria-labelledby="access-portal-radio-group"
+                        fxLayoutGap="10px" formControlName="accesstopatientportal" [disabled]='disabled'>
+                        <mat-radio-button value="yes">Yes</mat-radio-button>
+                        <mat-radio-button value="no">No</mat-radio-button>
+                    </mat-radio-group>
+
+                    <!-- This textarea is dummy, dont remove it -->
+                    <textarea style="visibility: hidden;height: 0%;width: 0%;"></textarea>
+                </div>
+            </mat-tab>
+        </div>
+        <mat-tab label="Allergy Details">
+            <br>
+            <!-- Allergy details must be auto populated from data base -->
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
+                class="tabsmargin">
+                <label id="allergy-details-radio-group">Patient has any known allergies?</label>
+                <mat-radio-group aria-labelledby="allergy-details-radio-group" formControlName="allergy_details"
+                    fxLayoutGap="10px" [(ngModel)]="allergy_details" [disabled]='disabled'>
+                    <mat-radio-button value="yes">Yes</mat-radio-button>
+                    <mat-radio-button value="no">No</mat-radio-button>
+                </mat-radio-group><br>
+            </div><br>
+            <div *ngIf="allergy_details =='yes'">
+                <!-- <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Allergy ID </mat-label>
+                                <input matInput formControlName="allergyid">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Allergy Type </mat-label>
+                                <input matInput formControlName="allergytype">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Allergy Name </mat-label>
+                                <input matInput formControlName="allergyname">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Allergy Description </mat-label>
+                                <textarea matInput formControlName="allergydesc"></textarea>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Allergy Clinical Information </mat-label>
+                                <input matInput formControlName="allergyclinicalinfo">
+                            </mat-form-field>
+                        </div> -->
+                <div fxLayoutAlign="end"><button mat-icon-button (click)="addAllergies()">
+                        <mat-icon>add</mat-icon>
+                    </button></div>
+
+                <table mat-table [dataSource]="allergydatasource" class="mat-elevation-z8" >
+                    <ng-container matColumnDef="allergyid">
+                        <th mat-header-cell *matHeaderCellDef>
+                            ID
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.allergyid}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="allergytype">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Type
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.allergytype}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="allergyname">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Name
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.allergyname}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="allergydesc">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Description
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.allergydesc}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="allergyclinicalinfo">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Clinical Information
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.allergyclinicalinfo}}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="allergycolumns"></tr>
+                    <tr mat-row *matRowDef="let row;columns:allergycolumns"></tr>
+                </table>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column">
+                <button color='primary'>Submit</button>
+                <!-- [disabled]="form.invalid" mat-raised-button -->
+                <!-- This textarea is dummy, dont remove it -->
+                <textarea style="visibility: hidden;height: 0%;width: 0%;"></textarea>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</form>
+    <!-- </div> -->
+    <!-- </div> -->

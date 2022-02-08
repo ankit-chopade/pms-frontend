@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { AllergyDetails } from '../../models/AllergyDetails';
-import { FormUtilServie } from '../../service/form-util.service';
+import { FormUtilService } from '../../service/form-util.service';
 import { ApiService } from '../../service/api.service';
 import { map, Observable, startWith } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -23,7 +23,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   allergyTypes: string[] = ['Animal', 'Bacteria airway', 'Bacteria skin', 'Contact', 'Drug', 'Food', 'Fungi', 'Insect', 'Mite', 'Parasite', 'Plant', 'Vaccine', 'Venom or Salivary', 'Others'];
   flag: boolean = false;
 
-  constructor(private apiCommonService: ApiService, private formConfig: FormUtilServie, public dialogRef: MatDialogRef<AllergyDetailsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: AllergyDetails) {
+  constructor(private apiCommonService: ApiService, private formConfig: FormUtilService, public dialogRef: MatDialogRef<AllergyDetailsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: AllergyDetails) {
     super(formConfig.allergyDetailsForm);
     dialogRef.disableClose = true;
   }

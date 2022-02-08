@@ -1,0 +1,19 @@
+<!-- <div fxLayoutAlign="end">
+    <button mat-icon-button (click)="editButtonClick()">
+        <mat-icon>create</mat-icon>
+    </button>
+    <button mat-icon-button (click)="saveButtonClick()" [disabled]="editable">
+        <mat-icon>save</mat-icon>
+    </button>
+</div> -->
+<div>
+    <nav mat-tab-nav-bar mat-align-tabs="center">
+        <a mat-tab-link 
+        *ngFor="let link of links" 
+        [routerLink]="link.route"
+        (click) = "activeLink = link.label"
+        [active] = "activeLink == link.label"> {{link.label}}</a>
+    </nav>
+    <router-outlet></router-outlet>
+
+</div>
