@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
     }
     this.apiService.getMenus(param).subscribe(
       (res: any) => {
-        console.log(res)
+        // console.log(res)
         this.menus=res['result']
     })
   }
