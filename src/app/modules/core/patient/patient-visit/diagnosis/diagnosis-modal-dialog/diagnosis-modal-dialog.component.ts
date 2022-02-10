@@ -13,8 +13,7 @@ import { PatientProcedureModalDialogComponent } from '../../procedure/patient-pr
 })
 export class DiagnosisModalDialogComponent
   extends FormBaseController<any>
-  implements OnInit
-{
+  implements OnInit {
   constructor(
     private formConfig: FormUtilService,
     private apiCommonService: ApiService,
@@ -24,24 +23,24 @@ export class DiagnosisModalDialogComponent
     super(formConfig.diagnosisModalDialog, '');
   }
 
-  diagDetails : DetailsInterface[];
-  diagDesc : any[] = [];
-  diagCode : any[] = [];
-  selectedId : number = 0;
+  diagDetails: any[];
+  diagDesc: any[] = [];
+  diagCode: any[] = [];
+  selectedId: number = 0;
 
   ngOnInit(): void {
     this.loadDiagnosisDetails();
   }
 
-  loadDiagnosisDetails(){
+  loadDiagnosisDetails() {
     this.apiCommonService.getDiagnosisDetails().subscribe(
       res => {
         this.diagDetails = res['result'];
         this.diagDetails.forEach((eachDetails) => {
-          this.diagCode.push(eachDetails['code']);
-          this.diagDesc.push(eachDetails['description']);
-          this.diagDesc.push('Others');
+          this.diagCode.push(eachDetails['diagnosisCode']);
+          this.diagDesc.push(eachDetails['diagnosisDescription']);
         });
+        this.diagDesc.push('Others');
       });
   }
 
@@ -51,9 +50,10 @@ export class DiagnosisModalDialogComponent
   }
 
   submit(): void {
-    this.clearModal();
     this.setControlValue('selectedId', this.selectedId);
     this.dialogRef.close(this.form.value);
+    this.clearModal();
+
   }
   clearModal(): void {
     this.setControlValue('code', '');
@@ -61,37 +61,37 @@ export class DiagnosisModalDialogComponent
     this.setControlValue('isDepricated', '');
   }
 
-  getSearchValueForDescription(){
+  getSearchValueForDescription() {
     return this.getControlValue('description');
   }
-  getSearchValueForCode(){
+  getSearchValueForCode() {
     return this.getControlValue('code');
   }
 
-  getDiagnosisDescFromInp(){
-    const code:string = this.getControlValue('code');
-    if(code != '' && code != null){
+  getDiagnosisDescFromInp() {
+    const code: string = this.getControlValue('code');
+    if (code != '' && code != null) {
       this.diagDetails.forEach(element => {
-        if(element.code === code){
-            this.setControlValue('description', element.description);
-            this.setControlValue('isDepricated', element.isDepricated);
-            this.selectedId = element.id;
+        if (element.diagnosisCode === code) {
+          this.setControlValue('description', element.diagnosisDescription);
+          this.setControlValue('isDepricated', element.diagnosisIsDepricated + ""); // change the integer 0 1 to yes no
+          this.selectedId = element.diagnosisId;
         }
       });
     }
   }
 
   getDiagnosisCodeFromInp() {
-     const description:string = this.getControlValue('description');
-     if(description === 'Others') {
-       this.setControlValue('code', 'Not-defined');
-       this.selectedId = 0;
-     } else if(description != '' && description != null){
-        this.diagDetails.forEach(element => {
-            this.setControlValue('code', element.code);
-            this.setControlValue('isDepricated', element.isDepricated);
-            this.selectedId = element.id;
-        });
-      }
+    const description: string = this.getControlValue('description');
+    if (description === 'Others') {
+      this.setControlValue('code', 'Not-defined');
+      this.selectedId = 0;
+    } else if (description != '' && description != null) {
+      this.diagDetails.forEach(element => {
+        this.setControlValue('code', element.diagnosisCode);
+        this.setControlValue('isDepricated', element.diagnosisIsDepricated + "");
+        this.selectedId = element.diagnosisId;
+      });
+    }
   }
 }

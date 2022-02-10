@@ -13,11 +13,13 @@ import { DiagnosisModalDialogComponent } from './diagnosis-modal-dialog/diagnosi
 })
 export class DiagnosisComponent extends FormBaseController<any> implements OnInit {
 
-  constructor(private formConfig: FormUtilService, public dialog: MatDialog, private apiCommonService: ApiService) { 
+  appointmentId: number = 24 //Static Value
+
+  constructor(private formConfig: FormUtilService, public dialog: MatDialog, private apiCommonService: ApiService) {
     super(formConfig.diagnosisDetailsForm, '');
   }
 
-  dataSource:DetailsInterface[]=[
+  dataSource: any[] = [
     // {code:'A001', description:'Sample Drug', isDepricated:'yes'}
   ];
   displayedColumns: string[] = ['code', 'description', 'isDepricate'];
@@ -25,20 +27,22 @@ export class DiagnosisComponent extends FormBaseController<any> implements OnIni
     this.loadGrid("3");
   }
 
-  diagnosisAddButtonClick(){
+  diagnosisAddButtonClick() {
     const dialogRef = this.dialog.open(DiagnosisModalDialogComponent, {
       width: '350px',
       data: this.dataSource
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result && result['code'] && result['description']&& result['isDepricated']){
-        const param : any = {
-          result: [{
-            id:result['id'],
-            code:result["code"],
-            description:result["description"],
-            isDepricated:result["isDepricated"]
-          }]
+      if (result && result['code'] && result['description'] && result['isDepricated']) {
+        const param: any = {
+
+          diagnosisId: result['selectedId'],
+          appointmentId: this.appointmentId, //Passing Static Value
+        //  appointmentId: result['appointmentId'],
+          diagnosisCode: result['code'],
+          diagnosisDescription: result['description'],
+          diagnosisIsDepricated: result['isDepricated']
+
         }
         this.saveDiagnosisDetails(param);
       }
@@ -53,20 +57,29 @@ export class DiagnosisComponent extends FormBaseController<any> implements OnIni
   //   });
   // }
 
-  loadGrid(userId : string){
-    const param : any = {
-      patientId: userId
+  loadGrid(userId: string) {
+    const param: any = {
+      appointmentId: this.appointmentId
     }
     this.apiCommonService.getDiagnosisDetailsForPatient(param).subscribe(
       res => {
         this.dataSource = res['result'];
+        this.dataSource.forEach(element => {
+          element.diagnosisIsDepricated = element.diagnosisIsDepricated == 0 ? 'Yes' : 'No';
+        }
+        )
       }
     );
   }
-  saveDiagnosisDetails(param : any){
+  saveDiagnosisDetails(param: any) {
     this.apiCommonService.saveDiagnosisDetails(param).subscribe(
       res => {
-        this.loadGrid(param.userId)
+        if (res && res['result'] && res['status'] === 200) {
+          this.loadGrid(param.userId)
+        }
+        else {
+          //Error Message
+        }
       }
     );
   }

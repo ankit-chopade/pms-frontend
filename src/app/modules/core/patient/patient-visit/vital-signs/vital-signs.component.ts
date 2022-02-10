@@ -9,8 +9,10 @@ import { FormUtilService } from '../../service/form-util.service';
   styleUrls: ['./vital-signs.component.scss']
 })
 export class VitalSignsComponent extends FormBaseController<any> implements OnInit {
-  @Input() appointmentId:number = 0;
   disabled: boolean = false;
+
+  appointmentId:number=24 //Static Value
+
 
   constructor(private formConfig: FormUtilService, private apiCommonService: ApiService) { 
     super(formConfig.vitalSignsForm)

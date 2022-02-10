@@ -15,7 +15,7 @@ export const APIConst={
     GET_DETAILS_BY_CODE:'getDetailsByCode',
     GET_DETAILS_BY_DESCRIPTION:'getDetailsByDescription',
 
-    VITAL_DETAILS:'vital',
+    VITAL_DETAILS:'vital-signs',
     // PROCEDURE_DETAILS:'procedure-details'
     PROCEDURE_DETAILS:'proc',
     PATIENT_PROC_DETAILS:'patient-proc-details',
@@ -23,7 +23,9 @@ export const APIConst={
     PROC_DETAILS_FOR_PROC_DESC:'proc',
 
     // Diagnosis apis
-    DIAG_DETAILS:'',
+    PATIENT:{
+        DIAGNOSIS_DETAILS:'patient-diagnosis'
+    },
 
     //medication apis
     MEDI_DETAILS:'',

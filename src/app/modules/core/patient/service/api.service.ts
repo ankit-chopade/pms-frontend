@@ -72,7 +72,7 @@ export class ApiService {
   // Diagnosis apis
   
   saveDiagnosisDetails(param:any){
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}`, param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, param);
   }
 
   getDiagnosisDetails(){
@@ -80,7 +80,7 @@ export class ApiService {
   }
 
   getDiagnosisDetailsForPatient(param:any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.GET_DETAILS_BY_PATIENT_ID}`, {params:param});
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
   }
 
   // getDiagnosisDetailsForCode(param:any){
