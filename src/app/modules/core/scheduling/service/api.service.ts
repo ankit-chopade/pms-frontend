@@ -17,12 +17,31 @@ export class ApiService {
   }
   
   getPhysician() {
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DOCTOR}`);
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PHYSICIAN}`);
   } 
 
   savePatientAppintment(param:any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_APPOINTMENT}`,param);
   } 
 
+  getPhysicianAppintments(param:any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PHYSICIAN_APPOINTMENTS}`,param);
+  } 
+
+  saveEditedAppointemnt(param:any){
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.EDIT_APPOINTMENT}`,param);
+  }
+  
+  deletePhysicianAppintments(param:any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DELETE_PHYSICIAN_APPOINTMENT}`,param);
+  } 
+
+  saveEditHistory(param:any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_EDIT_HISTORY}`,param);
+  } 
+
+  getEditHistory(param:any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_EDIT_HISTORY}`,param);
+  } 
 
 }
