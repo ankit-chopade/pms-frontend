@@ -28,6 +28,12 @@ export class ApiService {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS}`);
   }
   
-
-
+  getuserDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_USER_DATA}`,{params:param});
+  }
+  getpatientDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENT_DATA}`,{params:param});
+  }
 }
