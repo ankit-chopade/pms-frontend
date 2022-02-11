@@ -55,6 +55,11 @@ export class VitalSignsComponent extends FormBaseController<any> implements OnIn
     }
     this.apiCommonService.saveVitalDetails(param).subscribe(
       res => {
+        if (res && res['result'] && res['status'] === 200) {
+        }
+        else{
+          
+        }
         // notification to save 
       }
     );

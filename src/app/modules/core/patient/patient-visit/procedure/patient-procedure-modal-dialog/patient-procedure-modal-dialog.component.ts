@@ -24,8 +24,7 @@ import { DetailsInterface } from '../../patient-modal/DetailsInterface';
  */
 export class PatientProcedureModalDialogComponent
   extends FormBaseController<any>
-  implements OnInit
-{
+  implements OnInit {
   constructor(
     private formConfig: FormUtilService,
     private apiCommonService: ApiService,
@@ -34,7 +33,7 @@ export class PatientProcedureModalDialogComponent
   ) {
     super(formConfig.patientProcedureModalDialog, '');
   }
-  procDetails: DetailsInterface[];
+  procDetails: any[];
   procDesc: any[] = [];
   procCode: any[] = [];
   selectedId: number = 0;
@@ -45,11 +44,12 @@ export class PatientProcedureModalDialogComponent
       console.log('response' + JSON.stringify(res));
       this.procDetails = res['result'];
       this.procDetails.forEach((eachDetails) => {
-        this.procCode.push(eachDetails['code']);
-        this.procDesc.push(eachDetails['description']);
-        this.procDesc.push('Others');
-        console.log(this.procDesc);
+        this.procCode.push(eachDetails['procedureCode']);
+        this.procDesc.push(eachDetails['procedureDescription']);
+        // console.log(this.procDesc);
       });
+      this.procDesc.push('Others');
+
       // console.log("ProcDetails" + JSON.stringify(this.procDetails))
       // }
     });
@@ -60,9 +60,10 @@ export class PatientProcedureModalDialogComponent
   }
 
   submit(): void {
-    this.clearModal();
     this.setControlValue('selectedId', this.selectedId);
     this.dialogRef.close(this.form.value);
+    this.clearModal();
+
   }
   clearModal(): void {
     this.setControlValue('code', '');
@@ -101,9 +102,11 @@ export class PatientProcedureModalDialogComponent
     const code: string = this.getControlValue('code');
     if (code != '' && code != null) {
       this.procDetails.forEach((element) => {
-        this.setControlValue('description', element.description);
-        this.setControlValue('isDepricated', element.isDepricated);
-        this.selectedId = element.id;
+        if (element.procedureCode === code) {
+          this.setControlValue('description', element.procedureDescription);
+          this.setControlValue('isDepricated', element.procedureIsDepricated + "");
+          this.selectedId = element.procedureId;
+        }
       });
     }
   }
@@ -126,17 +129,19 @@ export class PatientProcedureModalDialogComponent
   // }
   getProcCodeFromInp() {
     const description: string = this.getControlValue('description');
-    if(description === 'Others') {
+    if (description === 'Others') {
       this.setControlValue('code', 'Not-defined');
       this.selectedId = 0;
     } else
-    if (description != '' && description != null) {
-      this.procDetails.forEach((element) => {
-        this.setControlValue('code', element.code);
-        this.setControlValue('isDepricated', element.isDepricated);
-        this.selectedId = element.id;
-      });
-    }
+      if (description != '' && description != null) {
+        this.procDetails.forEach((element) => {
+          if (element.procedureDescription === description) {
+            this.setControlValue('code', element.procedureCode);
+            this.setControlValue('isDepricated', element.procedureIsDepricated + "");
+            this.selectedId = element.procedureId;
+          }
+        });
+      }
   }
 }
 

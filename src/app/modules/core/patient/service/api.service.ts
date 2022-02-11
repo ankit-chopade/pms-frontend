@@ -40,34 +40,34 @@ export class ApiService {
    * @param  {} {returnthis.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DETAILS}`
    */
   getProcDetails(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DETAILS}`);
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DOMAIN}`);
   }
   /**
    * @param  {any} param
    */
   getProcDetailsForPatient(param: any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DOMAIN}`, {params:param});
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.PROCEDURE_DETAILS}`, {params:param});
   }
   /**
    * @param  {any} param
    */
   saveProcDetailsForPatient(param:any){
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DOMAIN}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.PROCEDURE_DETAILS}`,param);
   }
   /**
    * @param  {any} param
    * @description used to obtain procedure description for procedure code
    */
-  getProcDetailsForProcCode(param:any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_CODE}`, {params:param});
-  }
+  // getProcDetailsForProcCode(param:any){
+  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_CODE}`, {params:param});
+  // }
   /**
    * @param  {any} param
    * @description used to obtain procedure code for procedure description
    */
-  getProcCodeForProcDesc(param:any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_DESC}`, {params:param});
-  }
+  // getProcCodeForProcDesc(param:any){
+  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_DESC}`, {params:param});
+  // }
 
   // Diagnosis apis
   
@@ -94,7 +94,7 @@ export class ApiService {
   //Medication apis
 
   saveMedicationDetails(param:any){
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}`, param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`, param);
   }
   
   getMedicationDetails(){
@@ -102,7 +102,7 @@ export class ApiService {
   }
   
   getMedicationDetailsForPatient(param:any) { 
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_PATIENT_ID}`,{params:param});
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`,{params:param});
   }
 
   getDrugDetailsForDrugId(param:any){

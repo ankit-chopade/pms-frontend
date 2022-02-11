@@ -13,42 +13,44 @@ import { MedicationsModalDialogComponent } from './medications-modal-dialog/medi
 })
 export class MedicationsComponent extends FormBaseController<any> implements OnInit {
 
+  appointmentId: number = 24 //Static Value
+
   constructor(private formConfig: FormUtilService, private dialog: MatDialog, private apiCommonService: ApiService) {
     super(formConfig.medicationDetailsForm, '');
   }
 
-  dataSource: MedicationDetailInterface[] =[];
+  dataSource: MedicationDetailInterface[] = [];
   displayedColumns: string[] = ['drugId', 'drugName', 'drugGenericName', 'drugBrandName', 'drugForm', 'drugStrength']
   ngOnInit(): void {
-    this.loadGrid("3");
+    this.loadGrid(this.appointmentId);
   }
-  medicationAddButtonClick(){
+  medicationAddButtonClick() {
     console.log("add button click for medications");
     const dialogRef = this.dialog.open(MedicationsModalDialogComponent, {
       width: '250px',
       data: this.dataSource
     });
-    dialogRef.afterClosed().subscribe( result => {
-      if(result && result['drugId'] && result['drug']&& result['isDepricated']){
-        const param : any = {
-          result: [{
-            id:result['id'],
-            drugId : result['drugId'],
-            drugName : result['drugName'],
-            drugGenericName : result['drugGenericName'],
-            drugBrandName : result['drugBrandName'],
-            drugForm : result['drugForm'],
-            drugStrength: result['drugStrength'],
-          }]
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result['drgId'] && result['drgName']) {
+        const param: any = {
+          appointmentId: this.appointmentId,
+          medicationId: result['selectedId'],
+          drugId: result['drgId'],
+          drugName: result['drgName'],
+          drugGenericName: result['drgGenericName'],
+          drugManufacturerName: result['drgBrandName'],
+          drugForm: result['drgForm'],
+          drugStrength: result['drgStrength'],
+
         }
         this.saveDrugDetails(param);
       }
     });
   }
 
-  loadGrid(userId : string){
-    const param : any = {
-      patientId: userId
+  loadGrid(appointmentId: number) {
+    const param: any = {
+      appointmentId: appointmentId,
     }
     this.apiCommonService.getMedicationDetailsForPatient(param).subscribe(
       res => {
@@ -57,10 +59,15 @@ export class MedicationsComponent extends FormBaseController<any> implements OnI
     );
   }
 
-  saveDrugDetails(param:any){
+  saveDrugDetails(param: any) {
     this.apiCommonService.saveMedicationDetails(param).subscribe(
       res => {
-        this.loadGrid(param.userId)
+        if (res && res['result'] && res['status'] === 200) {
+          this.loadGrid(this.appointmentId)
+        }
+        else {
+
+        }
       }
     );
   }

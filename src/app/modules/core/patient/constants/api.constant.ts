@@ -5,7 +5,7 @@ export const APIConst={
 
 
     MEDICATION_DOMAIN:'medication/',
-    PROCEDURE_DOMAIN:'procedure/',
+    PROCEDURE_DOMAIN:'procedure',
     DIAGNOSIS_DOMAIN:'diagnosis/',
     VITAL_SIGN_DOMAIN:'vital-sign/',
     PATIENT_DETAIL_DOMAIN:'patient-detail/',
@@ -17,14 +17,16 @@ export const APIConst={
 
     VITAL_DETAILS:'vital-signs',
     // PROCEDURE_DETAILS:'procedure-details'
-    PROCEDURE_DETAILS:'proc',
+   // PROCEDURE_DETAILS:'procedure',
     PATIENT_PROC_DETAILS:'patient-proc-details',
     PROC_DETAILS_FOR_PROC_CODE:'proc',
     PROC_DETAILS_FOR_PROC_DESC:'proc',
 
     // Diagnosis apis
     PATIENT:{
-        DIAGNOSIS_DETAILS:'patient-diagnosis'
+        DIAGNOSIS_DETAILS:'patient-diagnosis',
+        PROCEDURE_DETAILS:'patient-procedure',
+        MEDICATION_DETAILS:'patient-medication',
     },
 
     //medication apis

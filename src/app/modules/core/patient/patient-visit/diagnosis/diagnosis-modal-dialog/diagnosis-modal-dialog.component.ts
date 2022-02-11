@@ -88,9 +88,11 @@ export class DiagnosisModalDialogComponent
       this.selectedId = 0;
     } else if (description != '' && description != null) {
       this.diagDetails.forEach(element => {
-        this.setControlValue('code', element.diagnosisCode);
-        this.setControlValue('isDepricated', element.diagnosisIsDepricated + "");
-        this.selectedId = element.diagnosisId;
+        if (element.diagnosisDescription === description) {
+          this.setControlValue('code', element.diagnosisCode);
+          this.setControlValue('isDepricated', element.diagnosisIsDepricated + "");
+          this.selectedId = element.diagnosisId;
+        }
       });
     }
   }

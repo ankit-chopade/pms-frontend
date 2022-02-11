@@ -21,7 +21,7 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
     super(formConfig.medicationModalDialog, '');
   }
 
-  drugDetails: MedicationDetailInterface[];
+  drugDetails: any[];
   drugName: any[] = [];
   drugForm: any[] = [];
   drugId: any[] = [];
@@ -35,9 +35,8 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
       this.drugDetails.forEach((eachDetails) => {
         this.drugId.push(eachDetails['drugId']);
         this.drugName.push(eachDetails['drugName']);
-        this.drugName.push('Others');
-        // this.drugForm.push(eachDetails['drugForm']);
       });
+      this.drugName.push('Others');
     });
   }
 
@@ -47,9 +46,9 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
   }
 
   submit(): void {
-    this.clearModal();
     this.setControlValue('selectedId', this.selectedId);
     this.dialogRef.close(this.form.value);
+    this.clearModal();
   }
   clearModal(): void {
     this.setControlValue('drgId', '');
@@ -100,12 +99,14 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
     const drgId: string = this.getControlValue('drgId');
     if (drgId != '' && drgId != null) {
       this.drugDetails.forEach((element) => {
-        this.setControlValue('drgName', element.drugName);
-        this.setControlValue('drgGenericName', element.drugGenericName);
-        this.drugBrandName = element.drugBrandName.split(';');
-        this.drugForm = element.drugForm.split(';');
-        this.drugStrength = element.drugStrength.split(';');
-        this.selectedId = element.id;
+        if (element.drugId === drgId) {
+          this.setControlValue('drgName', element.drugName);
+          this.setControlValue('drgGenericName', element.drugGenericName);
+          this.drugBrandName = element.drugManufacturerName.split(';');
+          this.drugForm = element.drugForm.split(';');
+          this.drugStrength = element.drugStrength.split(';');
+          this.selectedId = element.medicationId;
+        }
       });
     }
   }
@@ -133,12 +134,14 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
       this.selectedId = 0;
     } else if (drugName != '' && drugName != null) {
       this.drugDetails.forEach((element) => {
-        this.setControlValue('drgId', element.drugId);
-        this.setControlValue('drgGenericName', element.drugGenericName);
-        this.drugBrandName = element.drugBrandName.split(';');
-        this.drugForm = element.drugForm.split(';');
-        this.drugStrength = element.drugStrength.split(';');
-        this.selectedId = element.id;
+        if (element.drugName === drugName) {
+          this.setControlValue('drgId', element.drugId);
+          this.setControlValue('drgGenericName', element.drugGenericName);
+          this.drugBrandName = element.drugManufacturerName;
+          this.drugForm = element.drugForm.split(';');
+          this.drugStrength = element.drugStrength.split(';');
+          this.selectedId = element.medicationId;
+        }
       });
     }
   }

@@ -7,15 +7,15 @@
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
         <ng-container matColumnDef="code">
             <th mat-header-cell *matHeaderCellDef> Procedure Code &nbsp;</th>
-            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.procedureCode}} </td>
         </ng-container>
         <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef> Procedure Description &nbsp;</th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.procedureDescription}} </td>
         </ng-container>
         <ng-container matColumnDef="isDepricate">
             <th mat-header-cell *matHeaderCellDef> Depricated &nbsp;</th>
-            <td mat-cell *matCellDef="let element"> {{element.isDepricated}}
+            <td mat-cell *matCellDef="let element"> {{element.procedureIsDepricated}}
             </td>
         </ng-container>
         <!-- <ng-container matColumnDef="+">
