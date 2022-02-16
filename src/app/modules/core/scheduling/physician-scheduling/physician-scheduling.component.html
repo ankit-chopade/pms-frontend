@@ -1,0 +1,54 @@
+<mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="openededithistorysidebar" position="end">
+  
+      <mat-accordion>
+        <div *ngFor="let history of editHistoryDatasource">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{history.subject}}
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>EditedBy :{{history.editedBy}}</p><br>
+            <p>Edit Time: {{history.editTime}}</p><br>
+            <p>Physician Name :{{history.physicianName}}</p><br>
+            <p>Reason :{{history.reason}}</p><br>
+            <p>Description :{{history.description}}</p><br>
+            <p>Start Time : {{history.startTime}}</p><br>
+            <p>End Time : {{history.endTime}}</p><br>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+  
+  
+  
+    </mat-sidenav>
+    <mat-sidenav-content>
+  
+  
+  
+  
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <mat-form-field appearance="legacy" class="title">
+          <mat-label>Choose Specialist</mat-label>
+          <mat-select (selectionChange)="patientSelected()" [(ngModel)]='patientselected'>
+            <mat-option *ngFor="let data of patient" [value]="data.userId"> {{data.title}} {{data.firstName}} {{data.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="toggleSideBar()">Edit History</button>
+  
+      </div>
+  
+      <div class="control-section">
+        <ejs-schedule #scheduleObj width='100%' height='550px' [eventSettings]="eventSettings"
+          (navigating)="onNavigating($event)" (actionComplete)="onActionComplete($event)" [readonly]="disable">
+        </ejs-schedule>
+      </div>
+      <!-- (popupOpen)='onPopupOpen($event)' -->
+  
+  
+    </mat-sidenav-content>
+  </mat-sidenav-container>

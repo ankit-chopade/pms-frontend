@@ -11,12 +11,16 @@ import { TextBoxModule, UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { ContextMenuModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { PhysicianSchedulingComponent } from './physician-scheduling/physician-scheduling.component';
+import { NurseSchedulingComponent } from './nurse-scheduling/nurse-scheduling.component';
 
 
 
 @NgModule({
   declarations: [
-    PatientSchedulingComponent
+    PatientSchedulingComponent,
+    PhysicianSchedulingComponent,
+    NurseSchedulingComponent
   ],
     providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService,ResizeService, DragAndDropService],
   imports: [
