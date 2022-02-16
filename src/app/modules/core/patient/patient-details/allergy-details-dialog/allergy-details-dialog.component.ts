@@ -33,6 +33,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           this.allergydata = resp['result'];
+          console.log(this.allergydata);
           this.allergydatBackup = resp['result'];
         }
       }
@@ -42,7 +43,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
 
 
   getAllergyDetailsById() {
-    let allergyDataFromId = this.allergydata.filter(x => x.allergyDetailsId == this.selectedId);
+    let allergyDataFromId = this.allergydata.filter(x => x.allergyCode == this.selectedId);
     this.setControlValue('allergyname', allergyDataFromId[0].allergyName);
     this.setControlValue('allergytype', allergyDataFromId[0].allergyType);
     this.setControlValue('allergydesc', allergyDataFromId[0].allergyDescription);
@@ -69,6 +70,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   }
 
   add() {
+    
     this.dialogRef.close(this.form.value);
   }
 

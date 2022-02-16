@@ -6,6 +6,10 @@ import { FormBaseController } from 'src/app/modules/common/utility/form-base-con
 import { formErrorMessages } from 'src/app/modules/default/constant/message.constant';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { AllergyDetails } from '../models/AllergyDetails';
+import { AllergyMap } from '../models/AllergyMap';
+
+
+
 import { EmergencyDetails } from '../models/EmergencyDetails';
 import { PatientDetails } from '../models/PatientDetails';
 import { User } from '../models/User';
@@ -21,6 +25,9 @@ import { AllergyDetailsDialogComponent } from './allergy-details-dialog/allergy-
 export class PatientDetailsComponent extends FormBaseController<any> implements OnInit {
   userData:User;
   patientData:PatientDetails;
+  AllergyMapData:AllergyMap[];
+  allergyData:AllergyDetails;
+  allergycode:string;
   errormessage = formErrorMessages;
   allergy_details: string = "false";
   constructor(private dialog: MatDialog, private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService) {
@@ -31,18 +38,42 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   addrsameaspatient:string;
 
   allergydatasource: AllergyDetails[] = [];
+  allergydatatemporary: AllergyDetails[] = [];
   // allergy_details_dto: AllergyDetails[] = [];
 
   submitPatientDetailsForm() {
     const emergencyDetails: EmergencyDetails = new EmergencyDetails();
-    emergencyDetails.firstname = this.getControlValue('emergencycontactfirstname');
-    emergencyDetails.lastname = this.getControlValue('emergencycontactlastname');
-    emergencyDetails.relation = this.getControlValue('emergencycontactrelation');
-    emergencyDetails.emailid = this.getControlValue('emergencycontactemailid');
-    emergencyDetails.number = this.getControlValue('emergencycontactnumber');
-    emergencyDetails.homeaddress = this.getControlValue('emergencycontacthomeaddress');
+    emergencyDetails.emergencyContactFristName = this.getControlValue('emergencycontactfirstname');
+    emergencyDetails.emergencyContactLastName = this.getControlValue('emergencycontactlastname');
+    emergencyDetails.patientRelationship = this.getControlValue('emergencycontactrelation');
+    emergencyDetails.emergencyContactEmail = this.getControlValue('emergencycontactemailid');
+    emergencyDetails.emergencyContact = this.getControlValue('emergencycontactnumber');
+    emergencyDetails.homeAddress = this.getControlValue('emergencycontacthomeaddress');
 
+//     const allergyMap: AllergyMap= new AllergyMap();
+//     const allergyDetailsEntity:AllergyDetails=new AllergyDetails();
+  
+//     for(let allergydata of this.allergydatasource)
+//     {
+//        this.allergycode= allergydata.allergyCode
 
+//     }
+//  const allergycode={
+//       'allergyCode':Number(this.allergycode)
+//     }
+//     this.apiCommonService.getAllergyDetailsbyCodeDetails(allergycode).subscribe(
+//       res => {
+//         if (res && res['result'] && res['status'] === 200) {
+//         //  alert("Success");
+//               this.allergy_details= res['result']
+//               console.log(this.allergy_details);
+//              //  this.allergyData.allergyId=this.allergy_details.
+//         }
+//         else {
+//         //  alert("Failed");
+//         }
+      // }
+      // );
     const param = {
       title: this.getControlValue('title'),
       firstname: this.getControlValue('firstname'),
@@ -57,7 +88,9 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       homeaddress: this.getControlValue('homeaddress'),
       contactnumber: this.getControlValue('contactnumber'),
       EmergencyContactEntity: emergencyDetails,
-      allergyDetailsEntity: this.allergydatasource,
+     // allergyDetailsEntity: this.allergydatasource,
+      allergyMap:this.AllergyMapData
+     
     }
 
     this.apiCommonService.patientDetails(param).subscribe(
@@ -92,6 +125,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
 
   loadGrid() {
+    console.log(this.allergydatasource)
     this.allergydatasource = [...this.allergydatasource];
   }
 
@@ -114,7 +148,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          alert("Success");
+        //  alert("Success");
          
           this.userData=res['result'];
           console.log(this.userData);
@@ -127,30 +161,71 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           
         }
         else {
-          alert("Failed");
+        //  alert("Failed");
         }
       }
     );
     this.apiCommonService.getpatientDetails(userId).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          alert("Success");
+   // alert("Success");
          
           this.patientData=res['result'];
-          console.log(this.userData);
+          console.log(this.patientData);
           this.setControlValue('age',this.patientData.patientAge)
           this.setControlValue('gender',this.patientData.patientGender)
           this.setControlValue('race',this.patientData.patientRace)
           this.setControlValue('ethnicity',this.patientData.patientEthnicity)
-          this.setControlValue('languages',this.patientData.LanguagesKnown)
+          this.setControlValue('languages',this.patientData.languagesKnown)
           this.setControlValue('homeaddress',this.patientData.homeAddress)
-          this.setControlValue('emergencycontactfirstname',this.patientData.EmergencyContactEntity.firstname)
-          this.setControlValue('emergencycontactlastname',this.patientData.EmergencyContactEntity.lastname)
-          this.setControlValue('emergencycontactrelation',this.patientData.EmergencyContactEntity.relation)
-          this.setControlValue('emergencycontactemailid',this.patientData.EmergencyContactEntity.emailid)
-          this.setControlValue('emergencycontactnumber',this.patientData.EmergencyContactEntity.number)
-          this.setControlValue('emergencycontacthomeaddress',this.patientData.EmergencyContactEntity.homeaddress)
-     
+          this.setControlValue('emergencycontactfirstname',this.patientData.emergencyContactEntity.emergencyContactFristName)
+          this.setControlValue('emergencycontactlastname',this.patientData.emergencyContactEntity.emergencyContactLastName)
+          this.setControlValue('emergencycontactrelation',this.patientData.emergencyContactEntity.patientRelationship)
+          this.setControlValue('emergencycontactemailid',this.patientData.emergencyContactEntity.emergencyContactEmail)
+          this.setControlValue('emergencycontactnumber',this.patientData.emergencyContactEntity.emergencyContact)
+          this.setControlValue('emergencycontacthomeaddress',this.patientData.emergencyContactEntity.homeAddress)
+          this.setControlValue('accesstopatientportal',this.patientData.emergencyContactEntity.accessPatientPortal)
+          this.setControlValue('allergy_details',this.patientData.patientKnowAllergy);
+          
+          this.AllergyMapData =this.patientData.allergyMap;
+     //     this.AllergyMapData.forEach(this.apiCommonService.getAllergyDetailsById(AllergyMapData))
+         for(let AllergyMap of this.AllergyMapData)
+         {
+                  console.log(AllergyMap.allergyId);
+                  const allergyId={
+                    'allergyId':Number(AllergyMap.allergyId)
+                  }
+                  this.apiCommonService.getAllergyDetailsById(allergyId).subscribe(
+                    res => {
+                      if (res && res['result'] && res['status'] === 200) {
+                      //  alert("Success");
+                        this.allergyData=res['result'];
+                        console.log(this.allergyData);
+                        
+                       if(this.allergyData!=null)
+                       {
+                        this.allergydatatemporary.push(this.allergyData);
+                   
+                        this.setControlValue('allergyid',this.allergyData.allergyCode);
+                        this.setControlValue('allergytype',this.allergyData.allergyType);
+
+                        
+                       }
+                      this.allergydatasource =[...this.allergydatatemporary]
+                    //  this.loadGrid();
+                       console.log(this.allergydatasource);
+                       
+                     
+                      }
+                      else {
+                        alert("Failed");
+                      }
+                    }
+                  );
+               
+                  
+         }
+
         }
         else {
           alert("Failed");

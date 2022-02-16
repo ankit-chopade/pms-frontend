@@ -1,4 +1,6 @@
 import { AllergyDetails } from "./AllergyDetails";
+import { AllergyMap } from "./AllergyMap";
+
 import { EmergencyDetails } from "./EmergencyDetails";
 
 export class PatientDetails
@@ -9,8 +11,10 @@ export class PatientDetails
     patientAge:String;
     patientRace:String;
     patientEthnicity:String;
-    LanguagesKnown:String;
+    languagesKnown:String;
     homeAddress:String;
-	allergyDetails:AllergyDetails[];
-    EmergencyContactEntity:EmergencyDetails;
+    patientKnowAllergy:string;
+//	allergyDetails:AllergyDetails[];
+     allergyMap:AllergyMap[];
+     emergencyContactEntity:EmergencyDetails;
 }

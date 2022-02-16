@@ -4,8 +4,8 @@
     <mat-form-field appearance="outline">
       <mat-label>Allergy ID</mat-label>
       <mat-select [(value)]="selectedId" (selectionChange)="getAllergyDetailsById()" formControlName="allergyid">
-        <mat-option *ngFor="let allergy of allergydata" [value]="allergy.allergyDetailsId">
-          {{allergy.allergyDetailsId}}
+        <mat-option *ngFor="let allergy of allergydata" [value]="allergy.allergyCode">
+          {{allergy.allergyCode}}
         </mat-option>
       </mat-select>
     </mat-form-field>

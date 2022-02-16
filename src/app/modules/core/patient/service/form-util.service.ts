@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 })
 
 export class FormUtilServie {
+    [x: string]: any;
 
     fb = new FormBuilder();
 
@@ -47,4 +48,14 @@ export class FormUtilServie {
         allergydesc:["",Validators.required],
         allergyclinicalinfo:["",Validators.required],
     });
+    employeeRegistrationForm = this.fb.group({
+        title:["",Validators.required],
+        firstname:["",Validators.required],
+        lastname: ["", Validators.required],
+        dob: ["", Validators.required],
+        username :   ["", Validators.email],
+        contactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
+        emailid: ["", Validators.email],
+    });
+
 }

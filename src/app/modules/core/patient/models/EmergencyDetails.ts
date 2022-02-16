@@ -1,9 +1,10 @@
 export class EmergencyDetails
 {
-        firstname:string;
-        lastname:string;
-        relation: string;
-        emailid: string;
-        number :  number;
-        homeaddress: string;
+        emergencyContactFristName:string;
+        emergencyContactLastName:string;
+        emergencyContactEmail:string;
+        homeAddress:string;
+        emergencyContact: number;
+        patientRelationship: string;
+        accessPatientPortal:string;
 }
