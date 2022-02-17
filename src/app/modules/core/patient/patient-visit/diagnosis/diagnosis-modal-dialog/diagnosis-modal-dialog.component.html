@@ -7,7 +7,7 @@
             <mat-label>Diagnosis Code</mat-label>
             <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" >
             <mat-autocomplete name="pcode" #getCode="matAutocomplete">
-                <mat-option *ngFor="let value of diagCode | searchFilter : getSearchValueForCode()" value="{{value}}" on-focusout="getDiagnosisDescFromInp()">{{value}}</mat-option>
+                <mat-option *ngFor="let value of diagCode | searchFilter : getSearchValueForCode()" value="{{value}}" onchange="getDiagnosisDescFromInp()">{{value}}</mat-option>
             </mat-autocomplete>
         </mat-form-field>
         <br>
@@ -18,6 +18,11 @@
                 <mat-option *ngFor="let value of diagDesc | searchFilter : getSearchValueForDescription()" value="{{value}}" >{{value}}</mat-option>
                 <!-- <mat-option value="other">Other</mat-option> -->
             </mat-autocomplete>
+        </mat-form-field>
+        <br>
+        <mat-form-field   *ngIf = "!isHiddenDetails">
+            <mat-label>Diagnosis Details</mat-label>
+            <input matInput type="text" formControlName="details">
         </mat-form-field>
         <br>
             <div>

@@ -1,3 +1,8 @@
+<div fxLayoutAlign="end">
+    <button mat-icon-button (click)="editButtonClick()" [disabled]="!disabled">
+        <mat-icon>create</mat-icon>
+    </button>
+</div>
 <br>
 <form [formGroup]="form">
     <div>
@@ -30,9 +35,8 @@
                 <input matInput type="number" [readonly]="disabled" formControlName="respirationRate" value="20">
             </mat-form-field>
         </div>
-        <div fxLayoutAlign="center center"> 
+        <div fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout.xs="column" > 
             <button mat-raised-button color="primary" (click)="saveVitalSignsClick()" [disabled] = 'disabled'>Submit</button>
         </div>
-    <!-- <mat-form-field></mat-form-field> -->
     </div>
 </form>

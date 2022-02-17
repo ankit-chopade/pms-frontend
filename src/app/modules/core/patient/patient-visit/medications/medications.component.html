@@ -11,7 +11,7 @@
         </ng-container>
         <ng-container matColumnDef="drugName">
             <th mat-header-cell *matHeaderCellDef> Drug Name &nbsp;</th>
-            <td mat-cell *matCellDef="let element"> {{element.drugName}} </td>
+            <td mat-cell *matCellDef="let element"> {{(element.drugName == 'Others') ? element.medicationDetails : element.drugName}} </td>
         </ng-container>
         <ng-container matColumnDef="drugGenericName">
             <th mat-header-cell *matHeaderCellDef> Drug Generic Name &nbsp;</th>
@@ -28,6 +28,20 @@
         <ng-container matColumnDef="drugStrength">
             <th mat-header-cell *matHeaderCellDef> Drug Strength &nbsp;</th>
         <td mat-cell *matCellDef="let element">{{element.drugStrength}} </td>
+        </ng-container>
+        <ng-container matColumnDef="prescribedDate">
+            <th mat-header-cell *matHeaderCellDef> Prescribed Date &nbsp;</th>
+            <td mat-cell *matCellDef="let element"> {{element.prescribedDate}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="delete" >
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let element" >
+                <!-- <a href="javascript:void(0)" (click) = "deleteMedicationClick(element.patientDiagnosisId)" >{{element.deleteButton}}</a> -->
+                <button mat-icon-button (click)="deleteMedicationClick(element.patientMedicationId)" [disabled]="(element.deleteButton == 'delete') ? 'false' : 'true'">
+                    <mat-icon>{{element.deleteButton}}</mat-icon>
+                </button>
+            </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

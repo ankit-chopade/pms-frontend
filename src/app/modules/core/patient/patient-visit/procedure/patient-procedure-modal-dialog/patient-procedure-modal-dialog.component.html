@@ -20,6 +20,11 @@
             </mat-autocomplete>
         </mat-form-field>
         <br>
+        <mat-form-field   *ngIf = "!isHiddenDetails">
+            <mat-label>Procedure Details</mat-label>
+            <input matInput type="text" formControlName="details">
+        </mat-form-field>
+        <br>
             <div>
             <mat-label>Procedure Depricated &nbsp;</mat-label><br>
             <mat-radio-group  formControlName="isDepricated" name="pdepri" >

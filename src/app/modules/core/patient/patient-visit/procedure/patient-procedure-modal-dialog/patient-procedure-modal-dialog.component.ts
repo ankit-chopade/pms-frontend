@@ -37,18 +37,22 @@ export class PatientProcedureModalDialogComponent
   procDesc: any[] = [];
   procCode: any[] = [];
   selectedId: number = 0;
+  isHiddenDetails: boolean = true;
 
   ngOnInit(): void {
+    this.loadProcedureDetails();
+  }
+  loadProcedureDetails(){
     this.apiCommonService.getProcDetails().subscribe((res) => {
-      // if(res && res['result'] && res['status'] === 200) {
-      console.log('response' + JSON.stringify(res));
       this.procDetails = res['result'];
       this.procDetails.forEach((eachDetails) => {
-        this.procCode.push(eachDetails['procedureCode']);
+        if(eachDetails['procedureCode'] != 'Not-Defined'){
+          this.procCode.push(eachDetails['procedureCode']);
+        }
         this.procDesc.push(eachDetails['procedureDescription']);
         // console.log(this.procDesc);
       });
-      this.procDesc.push('Others');
+      // this.procDesc.push('Others');
 
       // console.log("ProcDetails" + JSON.stringify(this.procDetails))
       // }
@@ -69,6 +73,7 @@ export class PatientProcedureModalDialogComponent
     this.setControlValue('code', '');
     this.setControlValue('description', '');
     this.setControlValue('isDepricated', '');
+    this.setControlValue('details','');
   }
 
   getSearchValueForDescription() {
@@ -101,6 +106,7 @@ export class PatientProcedureModalDialogComponent
   getProcDescFromInp() {
     const code: string = this.getControlValue('code');
     if (code != '' && code != null) {
+      console.log(this.procDetails);
       this.procDetails.forEach((element) => {
         if (element.procedureCode === code) {
           this.setControlValue('description', element.procedureDescription);
@@ -130,10 +136,8 @@ export class PatientProcedureModalDialogComponent
   getProcCodeFromInp() {
     const description: string = this.getControlValue('description');
     if (description === 'Others') {
-      this.setControlValue('code', 'Not-defined');
-      this.selectedId = 0;
-    } else
-      if (description != '' && description != null) {
+      this.isHiddenDetails = false;
+    } if (description != '' && description != null) {
         this.procDetails.forEach((element) => {
           if (element.procedureDescription === description) {
             this.setControlValue('code', element.procedureCode);
@@ -144,9 +148,3 @@ export class PatientProcedureModalDialogComponent
       }
   }
 }
-
-// export interface ProcedureInterface {
-//   code:string;
-//   description:string;
-//   isDepricated:string;
-// }

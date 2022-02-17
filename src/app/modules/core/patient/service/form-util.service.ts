@@ -103,6 +103,7 @@ export class FormUtilService {
         isDepricated:[],
         appointmentId: [],
         selectedId: [],
+        details: []
       });
     
       diagnosisDetailsForm = this.fb.group({
@@ -115,6 +116,7 @@ export class FormUtilService {
         isDepricated:[],
         appointmentId: [],
         selectedId: [],
+        details: []
       });
     
       procedureDetailsForm = this.fb.group({
@@ -143,6 +145,7 @@ export class FormUtilService {
         drgStrength:[],
         appointmentId:[],
         selectedId:[],
+        details: []
       });
 
 

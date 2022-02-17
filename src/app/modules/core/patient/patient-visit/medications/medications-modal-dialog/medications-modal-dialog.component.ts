@@ -28,15 +28,23 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
   drugBrandName: any[] = [];
   drugStrength: any[] = [];
   selectedId: number = 0;
+  isHiddenDetails: boolean = false;
+  
 
   ngOnInit(): void {
+    this.loadMedicationsData();
+  }
+
+  loadMedicationsData() {
     this.apiCommonService.getMedicationDetails().subscribe((res) => {
       this.drugDetails = res['result'];
       this.drugDetails.forEach((eachDetails) => {
-        this.drugId.push(eachDetails['drugId']);
+        if(eachDetails['drugId'] != 'Not-Defined'){
+          this.drugId.push(eachDetails['drugId']);
+        }
         this.drugName.push(eachDetails['drugName']);
       });
-      this.drugName.push('Others');
+      // this.drugName.push('Others');
     });
   }
 
@@ -56,6 +64,8 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
     this.setControlValue('drgGenericName', '');
     this.setControlValue('drgBrandName', '');
     this.setControlValue('drgForm', '');
+    this.setControlValue('drgStrength', '');
+    this.setControlValue('details','');
   }
 
   getDrugIdFromField() {
@@ -128,21 +138,31 @@ export class MedicationsModalDialogComponent extends FormBaseController<any> imp
   //   );
   // }
   autoFillDetailsForDrugName() {
-    const drugName: string = this.getControlValue('drugName');
-    if (drugName === 'Others') {
-      this.setControlValue('drgId', 'Not defined');
-      this.selectedId = 0;
-    } else if (drugName != '' && drugName != null) {
+    const drugName: string = this.getControlValue('drgName');
+     if (drugName != '' && drugName != null) {
+      // this.drugDetails.forEach((element) => {
+      if(drugName === 'Others'){
+        this.isHiddenDetails = true;
+      } else{
+        this.isHiddenDetails = false;
+      }
       this.drugDetails.forEach((element) => {
-        if (element.drugName === drugName) {
+        if(element.drugName === 'Others' && element.drugName === drugName){
+          // this.isHiddenDetails = true;
+          this.setControlValue('drgId', element.drugId);
+          this.selectedId = element.medicationId;
+          return;
+        } else if (element.drugName === drugName) {
+          // this.isHiddenDetails = false;
           this.setControlValue('drgId', element.drugId);
           this.setControlValue('drgGenericName', element.drugGenericName);
-          this.drugBrandName = element.drugManufacturerName;
+          this.drugBrandName = element.drugManufacturerName.split(';');
           this.drugForm = element.drugForm.split(';');
           this.drugStrength = element.drugStrength.split(';');
           this.selectedId = element.medicationId;
+          return;
         }
-      });
+      })
     }
   }
 }

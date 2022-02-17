@@ -27,6 +27,7 @@ export class DiagnosisModalDialogComponent
   diagDesc: any[] = [];
   diagCode: any[] = [];
   selectedId: number = 0;
+  isHiddenDetails: boolean = true;
 
   ngOnInit(): void {
     this.loadDiagnosisDetails();
@@ -37,11 +38,14 @@ export class DiagnosisModalDialogComponent
       res => {
         this.diagDetails = res['result'];
         this.diagDetails.forEach((eachDetails) => {
-          this.diagCode.push(eachDetails['diagnosisCode']);
+          if(eachDetails['diagnosisCode'] != 'Not-Defined'){
+            this.diagCode.push(eachDetails['diagnosisCode']);
+          }
           this.diagDesc.push(eachDetails['diagnosisDescription']);
         });
-        this.diagDesc.push('Others');
+        // this.diagDesc.push('Others');
       });
+      // console.log(this.diagDetails);
   }
 
   onNoClick(): void {
@@ -59,6 +63,7 @@ export class DiagnosisModalDialogComponent
     this.setControlValue('code', '');
     this.setControlValue('description', '');
     this.setControlValue('isDepricated', '');
+    this.setControlValue('details','');
   }
 
   getSearchValueForDescription() {
@@ -84,9 +89,9 @@ export class DiagnosisModalDialogComponent
   getDiagnosisCodeFromInp() {
     const description: string = this.getControlValue('description');
     if (description === 'Others') {
-      this.setControlValue('code', 'Not-defined');
-      this.selectedId = 0;
-    } else if (description != '' && description != null) {
+      this.isHiddenDetails = false;
+    }  
+    if (description != '' && description != null) {
       this.diagDetails.forEach(element => {
         if (element.diagnosisDescription === description) {
           this.setControlValue('code', element.diagnosisCode);

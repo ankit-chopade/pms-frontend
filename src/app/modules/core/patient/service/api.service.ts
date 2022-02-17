@@ -36,6 +36,9 @@ export class ApiService {
   saveVitalDetails(param: any){
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.VITAL_SIGN_DOMAIN}`, param);
   }
+  updateVitalDetails(param: any){
+    return this.httpClient.put<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.VITAL_SIGN_DOMAIN}`, param);
+  }
   /**
    * @param  {} {returnthis.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROCEDURE_DETAILS}`
    */
@@ -53,6 +56,10 @@ export class ApiService {
    */
   saveProcDetailsForPatient(param:any){
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.PROCEDURE_DETAILS}`,param);
+  }
+
+  deleteProcedureDetail(param: any){
+    return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.PROCEDURE_DETAILS}`, {params:param});
   }
   /**
    * @param  {any} param
@@ -83,6 +90,10 @@ export class ApiService {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
   }
 
+  deleteDiagnosisDetail(param:any){
+    return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
+  }
+
   // getDiagnosisDetailsForCode(param:any){
   //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.GET_DETAILS_BY_CODE}`, {params:param});
   // }
@@ -105,12 +116,16 @@ export class ApiService {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`,{params:param});
   }
 
-  getDrugDetailsForDrugId(param:any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_CODE}`,{params:param});
-  }
+  // getDrugDetailsForDrugId(param:any){
+  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_CODE}`,{params:param});
+  // }
 
-  getDrugDetailsForDrugName(param:any){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_DESCRIPTION}`, {params:param});
+  // getDrugDetailsForDrugName(param:any){
+  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_DESCRIPTION}`, {params:param});
+  // }
+
+  deleteMedicationDetail(param:any){
+    return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`, {params:param})
   }
 
   //Patient details screen
