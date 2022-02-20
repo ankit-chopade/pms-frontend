@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
+import { formErrorMessages } from 'src/app/modules/core/patient/constants/message.constant';
 import { ApiService } from '../../../service/api.service';
 import { FormUtilService } from '../../../service/form-util.service';
 import { DetailsInterface } from '../../patient-modal/DetailsInterface';
@@ -23,6 +24,7 @@ export class DiagnosisModalDialogComponent
     super(formConfig.diagnosisModalDialog, '');
   }
 
+  errorMessages = formErrorMessages;
   diagDetails: any[];
   diagDesc: any[] = [];
   diagCode: any[] = [];
@@ -43,9 +45,7 @@ export class DiagnosisModalDialogComponent
           }
           this.diagDesc.push(eachDetails['diagnosisDescription']);
         });
-        // this.diagDesc.push('Others');
       });
-      // console.log(this.diagDetails);
   }
 
   onNoClick(): void {
@@ -64,6 +64,7 @@ export class DiagnosisModalDialogComponent
     this.setControlValue('description', '');
     this.setControlValue('isDepricated', '');
     this.setControlValue('details','');
+    this.form.reset();
   }
 
   getSearchValueForDescription() {
@@ -75,6 +76,9 @@ export class DiagnosisModalDialogComponent
 
   getDiagnosisDescFromInp() {
     const code: string = this.getControlValue('code');
+    if(code != 'Not-Defined'){
+      this.isHiddenDetails = true ;
+  }
     if (code != '' && code != null) {
       this.diagDetails.forEach(element => {
         if (element.diagnosisCode === code) {
@@ -90,8 +94,11 @@ export class DiagnosisModalDialogComponent
     const description: string = this.getControlValue('description');
     if (description === 'Others') {
       this.isHiddenDetails = false;
-    }  
+    } else {
+      this.isHiddenDetails = true;
+    }
     if (description != '' && description != null) {
+
       this.diagDetails.forEach(element => {
         if (element.diagnosisDescription === description) {
           this.setControlValue('code', element.diagnosisCode);

@@ -5,10 +5,11 @@
     <div fxLayoutGap="10px">
         <mat-form-field  >
             <mat-label>Procedure Code</mat-label>
-            <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" on-focusout="getProcDescFromInp()">
+            <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" on-focusout="getProcDescFromInp()" required>
             <mat-autocomplete name="pcode" #getCode="matAutocomplete">
                 <mat-option *ngFor="let value of procCode | searchFilter : getSearchValueForCode()" value="{{value}}">{{value}}</mat-option>
             </mat-autocomplete>
+            <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{errorMessages.PROCEDURE_CODE_REQUIRED}}</span>
         </mat-form-field>
         <br>
         <mat-form-field  >
@@ -22,7 +23,8 @@
         <br>
         <mat-form-field   *ngIf = "!isHiddenDetails">
             <mat-label>Procedure Details</mat-label>
-            <input matInput type="text" formControlName="details">
+            <input matInput type="text" formControlName="details" required>
+            <span *ngIf="checkTouchedAndInvalid('details')" class="error">{{errorMessages.PROCEDURE_DETAILS_REQUIRED}}</span>
         </mat-form-field>
         <br>
             <div>

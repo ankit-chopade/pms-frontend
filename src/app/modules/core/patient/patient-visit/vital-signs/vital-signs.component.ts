@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
+import { formErrorMessages } from '../../constants/message.constant';
 import { ApiService } from '../../service/api.service';
 import { FormUtilService } from '../../service/form-util.service';
 
@@ -13,6 +14,7 @@ export class VitalSignsComponent
   extends FormBaseController<any>
   implements OnInit
 {
+  errorMessages = formErrorMessages
   disabled: boolean = false;
   // updateDisable: boolean = true;
   saveDisabled:boolean = false;
@@ -102,5 +104,12 @@ export class VitalSignsComponent
         this.notifyService.showError("Vital signs not updated", "Error");
       }
     });
+  }
+
+  roundOffWeight(){
+    if(this.getControlValue('weight')){
+      const value = Number(this.getControlValue('weight')).toFixed(2);
+      this.setControlValue('weight', value);
+    }
   }
 }

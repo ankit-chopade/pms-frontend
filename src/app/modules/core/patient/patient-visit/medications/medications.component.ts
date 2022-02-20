@@ -71,8 +71,7 @@ export class MedicationsComponent
   }
 
   validateExistingMedications(selectedId: number): boolean {
-    // let data: any = this.dataSource.find(m => d.medicationId == selectedId && m.appointmentId == this.appointmentId)
-    let data: any = this.dataSource.find((m) => m.medicationId == selectedId);
+    let data: any = this.dataSource.find(m => m.medicationId == selectedId && m.appointmentId == this.appointmentId)
     if (data == null) {
       return true;
     }

@@ -5,10 +5,11 @@
     <div fxLayoutGap="10px">
         <mat-form-field  >
             <mat-label>Diagnosis Code</mat-label>
-            <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" >
+            <input matInput type = "text"  formControlName="code" [matAutocomplete]="getCode" required>
             <mat-autocomplete name="pcode" #getCode="matAutocomplete">
-                <mat-option *ngFor="let value of diagCode | searchFilter : getSearchValueForCode()" value="{{value}}" onchange="getDiagnosisDescFromInp()">{{value}}</mat-option>
+                <mat-option *ngFor="let value of diagCode | searchFilter : getSearchValueForCode()" value="{{value}}" on-focusout="getDiagnosisDescFromInp()">{{value}}</mat-option>
             </mat-autocomplete>
+            <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{errorMessages.DIAGNOSIS_CODE_REQUIRED}}</span>
         </mat-form-field>
         <br>
         <mat-form-field  >
@@ -22,7 +23,8 @@
         <br>
         <mat-form-field   *ngIf = "!isHiddenDetails">
             <mat-label>Diagnosis Details</mat-label>
-            <input matInput type="text" formControlName="details">
+            <input matInput type="text" formControlName="details" required>
+            <span *ngIf="checkTouchedAndInvalid('details')" class="error">{{errorMessages.DIAGNOSIS_DETAILS_REQUIRED}}</span>
         </mat-form-field>
         <br>
             <div>

@@ -14,4 +14,21 @@ export const formErrorMessages={
     LANGUAGEKNOWN_REQUIRED:"Please enter known Languages",
     HOMEADDRESS_REQUIRED:"Please enter Home Address",
     RELATIONSHIP_REQUIRED:"Please enter Relationship",
+
+    // Diagnosis
+    DIAGNOSIS_CODE_REQUIRED:"This field cannot be empty",
+    DIAGNOSIS_DETAILS_REQUIRED:"Please enter the details",
+
+    // Procedure
+    PROCEDURE_CODE_REQUIRED:"This field cannot be empty",
+    PROCEDURE_DETAILS_REQUIRED:"Please enter the details",
+
+    // vital_signs
+    HEIGHT_VALUE_ERROR:"Please enter a valid value below 250 and above 0",
+    WEIGHT_REQUIRED:"Please enter a value",
+
+    // medications
+    DRUG_DETAILS_REQUIRED:"Please enter a value",
+    DRUG_CODE_REQUIRED:"This field cannot be empty",
+    DRUG_FORM_REQUIRED:"Kindly provide a response",
 }

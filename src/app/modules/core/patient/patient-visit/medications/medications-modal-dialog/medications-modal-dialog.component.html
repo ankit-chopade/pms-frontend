@@ -3,17 +3,18 @@
     <mat-form-field>
       <mat-label>Drug Id</mat-label>
       <input matInput type="text" formControlName="drgId" [matAutocomplete]="getId"
-        on-focusout="autoFillDetailsForDrugId()" [required]="true" />
+        on-focusout="autoFillDetailsForDrugId()" required />
       <mat-autocomplete #getId="matAutocomplete">
         <mat-option *ngFor="let value of drugId | searchFilter : getDrugIdFromField()" value="{{value}}">{{value}}
         </mat-option>
       </mat-autocomplete>
+      <span *ngIf="checkTouchedAndInvalid('drgId')" class="error">{{errorMessages.DRUG_CODE_REQUIRED}}</span>
     </mat-form-field>
     <br />
     <mat-form-field>
       <mat-label>Drug Name</mat-label>
       <input matInput type="text" formControlName="drgName" [matAutocomplete]="getName"
-        on-focusout="autoFillDetailsForDrugName()" [required]="true">
+        on-focusout="autoFillDetailsForDrugName()" >
       <mat-autocomplete #getName="matAutocomplete">
         <mat-option *ngFor="let value of drugName | searchFilter : getDrugNameFromField()" value="{{ value }}">{{value}}
         </mat-option>
@@ -22,17 +23,18 @@
     <br />
     <mat-form-field *ngIf="isHiddenDetails">
       <mat-label>Drug Details</mat-label>
-      <input matInput type="text" formControlName="details">
+      <input matInput type="text" formControlName="details" required>
+      <span *ngIf="checkTouchedAndInvalid('details')" class="error">{{errorMessages.DRUG_DETAILS_REQUIRED}}</span>
     </mat-form-field>
     <!-- <br> -->
     <mat-form-field>
       <mat-label>Drug Generic Name</mat-label>
-      <input matInput type="text" formControlName="drgGenericName" [required]="true" />
+      <input matInput type="text" formControlName="drgGenericName" />
     </mat-form-field>
     <br />
     <mat-form-field>
       <mat-label>Drug Brand name</mat-label>
-      <input matInput type="text" formControlName="drgBrandName" [matAutocomplete]="getBrandName" [required]="true" />
+      <input matInput type="text" formControlName="drgBrandName" [matAutocomplete]="getBrandName" />
       <mat-autocomplete #getBrandName="matAutocomplete">
         <mat-option *ngFor="let value of drugBrandName | searchFilter : getDrugBrandNameFromField()" value="{{value}}">
           {{value}}</mat-option>
@@ -41,16 +43,17 @@
     <br />
     <mat-form-field>
       <mat-label>Drug Form</mat-label>
-      <input matInput type="text" formControlName="drgForm" [matAutocomplete]="getForm" [required]="true">
+      <input matInput type="text" formControlName="drgForm" [matAutocomplete]="getForm" required>
       <mat-autocomplete #getForm="matAutocomplete">
         <mat-option *ngFor="let value of drugForm | searchFilter : getDrugFormFromField()" value="{{ value }}">{{value}}
         </mat-option>
       </mat-autocomplete>
+      <span *ngIf="checkTouchedAndInvalid('drgForm')" class="error">{{errorMessages.DRUG_FORM_REQUIRED}}</span>
     </mat-form-field>
     <br>
     <mat-form-field>
       <mat-label>Drug Strength</mat-label>
-      <input matInput type="text" formControlName="drgStrength" [matAutocomplete]="getStrength" [required]="true">
+      <input matInput type="text" formControlName="drgStrength" [matAutocomplete]="getStrength" >
       <mat-autocomplete #getStrength="matAutocomplete">
         <mat-option *ngFor="let value of drugStrength | searchFilter : getDrugStrengthFromField()" value="{{value}}">
           {{value}}</mat-option>

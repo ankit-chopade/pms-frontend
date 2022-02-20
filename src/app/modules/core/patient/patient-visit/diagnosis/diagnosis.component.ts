@@ -27,9 +27,7 @@ export class DiagnosisComponent
     super(formConfig.diagnosisDetailsForm, '');
   }
 
-  dataSource: any[] = [
-    // {code:'A001', description:'Sample Drug', isDepricated:'yes'}
-  ];
+  dataSource: any[] = [];
   displayedColumns: string[] = [
     'code',
     'description',
@@ -58,7 +56,6 @@ export class DiagnosisComponent
           const param: any = {
             diagnosisId: result['selectedId'],
             appointmentId: this.appointmentId, //Passing Static Value
-            //  appointmentId: result['appointmentId'],
             diagnosisCode: result['code'],
             diagnosisDescription: result['description'],
             diagnosisIsDepricated: result['isDepricated'],
@@ -71,18 +68,9 @@ export class DiagnosisComponent
       }
     });
   }
-  //   dialogRef.afterClosed().subscribe(result => {
-  //       if(result && result['code'] && result['description']&& result['isDepricated']){
-  //         const param : any = {
-  //           result
-  //         }
-  //       }
-  //   });
-  // }
 
   validateExistingDiagnosis(selectedId: number): boolean {
-    // let data: any = this.dataSource.find(d => d.diagnosisId == selectedId && d.appointmentId == this.appointmentId)
-    let data: any = this.dataSource.find((d) => d.diagnosisId == selectedId);
+    let data: any = this.dataSource.find(d => d.diagnosisId == selectedId && d.appointmentId == this.appointmentId)
     if (data == null) {
       return true;
     }
@@ -100,10 +88,8 @@ export class DiagnosisComponent
           element.diagnosisIsDepricated = element.diagnosisIsDepricated == 0 ? 'Yes' : 'No';
           let customDate = element.createdDate.split(' ')[0].split('-');
           element.prescribedDate = customDate[2] + '-' + customDate[1] + '-' + customDate[0];
-          // element.appointmentId = this.appointmentId; // need to remove this
           element.deleteButton = (element.appointmentId == this.appointmentId) ? "delete" : ""
         });
-        // console.log(this.dataSource)
       });
   }
 

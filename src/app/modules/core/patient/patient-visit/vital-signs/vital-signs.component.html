@@ -6,29 +6,30 @@
 <br>
 <form [formGroup]="form">
     <div>
-        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayout.md="column" fxLayout.lt-lg="column" fxLayoutAlign="center center">
             <mat-form-field appearance="outline">
                 <mat-label>Height (in cm)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="height" min="0" max="250">
-                <span></span>
+                <input matInput type="number" [readonly]="disabled" formControlName="height"  >
+                <span *ngIf="form.controls['height'].hasError('max') || form.controls['height'].hasError('min') || checkTouchedAndInvalid('height')" class="error">{{errorMessages.HEIGHT_VALUE_ERROR}}</span>
             </mat-form-field>
-            <br>
+            <!-- <br> -->
             <mat-form-field appearance="outline">
                 <mat-label>Weight (in kg)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="weight">
+                <input matInput type="number" [readonly]="disabled" formControlName="weight" on-focusout="roundOffWeight()">
+                <span *ngIf="checkTouchedAndInvalid('weight')" class="error">{{errorMessages.WEIGHT_REQUIRED}}</span>
             </mat-form-field>
-            <br>
+            <!-- <br> -->
             <mat-form-field appearance="outline">
                 <mat-label>Blood Pressure (in mm Hg) </mat-label>
                 <input matInput type="number" [readonly]="disabled" formControlName="bloodPressure">
             </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayout.md="column" fxLayout.lt-lg="column" fxLayoutAlign="center center">
             <mat-form-field appearance="outline">
                 <mat-label>Body Temperature (in Fahrenheit)</mat-label>
                 <input matInput type="number" [readonly]="disabled" formControlName="bodyTemperature">
             </mat-form-field>
-            <br>
+            <!-- <br> -->
 
             <mat-form-field appearance="outline">
                 <mat-label>Respiration Rate(in BPM)</mat-label>

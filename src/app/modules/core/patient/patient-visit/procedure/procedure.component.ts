@@ -76,8 +76,7 @@ export class ProcedureComponent
   }
 
   validateExistingProcedure(selectedId: number): boolean {
-    // let data: any = this.dataSource.find(p => p.procedureId == selectedId && p.appointmentId == this.appointmentId)
-    let data: any = this.dataSource.find((p) => p.procedureId == selectedId);
+    let data: any = this.dataSource.find(p => p.procedureId == selectedId && p.appointmentId == this.appointmentId)
     if (data == null) {
       return true;
     }

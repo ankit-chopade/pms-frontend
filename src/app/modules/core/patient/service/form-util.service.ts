@@ -98,12 +98,12 @@ export class FormUtilService {
       });
     
       patientProcedureModalDialog = this.fb.group({
-        code:[],
+        code:['', Validators.required],
         description:[],
         isDepricated:[],
         appointmentId: [],
         selectedId: [],
-        details: []
+        details: ['', Validators.required]
       });
     
       diagnosisDetailsForm = this.fb.group({
@@ -111,12 +111,12 @@ export class FormUtilService {
       });
     
       diagnosisModalDialog = this.fb.group({
-        code:[],
+        code:['', Validators.required],
         description:[],
         isDepricated:[],
         appointmentId: [],
         selectedId: [],
-        details: []
+        details: ['', Validators.required]
       });
     
       procedureDetailsForm = this.fb.group({
@@ -124,8 +124,8 @@ export class FormUtilService {
       });
     
       vitalSignsForm = this.fb.group({
-        height:[],
-        weight:[],
+        height:['', [Validators.required, Validators.max(250), Validators.min(0)]],
+        weight:['', ],
         bloodPressure:[],
         bodyTemperature:[],
         respirationRate:[],
@@ -137,15 +137,15 @@ export class FormUtilService {
       });
     
       medicationModalDialog = this.fb.group({
-        drgId:[],
+        drgId:['', Validators.required],
         drgName:[],
         drgGenericName:[],
         drgBrandName:[],
-        drgForm:[],
+        drgForm:['', Validators.required],
         drgStrength:[],
         appointmentId:[],
         selectedId:[],
-        details: []
+        details: ['', Validators.required]
       });
 
 

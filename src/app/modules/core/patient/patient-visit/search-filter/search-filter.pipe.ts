@@ -7,7 +7,7 @@ export class SearchFilterPipe implements PipeTransform {
 
   transform(inputList: any[], filterCondition: string): any {
     // let output:any[] = [];
-    if(!filterCondition)
+    if(!filterCondition || filterCondition.length < 3)
       return inputList;
     let output = inputList.filter(v => {
       if(!v){ return;}

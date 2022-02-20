@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
+import { formErrorMessages } from '../../../constants/message.constant';
 import { ApiService } from '../../../service/api.service';
 import { FormUtilService } from '../../../service/form-util.service';
 import { DetailsInterface } from '../../patient-modal/DetailsInterface';
@@ -33,6 +34,7 @@ export class PatientProcedureModalDialogComponent
   ) {
     super(formConfig.patientProcedureModalDialog, '');
   }
+  errorMessages = formErrorMessages;
   procDetails: any[];
   procDesc: any[] = [];
   procCode: any[] = [];
@@ -74,6 +76,7 @@ export class PatientProcedureModalDialogComponent
     this.setControlValue('description', '');
     this.setControlValue('isDepricated', '');
     this.setControlValue('details','');
+    this.form.reset();
   }
 
   getSearchValueForDescription() {
@@ -105,6 +108,9 @@ export class PatientProcedureModalDialogComponent
   // }
   getProcDescFromInp() {
     const code: string = this.getControlValue('code');
+    if(code != 'Not-Defined'){
+        this.isHiddenDetails = true;
+    }
     if (code != '' && code != null) {
       console.log(this.procDetails);
       this.procDetails.forEach((element) => {
@@ -137,7 +143,10 @@ export class PatientProcedureModalDialogComponent
     const description: string = this.getControlValue('description');
     if (description === 'Others') {
       this.isHiddenDetails = false;
-    } if (description != '' && description != null) {
+    } else {
+      this.isHiddenDetails = true;
+    }
+    if (description != '' && description != null) {
         this.procDetails.forEach((element) => {
           if (element.procedureDescription === description) {
             this.setControlValue('code', element.procedureCode);
