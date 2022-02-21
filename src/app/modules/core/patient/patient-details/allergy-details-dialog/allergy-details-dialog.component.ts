@@ -51,6 +51,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
     this.setControlValue('allergyDescription', allergyDataFromId[0].allergyDescription);
     this.setControlValue('allergyClinicalInfo', allergyDataFromId[0].allergyClinicalInfo);
    this.selectedAllergyId = allergyDataFromId[0].allergyId;
+
   }
 
   getAllergyDetailsByType() {
@@ -73,13 +74,9 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   }
 
   add() {
+
     this.setControlValue('allergyId',this.selectedAllergyId);
-    this.dialogRef.close(this.form.value);
-    this.setControlValue('allergyCode', "");
-    this.setControlValue('allergyName', "");
-    this.setControlValue('allergyType', "");
-    this.setControlValue('allergyDescription', "");
-    this.setControlValue('allergyClinicalInfo', "");
+
   }
 
   cancel() {

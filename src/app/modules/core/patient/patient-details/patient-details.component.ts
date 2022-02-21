@@ -25,6 +25,7 @@ import { AllergyDetailsDialogComponent } from './allergy-details-dialog/allergy-
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent extends FormBaseController<any> implements OnInit {
+
   userData: User;
   patientData: PatientDetails;
   AllergyMapData: AllergyMap[];
@@ -43,7 +44,9 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   allergydatasource: AllergyDetails[] = [];
   allergydatatemporary: AllergyDetails[] = [];
+
   otherType: AllergyDetails = new AllergyDetails();
+
   // allergy_details_dto: AllergyDetails[] = [];
 
   submitPatientDetailsForm() {
@@ -56,7 +59,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     emergencyDetails.homeAddress = this.getControlValue('emergencycontacthomeaddress');
     emergencyDetails.accessPatientPortal = this.getControlValue('accesstopatientportal');
     
-    this.checkPriviousAllergy();
+  //  this.checkPriviousAllergy();
 
     const patientEntity = {
      
@@ -73,6 +76,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       emergencyContactEntity: emergencyDetails,
      
       allergyMap: this.allergyMaps
+
 
     }
 
@@ -135,9 +139,8 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('dob', this.userData.dob)
 
         }
-        else {
-          //  alert("Failed");
-        }
+  
+        
       }
     );
     this.apiCommonService.getpatientDetails(userId).subscribe(
@@ -198,15 +201,12 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
 
           }
-
         }
-        else {
-          //  alert("Failed");
-        }
+    
       }
     );
-  }
-
+    }
+  
   sameAddres() {
     if (this.addrsameaspatient) {
       this.setControlValue("emergencycontacthomeaddress", this.getControlValue("homeaddress"))
