@@ -7,6 +7,16 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AllergyDetailsDialogComponent } from './patient-details/allergy-details-dialog/allergy-details-dialog.component';
 import { AllergyFilterPipe } from './patient-details/search-filter/allergy-filter.pipe';
+import { PatientVisitComponent } from './patient-visit/patient-visit.component';
+import { PatientProcedureModalDialogComponent } from './patient-visit/procedure/patient-procedure-modal-dialog/patient-procedure-modal-dialog.component';
+import { SearchFilterPipe } from './patient-visit/search-filter/search-filter.pipe';
+import { DiagnosisComponent } from './patient-visit/diagnosis/diagnosis.component';
+import { DiagnosisModalDialogComponent } from './patient-visit/diagnosis/diagnosis-modal-dialog/diagnosis-modal-dialog.component';
+import { ProcedureComponent } from './patient-visit/procedure/procedure.component';
+import { VitalSignsComponent } from './patient-visit/vital-signs/vital-signs.component';
+import { MedicationsComponent } from './patient-visit/medications/medications.component';
+import { MedicationsModalDialogComponent } from './patient-visit/medications/medications-modal-dialog/medications-modal-dialog.component';
+import { PatientDemographicsDetailsComponent } from './patient-visit/patient-demographics-details/patient-demographics-details.component';
 
 
 
@@ -15,6 +25,16 @@ import { AllergyFilterPipe } from './patient-details/search-filter/allergy-filte
     PatientDetailsComponent,
     AllergyDetailsDialogComponent,
     AllergyFilterPipe,
+    PatientVisitComponent,
+    PatientProcedureModalDialogComponent,
+    SearchFilterPipe,
+    DiagnosisComponent,
+    DiagnosisModalDialogComponent,
+    ProcedureComponent,
+    VitalSignsComponent,
+    MedicationsComponent,
+    MedicationsModalDialogComponent,
+    PatientDemographicsDetailsComponent,
   ],
   imports: [
     CommonModule,

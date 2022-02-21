@@ -14,7 +14,7 @@ import { EmergencyDetails } from '../models/EmergencyDetails';
 import { PatientDetails } from '../models/PatientDetails';
 import { User } from '../models/User';
 import { ApiService } from '../service/api.service';
-import { FormUtilServie } from '../service/form-util.service';
+import { FormUtilService } from '../service/form-util.service';
 import { AllergyDetailsDialogComponent } from './allergy-details-dialog/allergy-details-dialog.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   allergycode:string;
   errormessage = formErrorMessages;
   allergy_details: string = "false";
-  constructor(private dialog: MatDialog, private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService) {
+  constructor(private dialog: MatDialog, private formConfig: FormUtilService, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService) {
     super(formConfig.patientDetailsForm);
   }
 
