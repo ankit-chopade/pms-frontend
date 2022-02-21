@@ -46,6 +46,7 @@ export class NurseSchedulingComponent {
   public filteredData: Record<string, any>[];
   public openededithistorysidebar:boolean=false;
   public editHistoryDatasource:any[];
+  public allappointments: Record<string, any>[];
 
   minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
     return args['value'].length >= 5;
@@ -98,7 +99,7 @@ export class NurseSchedulingComponent {
 
   toggleSideBar(){
    
-    if(this.patientselected!=undefined && this.specialistselected==undefined){
+    if(this.patientselected!=undefined) { //&& this.specialistselected==undefined){
       this.openededithistorysidebar=!this.openededithistorysidebar;
       this.getEditHistory(this.patientselected)
     }
@@ -251,9 +252,42 @@ export class NurseSchedulingComponent {
             this.scheduleObj.eventSettings.dataSource = this.allappointments_physician;
           }
           if (this.specialistselected !== undefined && this.patientselected != undefined) {
-            let filteredData: Record<string, any>[];
-            filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
-            this.scheduleObj.eventSettings.dataSource = filteredData;
+            // let filteredData: Record<string, any>[];
+            // this.allappointments.push(this.allappointments_patient)
+            let set_patient  = new Set(this.allappointments_patient)
+            let set_physician = new Set(this.allappointments_physician)
+            let merged = new Set([...set_patient,...set_physician])
+            console.log(merged)
+            this.allappointments=Array.of(merged)
+            this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
+            // this.allappointments.concat(this.allappointments_patient,this.allappointments_physician);
+            // console.log(this.allappointments_patient)
+            // this.allappointments_patient.forEach( (value) => {
+            //   console.log(value)
+            //   this.allappointments.push(value)
+            // })
+            // this.allappointments_physician.forEach( (value) => {
+            //   this.allappointments.push(value)
+            // })
+            // this.allappointments.concat(this.allappointments_physician)
+            // set.add(this.allappointments)
+            // set.add(this.allappointments_patient);
+            // set.add(this.allappointments_physician)
+            // console.log(set)
+            // this.allappointments.push(this.allappointments_physician)      
+            // const expected = new Set();
+            // this.allappointments = this.allappointments.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
+            // this.allappointments =Array.of(set);
+            console.log(this.allappointments)
+            this.allappointments.forEach( (value) =>{
+              if(value['patientId']!=this.patientselected && value['PhysicianId']!= this.specialistselected){
+                value['IsReadonly'] = true;
+
+              }
+            })
+
+            // filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
+            this.scheduleObj.eventSettings.dataSource = this.allappointments;
           }
           if (this.patientselected == 0 || this, this.patientselected == undefined) {
             this.allappointments_physician.forEach(function (value) {

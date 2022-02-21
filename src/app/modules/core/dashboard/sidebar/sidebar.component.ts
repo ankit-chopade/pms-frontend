@@ -27,4 +27,9 @@ export class SidebarComponent implements OnInit {
         this.menus=res['result']
     })
   }
+
+  // getUserDetails(){
+  //   let Id = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
+
+  // }
 }

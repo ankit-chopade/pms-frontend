@@ -32,7 +32,7 @@
   
       <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
         <mat-form-field appearance="legacy" class="title">
-          <mat-label>Choose Specialist</mat-label>
+          <mat-label>Choose Patient</mat-label>
           <mat-select (selectionChange)="patientSelected()" [(ngModel)]='patientselected'>
             <mat-option *ngFor="let data of patient" [value]="data.userId"> {{data.title}} {{data.firstName}} {{data.lastName}}
             </mat-option>
