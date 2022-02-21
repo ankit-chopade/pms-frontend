@@ -1,6 +1,6 @@
 <mat-card-content>
     <div fxLayoutAlign="center center" fxFlexFill>
-        <form [formGroup]="form" (submit)="submitregistrationForm()">
+        <form [formGroup]="form" >
             <div fxLayoutAlign="center center" fxFlexFill>
                 <h1>Patient Registration</h1>
             </div>
@@ -71,8 +71,8 @@
             </div>
               <br>
               <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center">
-                <button [disabled]="!(form.invalid==false  && (password==confirmpassword)==true)" mat-raised-button color='primary'>Submit</button>
-                <button mat-raised-button color='primary'routerLink="/login">Login</button>
+                <button [disabled]="!(form.invalid==false  && (password==confirmpassword)==true)"  (click)="submitregistrationForm()" mat-raised-button color='primary'>Submit</button>
+                <button mat-raised-button color='primary' routerLink="/login">Login</button>
                 
               </div>
         </form>

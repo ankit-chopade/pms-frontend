@@ -17,11 +17,13 @@ export class ApiService {
   }
 
   patientDetails(param: any) {
+    console.log(param)
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_DETAILS}`, param);
   }
 
-  getAllergyDetailsById(){
-    return this.httpClient.get(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`);
+  getAllergyDetailsById(param:any){
+    console.log(param)
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
   }
 
   getAllergyDetails(){
@@ -35,5 +37,13 @@ export class ApiService {
   getpatientDetails(param:any){
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENT_DATA}`,{params:param});
+  }
+  saveAllergyDetails(param:any){
+ 
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_ALLERGY_DETAILS}`,param);
+  }
+  getAllergyDetailsbyCodeDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_DETAILS}`,{params:param});
   }
 }

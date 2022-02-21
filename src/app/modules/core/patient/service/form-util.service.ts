@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 })
 
 export class FormUtilServie {
+    [x: string]: any;
 
     fb = new FormBuilder();
 
@@ -29,22 +30,34 @@ export class FormUtilServie {
         emergencycontactrelation: ["", Validators.required],
         emergencycontactemailid: ["", Validators.required],
         emergencycontactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
-        addrsameaspatient: ["", Validators.required],
+        addrsameaspatient: [],
         emergencycontacthomeaddress: [""],
-        allergy_details:["",Validators.required],
-        allergyid:["",Validators.required],
-        allergytype:["",Validators.required],
-        allergyname:["",Validators.required],
-        allergydesc:["",Validators.required],
-        allergyclinicalinfo:["",Validators.required],
+         allergy_details:[],
+         allergyid:[],
+         allergytype:[],
+         allergyname:[],
+         allergydesc:[],
+         allergyclinicalinfo:[],
     });
 
-    allergyDetailsForm=this.fb.group({
+        allergyDetailsForm=this.fb.group({
         allergy_details:["",Validators.required],
-        allergyid:["",Validators.required],
-        allergytype:["",Validators.required],
-        allergyname:["",Validators.required],
-        allergydesc:["",Validators.required],
-        allergyclinicalinfo:["",Validators.required],
+        allergyCode:["",Validators.required],
+        allergyType:["",Validators.required],
+        allergyName:["",Validators.required],
+        allergyDescription:["",Validators.required],
+        allergyClinicalInfo:["",Validators.required],
+        allergyId   :[],
+       selectedAllergyId:[]
     });
+    employeeRegistrationForm = this.fb.group({
+        title:["",Validators.required],
+        firstname:["",Validators.required],
+        lastname: ["", Validators.required],
+        dob: ["", Validators.required],
+        username :   ["", Validators.email],
+        contactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
+        emailid: ["", Validators.email],
+    });
+
 }

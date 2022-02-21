@@ -34,7 +34,7 @@ submitregistrationForm()
     lastName: this.getControlValue('lastname'),
     dob: this.getControlValue('dob'),
     emailId: this.getControlValue('username'),
-    contactNumber: this.getControlValue('contactnumber'),
+    contactNo: this.getControlValue('contactnumber'),
     password: this.getControlValue('password'),
     roleId:5,
     active:1,
@@ -42,6 +42,7 @@ submitregistrationForm()
 
   this.apiCommonService.registration(param).subscribe(
     res => {
+     // alert("Loadding please wait")
       if (res && res['result'] && res['status'] === 200) {
         this.notifyService.showSuccess("Registered Successfully","Success")
         this.router.navigate(['../login'])

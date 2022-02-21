@@ -16,6 +16,7 @@ import { HttpInterceptorsService } from './modules/common/services/http-intercep
   declarations: [
     AppComponent,
     ConfirmPasswordDirective,
+    
 
   ],
   imports: [
