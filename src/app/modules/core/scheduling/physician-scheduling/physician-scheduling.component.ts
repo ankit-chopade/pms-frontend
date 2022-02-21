@@ -23,27 +23,20 @@ import { NotificationService } from 'src/app/modules/default/service/notificatio
 declare var moment: any;
 import { createElement } from '@syncfusion/ej2-base';
 
-/**
- * Sample for overview
- */
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'app-patient-scheduling',
-  templateUrl: './patient-scheduling.component.html',
-  styleUrls: ['./patient-scheduling.component.scss'],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, YearService, AgendaService,
-    TimelineViewsService, TimelineMonthService, TimelineYearService, PrintService, ExcelExportService, ICalendarExportService],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-physician-scheduling',
+  templateUrl: './physician-scheduling.component.html',
+  styleUrls: ['./physician-scheduling.component.scss']
 })
+export class PhysicianSchedulingComponent {
 
-export class PatientSchedulingComponent  implements OnInit{
- constructor(private apiCommonService: ApiService,private notifyService : NotificationService){}
+  constructor(private apiCommonService: ApiService,private notifyService : NotificationService){}
 
   @ViewChild('scheduleObj') public scheduleObj: ScheduleComponent;
   
-  public physician: Physician[];
-  public specialistselected: number;
-  public physicianlist:string[];
+  public patient: Physician[];
+  public patientselected: number;
+  public patientlist:string[];
   public scheduleData: Record<string, any>[]| DataManager|undefined;
   public allappointments: Record<string, any>[];//from db
   minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
@@ -69,13 +62,18 @@ export class PatientSchedulingComponent  implements OnInit{
   public openededithistorysidebar:boolean=false;
   public editHistoryDatasource:any[];
   toggleSideBar(){
-    this.openededithistorysidebar=!this.openededithistorysidebar;
-    this.getEditHistory(parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))))
+    if(this.patientselected!=null){
+      this.openededithistorysidebar=!this.openededithistorysidebar;
+      this.getEditHistory(this.patientselected)
+    }
+    else{
+      this.notifyService.showWarning("Please select Patient","Warning")
+    }
 
   }
-  specialistSelected(){
+  patientSelected(){
     this.disable=false;    
-    this.getPhysicianAppintments(this.specialistselected);
+    this.getPatientAppintments(this.patientselected);
 
   }
   public onNavigating(args: NavigatingEventArgs): void {
@@ -89,8 +87,8 @@ export class PatientSchedulingComponent  implements OnInit{
       this.appointmentDummy = JSON.parse(JSON.stringify(this.scheduleObj.eventSettings.dataSource));
       let length = this.appointmentDummy.length -1;
       this.appointment=this.appointmentDummy[this.appointmentDummy.length-1]
-      this.appointment.patientId = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
-      this.appointment.physicianId = this.specialistselected;
+      this.appointment.patientId = this.patientselected;
+      this.appointment.physicianId = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
       const appointmentParam : any = {
         endTime : this.appointment.EndTime,
         endTimezone: this.appointment.EndTimezone==undefined?'Asia/Calcutta':this.appointment.EndTimezone,
@@ -114,8 +112,8 @@ export class PatientSchedulingComponent  implements OnInit{
      if(length!=undefined){
       this.appointment=JSON.parse(JSON.stringify(args.changedRecords))
       this.appointment=this.appointment[length-1];
-      this.appointment.patientId = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
-      this.appointment.physicianId = this.specialistselected;
+      this.appointment.patientId = this.patientselected;
+      this.appointment.physicianId = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
       let dummy = this.allappointments.filter(a=>a['Id']==this.appointment.Id);
       const appointmentParam : any = {
         endTime : this.appointment.EndTime,
@@ -148,7 +146,7 @@ export class PatientSchedulingComponent  implements OnInit{
         subject: this.appointment.Subject,
         editTime:new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
       }
-      console.log(edithistoryParam)
+      // console.log(edithistoryParam)
       this.saveEditHistory(edithistoryParam)
      }
     }
@@ -210,11 +208,11 @@ export class PatientSchedulingComponent  implements OnInit{
 
 
   ngOnInit(): void {
-    this.apiCommonService.getPhysician().subscribe(
+    this.apiCommonService.getPatient().subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-          this.physician=resp['result'];
-          this.physicianlist=this.physician.map(p=>p.title+" "+p.firstName + " " +p.lastName)
+          this.patient=resp['result'];
+          this.patientlist=this.patient.map(p=>p.title+" "+p.firstName + " " +p.lastName)
         }
       }
       ,
@@ -237,18 +235,18 @@ export class PatientSchedulingComponent  implements OnInit{
     );
   }
 
-  getPhysicianAppintments(Id:Number){
+  getPatientAppintments(Id:Number){
     const appointmentParam : any = {
       id: Id
     }
-    this.apiCommonService.getPhysicianAppintments(appointmentParam).subscribe(
+    this.apiCommonService.getPatientAppintments(appointmentParam).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
          this.allappointments = resp['result'];
          this.blockEvents()
          this.toGreaterCase();
          this.scheduleObj.eventSettings.dataSource = this.allappointments;
-         console.log(this.allappointments)
+        //  console.log(this.allappointments)
         }
       },
       (err=>{
@@ -277,7 +275,7 @@ export class PatientSchedulingComponent  implements OnInit{
         if (resp['status'] === 200 && resp['result'] && resp != null) {
          let editedappointment = resp['result'];
          this.toGreaterCase();
-         this.getPhysicianAppintments(this.specialistselected)
+         this.getPatientAppintments(this.patientselected)
          this.notifyService.showSuccess("Appointment has been edited successfully","Success")
         }
       },
@@ -306,7 +304,7 @@ export class PatientSchedulingComponent  implements OnInit{
   blockEvents(){
     let id = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
     this.allappointments.forEach(function (value){
-      if(value['patientId']!=id){
+      if(value['physicianId']!=id){
         value['isBlock']=true;
       }
       else{

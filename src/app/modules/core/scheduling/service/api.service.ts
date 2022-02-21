@@ -43,5 +43,10 @@ export class ApiService {
   getEditHistory(param:any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_EDIT_HISTORY}`,param);
   } 
-
+  getPatient(){
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT}`);
+  }
+  getPatientAppintments(param:any) {
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENTS}`,param);
+  }
 }

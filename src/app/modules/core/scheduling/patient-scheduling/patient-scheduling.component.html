@@ -3,22 +3,22 @@
 
     <mat-accordion>
       <div *ngFor="let history of editHistoryDatasource">
-      <mat-expansion-panel >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{history.subject}}
-          </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>EditedBy :{{history.editedBy}}</p><br>
-        <p>Edit Time: {{history.editTime}}</p><br>
-        <p>Physician Name :{{history.physicianName}}</p><br>
-        <p>Reason :{{history.reason}}</p><br>
-        <p>Description :{{history.description}}</p><br>
-        <p>Start Time : {{history.startTime}}</p><br>
-        <p>End Time : {{history.endTime}}</p><br>
-      </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{history.subject}}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>EditedBy :{{history.editedBy}}</p><br>
+          <p>Edit Time: {{history.editTime}}</p><br>
+          <p>Physician Name :{{history.physicianName}}</p><br>
+          <p>Reason :{{history.reason}}</p><br>
+          <p>Description :{{history.description}}</p><br>
+          <p>Start Time : {{history.startTime}}</p><br>
+          <p>End Time : {{history.endTime}}</p><br>
+        </mat-expansion-panel>
       </div>
     </mat-accordion>
 
@@ -34,7 +34,7 @@
       <mat-form-field appearance="legacy" class="title">
         <mat-label>Choose Specialist</mat-label>
         <mat-select (selectionChange)="specialistSelected()" [(ngModel)]='specialistselected'>
-          <mat-option *ngFor="let data of physician" [value]="data.userId"> {{data.title}} {{data.firstName}}
+          <mat-option *ngFor="let data of physician" [value]="data.userId"> {{data.title}} {{data.firstName}} {{data.lastName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
