@@ -43,7 +43,7 @@ export class MedicationsComponent
     this.loadGrid();
   }
   medicationAddButtonClick() {
-    console.log('add button click for medications');
+    // console.log('add button click for medications');
     const dialogRef = this.dialog.open(MedicationsModalDialogComponent, {
       width: '250px',
       data: this.dataSource,

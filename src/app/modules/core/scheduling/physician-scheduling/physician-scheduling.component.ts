@@ -78,7 +78,7 @@ export class PhysicianSchedulingComponent {
   }
   public onNavigating(args: NavigatingEventArgs): void {
     if (args.action === 'view' ) {
-      alert(args.action)
+      // alert(args.action)
     }
   }
 
@@ -319,7 +319,7 @@ export class PhysicianSchedulingComponent {
     this.apiCommonService.saveEditHistory(editHistory).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-         alert("Success");
+        //  alert("Success");
         }
       },
       (err=>{

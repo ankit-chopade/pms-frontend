@@ -80,7 +80,7 @@ export class PatientSchedulingComponent  implements OnInit{
   }
   public onNavigating(args: NavigatingEventArgs): void {
     if (args.action === 'view' ) {
-      alert(args.action)
+      // alert(args.action)
     }
   }
 
@@ -148,7 +148,7 @@ export class PatientSchedulingComponent  implements OnInit{
         subject: this.appointment.Subject,
         editTime:new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
       }
-      console.log(edithistoryParam)
+      // console.log(edithistoryParam)
       this.saveEditHistory(edithistoryParam)
      }
     }
@@ -248,7 +248,7 @@ export class PatientSchedulingComponent  implements OnInit{
          this.blockEvents()
          this.toGreaterCase();
          this.scheduleObj.eventSettings.dataSource = this.allappointments;
-         console.log(this.allappointments)
+        //  console.log(this.allappointments)
         }
       },
       (err=>{
@@ -321,7 +321,7 @@ export class PatientSchedulingComponent  implements OnInit{
     this.apiCommonService.saveEditHistory(editHistory).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-         alert("Success");
+        //  alert("Success");
         }
       },
       (err=>{

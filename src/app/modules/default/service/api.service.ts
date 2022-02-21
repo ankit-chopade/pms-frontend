@@ -34,7 +34,7 @@ export class ApiService {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.REGISTRATION}`, param);
   }
   getMenusHeaders(param: any,header:any) {
-    console.log(JSON.stringify(header))
+    // console.log(JSON.stringify(header))
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_MENUS}`, param,header);
   }
 

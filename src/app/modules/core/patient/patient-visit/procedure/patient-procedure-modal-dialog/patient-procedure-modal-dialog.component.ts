@@ -109,7 +109,7 @@ export class PatientProcedureModalDialogComponent
   getProcDescFromInp() {
     const code: string = this.getControlValue('code');
     if(code != 'Not-Defined'){
-        this.isHiddenDetails = true;
+        this.isHiddenDetails = true ;
     }
     if (code != '' && code != null) {
       console.log(this.procDetails);

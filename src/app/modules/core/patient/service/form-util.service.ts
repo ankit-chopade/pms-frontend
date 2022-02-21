@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
-export class FormUtilServie {
+export class FormUtilService {
   [x: string]: any;
 
   fb = new FormBuilder();

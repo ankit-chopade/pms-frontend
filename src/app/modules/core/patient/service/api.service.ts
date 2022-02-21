@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   getAllergyDetailsById(param:any){
-    console.log(param)
+    // console.log(param)
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
   }
 

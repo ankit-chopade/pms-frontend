@@ -4,7 +4,7 @@ import { FormBaseController } from 'src/app/modules/common/utility/form-base-con
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { formErrorMessages } from '../../patient/constants/message.constant';
 import { ApiService } from '../../patient/service/api.service';
-import { FormUtilServie } from '../../patient/service/form-util.service';
+import { FormUtilService } from '../../patient/service/form-util.service';
 
 @Component({
   selector: 'app-employee-registration',
@@ -14,7 +14,7 @@ import { FormUtilServie } from '../../patient/service/form-util.service';
 export class EmployeeRegistrationComponent extends FormBaseController<any>{
   errormessage = formErrorMessages;
   maxDate:Date=new Date();
-  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) 
+  constructor(private formConfig: FormUtilService, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) 
     { 
        super(formConfig.employeeRegistrationForm, '')
       

@@ -112,13 +112,13 @@ export class NurseSchedulingComponent {
 
   public onNavigating(args: NavigatingEventArgs): void {
     if (args.action === 'view') {
-      alert(args.action)
+      // alert(args.action)
     }
   }
 
   public onActionComplete(args: ActionEventArgs): void {
     if (args.requestType === 'eventCreated') {
-      console.log("in event change")
+      // console.log("in event change")
       this.appointmentDummy = JSON.parse(JSON.stringify(this.scheduleObj.eventSettings.dataSource));
       let length = this.appointmentDummy.length - 1;
       this.appointment = this.appointmentDummy[this.appointmentDummy.length - 1]
@@ -139,7 +139,7 @@ export class NurseSchedulingComponent {
         physicianId: this.appointment.physicianId,
         description: this.appointment.Description == undefined ? '' : this.appointment.Description
       }
-        console.log(appointmentParam)
+        // console.log(appointmentParam)
         this.savePatientAppintment(appointmentParam)
 
     }
@@ -257,7 +257,7 @@ export class NurseSchedulingComponent {
             let set_patient  = new Set(this.allappointments_patient)
             let set_physician = new Set(this.allappointments_physician)
             let merged = new Set([...set_patient,...set_physician])
-            console.log(merged)
+            // console.log(merged)
             this.allappointments=Array.of(merged)
             this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
             // this.allappointments.concat(this.allappointments_patient,this.allappointments_physician);
@@ -278,7 +278,7 @@ export class NurseSchedulingComponent {
             // const expected = new Set();
             // this.allappointments = this.allappointments.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
             // this.allappointments =Array.of(set);
-            console.log(this.allappointments)
+            // console.log(this.allappointments)
             this.allappointments.forEach( (value) =>{
               if(value['patientId']!=this.patientselected && value['PhysicianId']!= this.specialistselected){
                 value['IsReadonly'] = true;
@@ -388,7 +388,7 @@ export class NurseSchedulingComponent {
     this.apiCommonService.saveEditHistory(editHistory).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-         alert("Success");
+        //  alert("Success");
         }
       },
       (err=>{

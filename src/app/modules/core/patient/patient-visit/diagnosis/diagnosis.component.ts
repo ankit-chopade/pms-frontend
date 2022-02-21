@@ -52,7 +52,7 @@ export class DiagnosisComponent
         result['isDepricated']
       ) {
         if (this.validateExistingDiagnosis(result['selectedId']) || result['description'] == 'Others') {
-          console.log(result);
+          // console.log(result);
           const param: any = {
             diagnosisId: result['selectedId'],
             appointmentId: this.appointmentId, //Passing Static Value

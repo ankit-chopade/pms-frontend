@@ -96,10 +96,10 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     this.apiCommonService.patientDetails(param).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          alert("Success");
+          // alert("Success");
         }
         else {
-          alert("Failed");
+          // alert("Failed");
         }
       }
     );
@@ -125,7 +125,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
 
   loadGrid() {
-    console.log(this.allergydatasource)
+    // console.log(this.allergydatasource)
     this.allergydatasource = [...this.allergydatasource];
   }
 
@@ -151,7 +151,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
         //  alert("Success");
          
           this.userData=res['result'];
-          console.log(this.userData);
+          // console.log(this.userData);
           this.setControlValue('title',this.userData.title)
           this.setControlValue('firstname',this.userData.firstName)
           this.setControlValue('lastname',this.userData.lastName)
@@ -171,7 +171,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
    // alert("Success");
          
           this.patientData=res['result'];
-          console.log(this.patientData);
+          // console.log(this.patientData);
           this.setControlValue('age',this.patientData.patientAge)
           this.setControlValue('gender',this.patientData.patientGender)
           this.setControlValue('race',this.patientData.patientRace)
@@ -191,7 +191,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
      //     this.AllergyMapData.forEach(this.apiCommonService.getAllergyDetailsById(AllergyMapData))
          for(let AllergyMap of this.AllergyMapData)
          {
-                  console.log(AllergyMap.allergyId);
+                  // console.log(AllergyMap.allergyId);
                   const allergyId={
                     'allergyId':Number(AllergyMap.allergyId)
                   }
@@ -200,7 +200,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
                       if (res && res['result'] && res['status'] === 200) {
                       //  alert("Success");
                         this.allergyData=res['result'];
-                        console.log(this.allergyData);
+                        // console.log(this.allergyData);
                         
                        if(this.allergyData!=null)
                        {
@@ -213,12 +213,12 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
                        }
                       this.allergydatasource =[...this.allergydatatemporary]
                     //  this.loadGrid();
-                       console.log(this.allergydatasource);
+                      //  console.log(this.allergydatasource);
                        
                      
                       }
                       else {
-                        alert("Failed");
+                        // alert("Failed");
                       }
                     }
                   );
@@ -228,7 +228,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
         }
         else {
-          alert("Failed");
+          // alert("Failed");
         }
       }
     );

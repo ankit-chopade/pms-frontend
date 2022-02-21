@@ -40,7 +40,7 @@ export class ChangePasswordComponent extends FormBaseController<any>{
         }
         else {
           this.notifyService.showError("Please try again","Error")
-          console.log("Login Failed")
+          // console.log("Login Failed")
         }
       })
   }
