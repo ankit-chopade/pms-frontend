@@ -106,7 +106,7 @@ export class PatientSchedulingComponent  implements OnInit{
         physicianId:this.appointment.physicianId,
         description:this.appointment.Description==undefined?'':this.appointment.Description
       }
-      // console.log(appointmentParam)
+      // // // console.log(appointmentParam)
       this.savePatientAppintment(appointmentParam)
     }
     if( args.requestType === 'eventChanged' ){
@@ -133,7 +133,7 @@ export class PatientSchedulingComponent  implements OnInit{
         description:this.appointment.Description,
         appointmentId : dummy[0]['appointmentId']
       }
-      // console.log(this.appointment)
+      // // // console.log(this.appointment)
       this.saveEditedAppointemnt(appointmentParam)
       var dt = new Date();
       const edithistoryParam:any={
@@ -148,7 +148,7 @@ export class PatientSchedulingComponent  implements OnInit{
         subject: this.appointment.Subject,
         editTime:new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString()
       }
-      console.log(edithistoryParam)
+      // // console.log(edithistoryParam)
       this.saveEditHistory(edithistoryParam)
      }
     }
@@ -337,7 +337,7 @@ export class PatientSchedulingComponent  implements OnInit{
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
          this.editHistoryDatasource=resp['result'];
-         console.log(this.editHistoryDatasource);
+         // // console.log(this.editHistoryDatasource);
         }
       },
       (err=>{

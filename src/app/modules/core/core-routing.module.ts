@@ -29,7 +29,7 @@ const routes: Routes = [
 })
 export class CoreRoutingModule {
   constructor(){
-    console.log("core")
+    // console.log("core")
   }
 
  }
