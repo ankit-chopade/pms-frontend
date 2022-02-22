@@ -7,7 +7,7 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 export class HttpInterceptorsService implements HttpInterceptor {
     constructor() { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (sessionStorage.getItem('token') == null || sessionStorage.getItem('token') == "") {
+        if (sessionStorage.getItem('token') == null || sessionStorage.getItem('token') == "" || sessionStorage.getItem('token') == "undefined" ) {
             return next.handle(req)
         }
         let authReq: HttpRequest<any> = req.clone(
