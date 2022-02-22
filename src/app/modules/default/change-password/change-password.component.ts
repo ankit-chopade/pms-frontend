@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormBaseController } from '../../common/utility/form-base-controller';
@@ -12,13 +12,17 @@ import { NotificationService } from '../service/notification.service';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent extends FormBaseController<any>{
+export class ChangePasswordComponent extends FormBaseController<any> implements OnDestroy{
 
    flag_pwd:boolean=true;
    errormessage = formErrorMessages;
 
    constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService) {
     super(formConfig.changePasswordForm,'')
+  }
+  
+  ngOnDestroy(): void {
+    this.formConfig.changePasswordForm.reset();
   }
 
 
