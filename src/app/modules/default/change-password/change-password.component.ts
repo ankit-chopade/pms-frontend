@@ -42,7 +42,11 @@ export class ChangePasswordComponent extends FormBaseController<any>{
           this.notifyService.showError("Please try again","Error")
           // console.log("Login Failed")
         }
+      },
+      (err => {
+        this.notifyService.showError(err['error'].message, "");
       })
+    )
   }
 
   checkpwd()

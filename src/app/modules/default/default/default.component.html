@@ -8,12 +8,12 @@
   <div class="content-body">
     <img src="../../assets/logo.png" style=" width: 10%;height: 15%; margin-top: 0.5%;">
     <div fxLayoutAlign="center center" fxFlexFill >
-        <mat-card fxFlex="80" >
+        <mat-card fxFlex="80" style="box-shadow: none;">
             <mat-card-content>
                 <div fxLayout ="row" fxLayoutGap="10px" fxLayout.xs="column">
                     <!-- Mat Card 1.1-->
-                    <mat-card fxFlex="50%" fxLayoutAlign="center center" id="imgchange">
-                        <mat-card-content>
+                    <mat-card fxFlex="50%" fxLayoutAlign="center center" style="box-shadow: none;border: none;" id="imgchange">
+                        <mat-card-content >
                             <div fxLayoutAlign="center center" fxFlexFill *ngIf = "imgvar == 1">
                                 <img src="../../assets/hospital1.jpg"  class="img-login">
                            </div>
@@ -26,7 +26,7 @@
                        </mat-card-content>
                     </mat-card>
                     <!-- Mat Card 2 dyanamic-->
-                    <mat-card fxFlex="70%">
+                    <mat-card fxFlex="70%" style="box-shadow: none;border: none;">
                         <router-outlet></router-outlet>
                     </mat-card>
                 </div>
