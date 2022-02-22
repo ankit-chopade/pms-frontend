@@ -21,7 +21,7 @@ export class LoginComponent extends FormBaseController<any>  {
     super(formConfig.loginForm, '')
   }
 
-  user:string="chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"////="kvmanish.chaudhary@gmail.com";
+  user:string="singhaniaharshths@gmail.com"//"chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"////="kvmanish.chaudhary@gmail.com";
   password:string="Admin@123"
 
   ngOnInit(): void {

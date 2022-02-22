@@ -22,6 +22,7 @@ import { map } from 'lodash';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 declare var moment: any;
 import { createElement } from '@syncfusion/ej2-base';
+import { concatAll } from 'rxjs';
 
 @Component({
   selector: 'app-nurse-scheduling',
@@ -252,39 +253,17 @@ export class NurseSchedulingComponent {
             this.scheduleObj.eventSettings.dataSource = this.allappointments_physician;
           }
           if (this.specialistselected !== undefined && this.patientselected != undefined) {
-            // let filteredData: Record<string, any>[];
-            // this.allappointments.push(this.allappointments_patient)
-            let set_patient  = new Set(this.allappointments_patient)
-            let set_physician = new Set(this.allappointments_physician)
-            let merged = new Set([...set_patient,...set_physician])
-            console.log(merged)
-            this.allappointments=Array.of(merged)
             this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
-            // this.allappointments.concat(this.allappointments_patient,this.allappointments_physician);
-            // console.log(this.allappointments_patient)
-            // this.allappointments_patient.forEach( (value) => {
-            //   console.log(value)
-            //   this.allappointments.push(value)
-            // })
-            // this.allappointments_physician.forEach( (value) => {
-            //   this.allappointments.push(value)
-            // })
-            // this.allappointments.concat(this.allappointments_physician)
-            // set.add(this.allappointments)
-            // set.add(this.allappointments_patient);
-            // set.add(this.allappointments_physician)
-            // console.log(set)
-            // this.allappointments.push(this.allappointments_physician)      
-            // const expected = new Set();
-            // this.allappointments = this.allappointments.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
-            // this.allappointments =Array.of(set);
-            console.log(this.allappointments)
+            this.allappointments=  this.allappointments.filter((value, index) => this.allappointments.map(a=>a['appointmentId']).indexOf(value['appointmentId']) === index);
             this.allappointments.forEach( (value) =>{
-              if(value['patientId']!=this.patientselected && value['PhysicianId']!= this.specialistselected){
+              if(value['patientId']==this.patientselected && value['physicianId']== this.specialistselected){
+                value['IsReadonly'] = false;
+              }
+              else{
                 value['IsReadonly'] = true;
-
               }
             })
+            console.log(this.allappointments)
 
             // filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
             this.scheduleObj.eventSettings.dataSource = this.allappointments;
@@ -317,8 +296,22 @@ export class NurseSchedulingComponent {
             this.scheduleObj.eventSettings.dataSource = this.allappointments_patient;
           }
           if (this.specialistselected != undefined && this.patientselected != undefined) {
-            this.filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
-            this.scheduleObj.eventSettings.dataSource = this.filteredData;
+            // this.filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
+            // this.scheduleObj.eventSettings.dataSource = this.filteredData;
+            this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
+            this.allappointments=  this.allappointments.filter((value, index) => this.allappointments.map(a=>a['appointmentId']).indexOf(value['appointmentId']) === index);
+            this.allappointments.forEach( (value) =>{
+              if(value['patientId']==this.patientselected && value['physicianId']== this.specialistselected){
+                value['IsReadonly'] = false;
+              }
+              else{
+                value['IsReadonly'] = true;
+              }
+            })
+            console.log(this.allappointments)
+
+            // filteredData = this.allappointments_patient.filter(a => a['physicianId'] == this.specialistselected)
+            this.scheduleObj.eventSettings.dataSource = this.allappointments;
           }
 
           if ((this.specialistselected == 0 || this.specialistselected == undefined || this.patientselected == 0 || this.patientselected == undefined)&& this.filteredData!=null) {
