@@ -29,7 +29,7 @@ submitforgotPassword()
     res => {
       if (res && res['result'] && res['status'] === 200) {
         this.notifyService.showSuccess("Email has been sent","Success")
-        this.router.navigate(['../login'])
+        this.router.navigate(['../'])
       }
       else {
         this.notifyService.showError("Please try again","Error")

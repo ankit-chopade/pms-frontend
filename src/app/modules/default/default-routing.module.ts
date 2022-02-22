@@ -13,8 +13,7 @@ const routes: Routes = [
    component: DefaultComponent,
    children: [
     { 
-       path: 'register', component: PatientRegistrationComponent
-      //,canDeactivate:[RegistrationdeactivateauthguardService]
+      path: 'register', component: PatientRegistrationComponent//,canDeactivate:[RegistrationdeactivateauthguardService]
     },
     { 
       path: 'forgot', component: ForgotPasswordComponent

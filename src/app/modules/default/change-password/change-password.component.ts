@@ -40,7 +40,7 @@ export class ChangePasswordComponent extends FormBaseController<any> implements 
         if (res && res['result'] && res['status'] === 200) {
           sessionStorage.setItem('roleId', res.result["roleId"]);
           this.notifyService.showSuccess("Your Password has been changed successfully","Success")
-          this.router.navigate(['../login'])
+          this.router.navigate(['../'])
         }
         else {
           this.notifyService.showError("Please try again","Error")
