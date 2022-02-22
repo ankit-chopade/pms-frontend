@@ -11,12 +11,14 @@ export class SidebarComponent implements OnInit {
 
   menus: any[] = []
   constructor(private apiService: ApiService) { }
-
+  firstName:any="" 
+  lastName:any="" 
   ngOnInit(): void {
     this.getMenus();
   }
   getMenus() {
-   
+    this.firstName=(sessionStorage.getItem('firstName')?.toString())
+    this.lastName=(sessionStorage.getItem('lastName')?.toString())
     let roleId=Number(sessionStorage.getItem('roleId')?.toString())
      const param = {
       roleId:roleId

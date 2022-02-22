@@ -1,17 +1,22 @@
+
 :host{
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+   
 }
 
 mat-drawer{
     width: 230px;
-    margin-left: 12px;
+    margin-left: 1px;
+    background-color: #e6ece6;
 
 }
 mat-drawer-container{
     height: 100%;
+    background-color: rgb(250, 248, 248);
+  
 }
 mat-drawer-content{
     padding: 20px;

@@ -20,11 +20,12 @@
                     class="error">{{errormessage.PASSWORD_REQUIRED}}</span>
             </mat-form-field><br>
             <div fxLayout="row" fxLayoutGap="90px">
-                <a routerLink="/forgot">Forgot Password</a> <a routerLink="/change">Change Password</a>
+                <a routerLink="/forgot">Forgot Password</a> 
+                <a routerLink="/change">Change Password</a>
             </div><br>
             <div fxLayoutAlign="center center" fxLayoutGap="30px">
-                <button [disabled]="form.invalid" mat-raised-button color="primary">Login </button>
-                <button mat-raised-button color="primary" routerLink="/register">Register</button>
+                <button [disabled]="form.invalid" mat-stroked-button color="primary">Login </button>
+                <button mat-stroked-button color="primary" routerLink="/register">Register</button>
             </div>
         </form>
     </div>

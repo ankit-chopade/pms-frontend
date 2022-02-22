@@ -1,12 +1,14 @@
-<mat-toolbar color="primary">
+<mat-toolbar style="background-color: #accfb1;">
     <mat-toolbar-row>
       <button mat-icon-button (click)="toggleSideBar()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>APP Logo</span>
+      <span>
+        <img src="../../../../../assets/logo.png" style=" width: 50%;height: 15%;margin-left: -20px;">
+      </span>
       <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-        <ul fxLayout="row" fxLayoutGap="20px">
-          <li>
+        <ul style="list-style-type: none;" fxLayout="row" fxLayoutGap="20px">
+          <!-- <li>
             <button
               mat-icon-button
               color="light"
@@ -23,7 +25,7 @@
             >
               <mat-icon>help_outline</mat-icon>
             </button>
-          </li>
+          </li> -->
           <li>
             <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon>personal_outline</mat-icon>

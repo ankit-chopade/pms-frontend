@@ -17,12 +17,13 @@ import { NotificationService } from '../service/notification.service';
 export class LoginComponent extends FormBaseController<any>  {
 
   errormessage = formErrorMessages;
-  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router,private notifyService : NotificationService,private route:ActivatedRoute) {
+  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService, private route: ActivatedRoute) {
     super(formConfig.loginForm, '')
   }
 
-  user:string="chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"////="kvmanish.chaudhary@gmail.com";
-  password:string="Admin@123"
+  user: string =//"chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"//
+    "kvmanish.chaudhary@gmail.com";
+  password: string = "Admin@1234"
 
   ngOnInit(): void {
 
@@ -41,14 +42,13 @@ export class LoginComponent extends FormBaseController<any>  {
           this.router.navigate(['../dashboard'])
         }
         else {
-          this.notifyService.showError("Invalid Username or Password","Error");
-          // console.log("Login Failed")
+          this.notifyService.showError("Invalid Username or Password", "Error");
         }
       },
-      (err=>{
-        this.notifyService.showError("Invalid Username or Password","Error");
+      (err => {
+        this.notifyService.showError(err['error'].message, "");
       })
-      )
+    )
   }
 
 }
