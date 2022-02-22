@@ -20,7 +20,6 @@ export class ApiService {
   }
 
   getAllergyDetailsById(param:any){
-    // console.log(param)
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
   }
 
@@ -36,6 +35,12 @@ export class ApiService {
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENT_DATA}`,{params:param});
   }
+
+  saveAllergyDetails(param:any){
+ 
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_ALLERGY_DETAILS}`,param);
+  }
+
   getAllergyDetailsbyCodeDetails(param:any){
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_DETAILS}`,{params:param});
@@ -74,20 +79,6 @@ export class ApiService {
   deleteProcedureDetail(param: any){
     return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.PROCEDURE_DETAILS}`, {params:param});
   }
-  /**
-   * @param  {any} param
-   * @description used to obtain procedure description for procedure code
-   */
-  // getProcDetailsForProcCode(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_CODE}`, {params:param});
-  // }
-  /**
-   * @param  {any} param
-   * @description used to obtain procedure code for procedure description
-   */
-  // getProcCodeForProcDesc(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PROC_DETAILS_FOR_PROC_DESC}`, {params:param});
-  // }
 
   // Diagnosis apis
   
@@ -107,14 +98,6 @@ export class ApiService {
     return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
   }
 
-  // getDiagnosisDetailsForCode(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.GET_DETAILS_BY_CODE}`, {params:param});
-  // }
-
-  // getDiagnosisDetailsForDescription(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.GET_DETAILS_BY_DESCRIPTION}`, {params:param});
-  // }
-
   //Medication apis
 
   saveMedicationDetails(param:any){
@@ -128,14 +111,6 @@ export class ApiService {
   getMedicationDetailsForPatient(param:any) { 
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`,{params:param});
   }
-
-  // getDrugDetailsForDrugId(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_CODE}`,{params:param});
-  // }
-
-  // getDrugDetailsForDrugName(param:any){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.MEDICATION_DOMAIN}${APIConst.GET_DETAILS_BY_DESCRIPTION}`, {params:param});
-  // }
 
   deleteMedicationDetail(param:any){
     return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT.MEDICATION_DETAILS}`, {params:param})

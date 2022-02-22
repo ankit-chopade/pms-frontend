@@ -8,8 +8,6 @@ import { EmployeeRegistrationComponent } from './employee-registration/employee-
 import { AdminRoutingModule } from './admin-routing.module';
 
 
-
-
 @NgModule({
   declarations: [
     PatientUserManagementComponent,

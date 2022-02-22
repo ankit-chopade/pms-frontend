@@ -4,8 +4,6 @@ import { FormBaseController } from 'src/app/modules/common/utility/form-base-con
 import { AllergyDetails } from '../../models/AllergyDetails';
 import { FormUtilService } from '../../service/form-util.service';
 import { ApiService } from '../../service/api.service';
-import { map, Observable, startWith } from 'rxjs';
-import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -18,6 +16,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   allergydata: AllergyDetails[];
   allergydatBackup: AllergyDetails[];
   selectedId: string;
+  selectedAllergyId:number = 0;
   selectedType: string;
   selectedName: string;
   allergyTypes: string[] = ['Animal', 'Bacteria airway', 'Bacteria skin', 'Contact', 'Drug', 'Food', 'Fungi', 'Insect', 'Mite', 'Parasite', 'Plant', 'Vaccine', 'Venom or Salivary', 'Others'];
@@ -44,10 +43,12 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
 
   getAllergyDetailsById() {
     let allergyDataFromId = this.allergydata.filter(x => x.allergyCode == this.selectedId);
-    this.setControlValue('allergyname', allergyDataFromId[0].allergyName);
-    this.setControlValue('allergytype', allergyDataFromId[0].allergyType);
-    this.setControlValue('allergydesc', allergyDataFromId[0].allergyDescription);
-    this.setControlValue('allergyclinicalinfo', allergyDataFromId[0].allergyClinicalInfo);
+    this.setControlValue('allergyName', allergyDataFromId[0].allergyName);
+    this.setControlValue('allergyType', allergyDataFromId[0].allergyType);
+    this.setControlValue('allergyDescription', allergyDataFromId[0].allergyDescription);
+    this.setControlValue('allergyClinicalInfo', allergyDataFromId[0].allergyClinicalInfo);
+   this.selectedAllergyId = allergyDataFromId[0].allergyId;
+
   }
 
   getAllergyDetailsByType() {
@@ -61,17 +62,19 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
 
     else {
       this.flag = true;
-      this.setControlValue('allergyid', "");
-      this.setControlValue('allergyname', "");
-      this.setControlValue('allergydesc', "");
-      this.setControlValue('allergyclinicalinfo', "");
+      this.setControlValue('allergyCode', "");
+      this.setControlValue('allergyName', "");
+      this.setControlValue('allergyDescription', "");
+      this.setControlValue('allergyClinicalInfo', "");
     }
 
   }
 
   add() {
     
+    this.setControlValue('allergyId',this.selectedAllergyId);
     this.dialogRef.close(this.form.value);
+    this.clear();
   }
 
   cancel() {
@@ -79,19 +82,20 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
     this.dialogRef.close();
   }
   clear() {
-    this.setControlValue('allergyid', "");
-    this.setControlValue('allergyname', "");
-    this.setControlValue('allergytype', "");
-    this.setControlValue('allergydesc', "");
-    this.setControlValue('allergyclinicalinfo', "");
+    this.setControlValue('allergyCode', "");
+    this.setControlValue('allergyName', "");
+    this.setControlValue('allergyType', "");
+    this.setControlValue('allergyDescription', "");
+    this.setControlValue('allergyClinicalInfo', "");
   }
 
   getAllergyDetailsByName() {
     let allergyDataFromId = this.allergydata.filter(x => x.allergyName == this.selectedName);
-    this.setControlValue('allergyid', allergyDataFromId[0].allergyDetailsId);
-    this.setControlValue('allergytype', allergyDataFromId[0].allergyType);
-    this.setControlValue('allergydesc', allergyDataFromId[0].allergyDescription);
-    this.setControlValue('allergyclinicalinfo', allergyDataFromId[0].allergyClinicalInfo);
+    this.setControlValue('allergyCode', allergyDataFromId[0].allergyCode);
+    this.setControlValue('allergyType', allergyDataFromId[0].allergyType);
+    this.setControlValue('allergyDescription', allergyDataFromId[0].allergyDescription);
+    this.setControlValue('allergyClinicalInfo', allergyDataFromId[0].allergyClinicalInfo);
+    this.selectedAllergyId = allergyDataFromId[0].allergyId;
 
   }
 
