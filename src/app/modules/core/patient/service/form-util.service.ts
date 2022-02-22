@@ -48,7 +48,6 @@ export class FormUtilServie {
         allergyDescription:["",Validators.required],
         allergyClinicalInfo:["",Validators.required],
         allergyId   :[],
-       selectedAllergyId:[]
     });
     employeeRegistrationForm = this.fb.group({
         title:["",Validators.required],

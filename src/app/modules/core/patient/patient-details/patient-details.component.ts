@@ -1,3 +1,4 @@
+import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,7 +39,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     super(formConfig.patientDetailsForm);
   }
 
-  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo'];
+  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo','delete'];
   addrsameaspatient: string;
 
   allergydatasource: AllergyDetails[] = [];
@@ -56,10 +57,9 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     emergencyDetails.homeAddress = this.getControlValue('emergencycontacthomeaddress');
     emergencyDetails.accessPatientPortal = this.getControlValue('accesstopatientportal');
     
-    this.checkPriviousAllergy();
+   this.checkPriviousAllergy();
 
-    const patientEntity = {
-     
+    const patientEntity = { 
       patientAge: this.getControlValue('age'),
       patientGender: this.getControlValue('gender'),
       patientRace: this.getControlValue('race'),
@@ -71,23 +71,21 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       active:1,
       patientKnowAllergy:this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
-     
-      allergyMap: this.allergyMaps
+       allergyMap: this.allergyMaps
 
     }
-
     this.apiCommonService.patientDetails(patientEntity).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-          alert("Success");
+         // alert("Success");
+         this.notifyService.showSuccess("Added data Successfully","Success")
         }
         else {
-          alert("Failed");
+        //  alert("Failed");
+        this.notifyService.showError("Data not Saved","Failed")
         }
       }
-    );
-
-  
+    );  
 }
   addAllergies() {
     const dialogRef = this.dialog.open( AllergyDetailsDialogComponent, {
@@ -100,8 +98,9 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     dialogRef.afterClosed().subscribe(
       resp => {
         if (resp != null) {
-          // console.log(resp);
-          this.getAllAllergyId(resp)
+          this.getAllAllergyId(resp);
+          console.log(resp);
+          
         //  this.allergydatasource.push(resp);
           this.loadGrid();
         }
@@ -113,9 +112,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     console.log(this.allergydatasource)
     this.allergydatasource = [...this.allergydatasource];
   }
-
- 
-
   ngOnInit(): void {
     const userId = {
       'id': Number(sessionStorage.getItem('userId'))
@@ -163,7 +159,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('allergy_details', this.patientData.patientKnowAllergy);
 
           this.AllergyMapData = this.patientData.allergyMap;
-          //     this.AllergyMapData.forEach(this.apiCommonService.getAllergyDetailsById(AllergyMapData))
           for (let AllergyMap of this.AllergyMapData) {
             console.log(AllergyMap.allergyId);
             const allergyId = {
@@ -178,27 +173,13 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
                   if (this.allergyData != null) {
                     this.allergydatatemporary.push(this.allergyData);
-
-                    this.setControlValue('allergyid', this.allergyData.allergyCode);
-                    this.setControlValue('allergytype', this.allergyData.allergyType);
-
-
                   }
-                  this.allergydatasource = [...this.allergydatatemporary]
-                  //  this.loadGrid();
+                  this.allergydatasource = [...this.allergydatatemporary];
                   console.log(this.allergydatasource);
-
-
-                }
-                else {
-                  //  alert("Failed");
                 }
               }
             );
-
-
           }
-
         }
         else {
           //  alert("Failed");
@@ -216,9 +197,8 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   getAllAllergyId(data: any) {
 
     let obj: AllergyMap = new AllergyMap();
-    obj.allergyId = +data['allergyId']
-   // this.allergyMaps.push(obj);
-   
+    obj.allergyId = +data['allergyId'];
+  
     if(obj.allergyId==0)
     { 
 
@@ -230,20 +210,19 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       this.otherType.allergyDescription=data['allergyDescription']
          console.log(this.otherType);
          this.saveOtherAllergy(this.otherType)
-         
-
-    //     this.allergydatasource.push(data);
+ 
     }
     else{
-      this.allergydatasource.push(data);
-      // for (let AllergyMap of this.allergydatatemporary) {
-
-      //   obj.allergyId=AllergyMap.allergyId
-      // }
-      this.allergyMaps.push(obj);
-    }
-   
-
+         if(this.validateExistingAllergy(obj.allergyId)){
+          this.allergydatasource.push(data);
+      
+          this.allergyMaps.push(obj);
+         }
+         else{
+          this.notifyService.showError("This Allergy is alerady present","");
+         }
+ 
+       }
   }
   saveOtherAllergy(data :any)
   {
@@ -286,4 +265,23 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       this.allergyMaps.push(obj);
     }
   }
+  validateExistingAllergy(allergyId:any):boolean{
+    let data =this.allergydatasource.find(a => a.allergyId===allergyId);
+    if(data==null){
+      return true;
+    } 
+    else{
+      return false;
+    } 
+  }
+
+  delete(id:number){
+   
+    this.allergydatasource.forEach((element,index)=>{
+      if(element.allergyId==id) this.allergydatasource.splice(index,1)
+    });
+this.loadGrid();
+
+  }
+  
 }

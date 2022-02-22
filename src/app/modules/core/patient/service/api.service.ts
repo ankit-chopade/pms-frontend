@@ -46,4 +46,7 @@ export class ApiService {
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_DETAILS}`,{params:param});
   }
+  // deletePatientAllegy(param:any){
+  //   return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DELETE_PATIENT_ALLERGY}`,{params:param});
+  // }
 }
