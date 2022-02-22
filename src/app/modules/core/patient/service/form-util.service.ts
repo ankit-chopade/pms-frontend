@@ -41,11 +41,11 @@ export class FormUtilService {
 
     allergyDetailsForm=this.fb.group({
         allergy_details:["",Validators.required],
-        allergyid:["",Validators.required],
-        allergytype:["",Validators.required],
-        allergyname:["",Validators.required],
-        allergydesc:["",Validators.required],
-        allergyclinicalinfo:["",Validators.required],
+        allergyCode:["",Validators.required],
+        allergyType:["",Validators.required],
+        allergyName:["",Validators.required],
+        allergyDescription:["",Validators.required],
+        allergyClinicalInfo:["",Validators.required],
     });
 
     patientVisitForm = this.fb.group({
@@ -144,6 +144,14 @@ export class FormUtilService {
         appointmentId:[],
         selectedId:[],
       });
-
-
+      registrationForm = this.fb.group({
+        title:["",Validators.required],
+        firstname:["",Validators.required],
+        lastname: ["", Validators.required],
+        dob: ["", Validators.required],
+        username :   ["", Validators.email],
+        contactnumber :   ["", [Validators.required,Validators.pattern("\\d{10}")]],
+        password:  ["", [Validators.required,Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]],
+        confirmpassword: ["", Validators.required,],
+    });
 }

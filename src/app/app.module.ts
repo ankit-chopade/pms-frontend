@@ -12,11 +12,16 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorsService } from './modules/common/services/http-interceptor.service';
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmPasswordDirective,
-
+   
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,26 @@ export class ApiService {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_DETAILS}`, param);
   }
 
-  getAllergyDetailsById(){
-    return this.httpClient.get(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`);
+  getAllergyDetailsById(param:any){
+    console.log(param)
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
   }
 
   getAllergyDetails(){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS}`);
+  }
+  
+  getuserDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_USER_DATA}`,{params:param});
+  }
+  getpatientDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENT_DATA}`,{params:param});
+  }
+  getAllergyDetailsbyCodeDetails(param:any){
+ 
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_DETAILS}`,{params:param});
   }
   
   // Vital signs api
