@@ -21,7 +21,7 @@ export class VitalSignsComponent
   editDisable:boolean = false;
   vitalId: number = 0;
 
-  appointmentId: number = 24; //Static Value
+  appointmentId: number = 2; //Static Value
 
   constructor(
     private formConfig: FormUtilService,
@@ -64,8 +64,8 @@ export class VitalSignsComponent
     const param = {
       vitalId: this.vitalId,
       appointmentId: this.appointmentId,
-      height: this.getControlValue('height'),
-      weight: this.getControlValue('weight'),
+      height: +this.getControlValue('height'),
+      weight: +this.getControlValue('weight'),
       bloodPressure: this.getControlValue('bloodPressure'),
       bodyTemperature: this.getControlValue('bodyTemperature'),
       respirationRate: this.getControlValue('respirationRate'),

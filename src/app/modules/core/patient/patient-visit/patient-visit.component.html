@@ -7,13 +7,21 @@
     </button>
 </div> -->
 <div>
-    <nav mat-tab-nav-bar mat-align-tabs="center">
-        <a mat-tab-link 
-        *ngFor="let link of links" 
+  <nav mat-tab-nav-bar mat-align-tabs="center">
+    <span *ngFor="let link of links">
+      <a
+        mat-tab-link
+        *ngIf="
+          ((link.label == 'Vital Signs' || link.label == 'Patient Details') &&
+            role == '4') ||
+          role == '3' "
         [routerLink]="link.route"
-        (click) = "activeLink = link.label"
-        [active] = "activeLink == link.label"> {{link.label}}</a>
-    </nav>
-    <router-outlet></router-outlet>
-
+        (click)="activeLink = link.label"
+        [active]="activeLink == link.label"
+      >
+        {{ link.label }}</a
+      >
+    </span>
+  </nav>
+  <router-outlet></router-outlet>
 </div>

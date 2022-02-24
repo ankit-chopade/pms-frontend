@@ -16,7 +16,7 @@ export class DiagnosisComponent
   extends FormBaseController<any>
   implements OnInit
 {
-  appointmentId: number = 104; //Static Value
+  appointmentId: number = 2; //Static Value
 
   constructor(
     private formConfig: FormUtilService,
