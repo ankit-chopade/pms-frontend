@@ -22,6 +22,7 @@ import { map } from 'lodash';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 declare var moment: any;
 import { createElement } from '@syncfusion/ej2-base';
+import { DateTimePicker } from '@syncfusion/ej2-angular-calendars';
 
 @Component({
   selector: 'app-physician-scheduling',
@@ -61,6 +62,8 @@ export class PhysicianSchedulingComponent {
   public disable:boolean=true
   public openededithistorysidebar:boolean=false;
   public editHistoryDatasource:any[];
+  public showQuickInfo: Boolean = false;
+
   toggleSideBar(){
     if(this.patientselected!=null){
       this.openededithistorysidebar=!this.openededithistorysidebar;
@@ -162,49 +165,28 @@ export class PhysicianSchedulingComponent {
   }
 
 
-//   onPopupOpen(args: PopupOpenEventArgs): void {
-//     if (args.type === 'Editor') {
-//         // Create required custom elements in initial time
-//         if (!args.element.querySelector('.edithistory-field-row')) {
-//             let row: HTMLElement = createElement('div', { className: 'edithistory-field-row' });
-//             let formElement: HTMLElement|null;
-//             if(args.element.querySelector('.e-schedule-form')!=null ){
-//               formElement = args.element.querySelector('.e-schedule-form');
-//               if(formElement?.firstChild!=null && args.element.querySelector('.e-description-row')!=null){
-//                 formElement.firstChild.insertBefore(row, args.element.querySelector('.e-description-row'));
-//               }
-//             }
-      
-//             let container: HTMLElement = createElement('div', { className: 'edithistory-field-container' });
-//             let inputEle: HTMLInputElement = createElement('input', {
-//                 className: 'e-field', attrs: { name: 'EditHistory' }
-//             }) as HTMLInputElement;
-//             Input.createInput ({
-//               element: inputEle,
-//               buttons: ['e-input'],
-//               properties: {
-//                   placeholder:'Enter Value'
-//               }
-//           });
-//             container.appendChild(inputEle);
-//             row.appendChild(container);
-//             // let dropDownList: DropDownList = new DropDownList({
-//             //     dataSource: [//db history 
-//             //         { text: 'Public Event', value: 'public-event' },
-//             //         { text: 'Maintenance', value: 'maintenance' },
-//             //         { text: 'Commercial Event', value: 'commercial-event' },
-//             //         { text: 'Family Event', value: 'family-event' }
-//             //     ],
-//             //     fields: { text: 'text', value: 'value' },
-//             //     value: (<{ [key: string]: Object; }>(args.data))['EditHistory'] as string,
-//             //     floatLabelType: 'Always', placeholder: 'Edit History'
-//             // });
-//             // dropDownList.appendTo(inputEle);
-//             inputEle.setAttribute('name', 'EditHistory');
-//         }
-
-//     }
-// }
+  onPopupOpen(args: PopupOpenEventArgs): void {
+    if (args.type === 'Editor') {
+      let startElement: HTMLInputElement = args.element.querySelector(
+        '#StartTime'
+      ) as HTMLInputElement;
+      if (!startElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker(
+          { value: new Date(startElement.value) || new Date() },
+          startElement
+        );
+      }
+      let endElement: HTMLInputElement = args.element.querySelector(
+        '#EndTime'
+      ) as HTMLInputElement;
+      if (!endElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker(
+          { value: new Date(endElement.value) || new Date() },
+          endElement
+        );
+      }
+    }
+  }
 
 
   ngOnInit(): void {

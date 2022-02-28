@@ -117,7 +117,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
   ngOnInit(): void {
     const userId = {
-      'id': Number(sessionStorage.getItem('userId'))
+      id: Number(sessionStorage.getItem('userId'))
     }
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
