@@ -6,7 +6,7 @@ import { EmergencyDetails } from "./EmergencyDetails";
 export class PatientDetails
 {
     
-   
+    patientBasicDetailId:number
     patientGender:String;
     patientAge:String;
     patientRace:String;

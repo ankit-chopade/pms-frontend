@@ -125,13 +125,25 @@
                             <span *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
                                 class="error">{{errormessage.LASTNAME_REQUIRED}} </span>
                         </mat-form-field>
-
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Relationship</mat-label>
+                            <mat-select formControlName="emergencycontactrelation">
+                                <mat-option value="father">Father</mat-option>
+                                <mat-option value="mother">Mother</mat-option>
+                                <mat-option value="sibling">Sibling</mat-option>
+                                <mat-option value="spouse">Spouse</mat-option>
+                                <mat-option value="friend">Friend</mat-option>
+                                <mat-option value="other">Other</mat-option>
+                                <span *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
+                                class="error">{{errormessage.RELATIONSHIP_REQUIRED}} </span>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <mat-form-field appearance="outline">
                             <mat-label>Relationship </mat-label>
                             <input matInput formControlName="emergencycontactrelation" required>
                             <span *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
                                 class="error">{{errormessage.RELATIONSHIP_REQUIRED}} </span>
-                        </mat-form-field>
+                        </mat-form-field> -->
                     </div>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
                         <mat-form-field appearance="outline">

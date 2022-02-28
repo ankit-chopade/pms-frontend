@@ -4,7 +4,7 @@ export class User
     firstName:string;
     lastName:string;
     emailId:string;
-    dob:string;
+    dob:Date;
     contactNo:string;
     
 }
