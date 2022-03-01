@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PatientUserManagementComponent } from './patient-user-management/patient-user-management.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { EmployeeManagementComponent } from './employee-management/employee-management.component';
+import { EmployeeRegistrationComponent } from './employee-management/employee-registration/employee-registration.component';
+import { PatientManagementComponent } from './patient-management/patient-management.component';
+import { EmployeeDetailsComponent } from './employee-management/employee-details/employee-details.component';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { EmployeeRegistrationComponent } from './employee-registration/employee-registration.component';
-import { AdminRoutingModule } from './admin-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AdminRoutingModule } from './admin.routing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
-    PatientUserManagementComponent,
-    EmployeeRegistrationComponent
+    EmployeeManagementComponent,
+    EmployeeRegistrationComponent,
+    PatientManagementComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     CommonModule,
