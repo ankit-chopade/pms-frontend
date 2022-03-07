@@ -40,6 +40,8 @@ export class PhysicianSchedulingComponent {
   public patientlist:string[];
   public scheduleData: Record<string, any>[]| DataManager|undefined;
   public allappointments: Record<string, any>[];//from db
+   public allappointments_patient: Record<string, any>[]; //from db
+  public allappointments_physician: Record<string, any>[]; //from db
   minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
     return args['value'].length >= 5;
 };
@@ -217,16 +219,20 @@ export class PhysicianSchedulingComponent {
     );
   }
 
-  getPatientAppintments(Id:Number){
+  getPatientAppintments(Id:number){
+    this.getPhysicianAppintments(parseInt(JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))))
     const appointmentParam : any = {
       id: Id
     }
     this.apiCommonService.getPatientAppintments(appointmentParam).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-         this.allappointments = resp['result'];
-         this.blockEvents()
-         this.toGreaterCase();
+         this.allappointments_patient = resp['result'];
+         this.toGreaterCasePatient();
+         this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
+         this.allappointments=  this.allappointments.filter((value, index) => this.allappointments.map(a=>a['appointmentId']).indexOf(value['appointmentId']) === index);
+         this.blockEvents(Id);
+
          this.scheduleObj.eventSettings.dataSource = this.allappointments;
         //  console.log(this.allappointments)
         }
@@ -235,6 +241,54 @@ export class PhysicianSchedulingComponent {
         this.notifyService.showError("Please try after some time","Error");
       })
     );
+  }
+  getPhysicianAppintments(Id: number) {
+    const appointmentParam: any = {
+      id: Id,
+    };
+    this.apiCommonService.getPhysicianAppintments(appointmentParam).subscribe(
+      (resp) => {
+        if (resp['status'] === 200 && resp['result'] && resp != null) {
+          this.allappointments_physician = resp['result'];
+          console.log(this.allappointments_physician)
+          this.toGreaterCasePhysician();
+                   // this.toGreaterCasePhysician();
+
+          // this.scheduleObj.eventSettings.dataSource = this.allappointments;
+        }
+      },
+      (err) => {
+        this.notifyService.showError('Please try after some time', 'Error');
+      }
+    );
+  }
+
+  toGreaterCasePhysician() {
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"endTime":').join('"EndTime":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"endTimezone":').join('"EndTimezone":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"id":').join('"Id":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isAllDay":').join('"IsAllDay":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"recurrenceRule":').join('"RecurrenceRule":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"startTime":').join('"StartTime":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"startTimezone":').join('"StartTimezone":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"subject":').join('"Subject":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isReadonly":').join('"IsReadonly":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isBlock":').join('"IsBlock":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"description":').join('"Description":'))
+  }
+
+  toGreaterCasePatient() {
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"endTime":').join('"EndTime":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"endTimezone":').join('"EndTimezone":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"id":').join('"Id":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isAllDay":').join('"IsAllDay":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"recurrenceRule":').join('"RecurrenceRule":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"startTime":').join('"StartTime":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"startTimezone":').join('"StartTimezone":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"subject":').join('"Subject":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isReadonly":').join('"IsReadonly":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isBlock":').join('"IsBlock":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"description":').join('"Description":'))
   }
 
   toGreaterCase(){
@@ -283,19 +337,37 @@ export class PhysicianSchedulingComponent {
     );
   }
 
-  blockEvents(){
-    let id = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
-    this.allappointments.forEach(function (value){
-      if(value['physicianId']!=id){
-        value['isBlock']=true;
-      }
-      else{
-        value['isBlock']=false;
+  // blockEvents(){
+  //   let id = parseInt( JSON.parse(JSON.stringify(sessionStorage.getItem('userId'))));
+  //   this.allappointments.forEach(function (value){
+  //     if(value['physicianId']!=id){
+  //       value['isBlock']=true;
+  //     }
+  //     else{
+  //       value['isBlock']=false;
 
-      }
-    })
+  //     }
+  //   })
 
+  // }
+  blockEvents(Id?:number) {
+    // alert("In block")
+    let id = parseInt(
+      JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))
+    );
+    if(this.allappointments.length!=0){
+    this.allappointments.forEach(function (value) {
+      // alert("In for each")
+      if (value['patientId'] != Id || value['physicianId'] != id) {
+        value['IsBlock'] = true;
+        value["Subject"]="Not Available";
+        console.log(value)
+      } else {
+        value['IsBlock'] = false;
+      }
+    });
   }
+}
 
   saveEditHistory(editHistory:any){
     this.apiCommonService.saveEditHistory(editHistory).subscribe(

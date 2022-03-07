@@ -116,6 +116,8 @@ export class PatientSchedulingComponent implements OnInit {
   public physicianlist: string[];
   public scheduleData: Record<string, any>[] | DataManager | undefined;
   public allappointments: Record<string, any>[]; //from db
+  public allappointments_patient: Record<string, any>[]; //from db
+  public allappointments_physician: Record<string, any>[]; //from db
   minValidation: (args: { [key: string]: string }) => boolean = (args: {
     [key: string]: string;
   }) => {
@@ -301,6 +303,24 @@ export class PatientSchedulingComponent implements OnInit {
       (err) => {
         this.notifyService.showError('Please try after some time', 'Error');
       }
+    );    
+  }
+  getPatientAppintments(Id:Number){
+    const appointmentParam : any = {
+      id: Id
+    }
+    this.apiCommonService.getPatientAppintments(appointmentParam).subscribe(
+      resp => {
+        if (resp['status'] === 200 && resp['result'] && resp != null) {
+         this.allappointments_patient = resp['result'];
+        //  this.blockEvents()
+         this.toGreaterCasePatient();
+        //  console.log(this.allappointments_patient)
+        }
+      },
+      (err=>{
+        this.notifyService.showError("Please try after some time","Error");
+      })
     );
   }
 
@@ -320,16 +340,22 @@ export class PatientSchedulingComponent implements OnInit {
     );
   }
 
-  getPhysicianAppintments(Id: Number) {
+  getPhysicianAppintments(Id: number) {
+    this.getPatientAppintments(parseInt(JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))))
     const appointmentParam: any = {
       id: Id,
     };
     this.apiCommonService.getPhysicianAppintments(appointmentParam).subscribe(
       (resp) => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
-          this.allappointments = resp['result'];
-          this.blockEvents();
-          this.toGreaterCase();
+          this.allappointments_physician = resp['result'];
+          console.log(resp['result'])
+          this.toGreaterCasePhysician();
+          this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
+          this.allappointments=  this.allappointments.filter((value, index) => this.allappointments.map(a=>a['appointmentId']).indexOf(value['appointmentId']) === index);
+          // this.toGreaterCasePhysician();
+
+          this.blockEvents(Id);
           this.scheduleObj.eventSettings.dataSource = this.allappointments;
         }
       },
@@ -339,60 +365,143 @@ export class PatientSchedulingComponent implements OnInit {
     );
   }
 
-  toGreaterCase() {
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"endTime":')
-        .join('"EndTime":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"endTimezone":')
-        .join('"EndTimezone":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments).split('"id":').join('"Id":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"isAllDay":')
-        .join('"IsAllDay":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"recurrenceRule":')
-        .join('"RecurrenceRule":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"startTime":')
-        .join('"StartTime":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"startTimezone":')
-        .join('"StartTimezone":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"subject":')
-        .join('"Subject":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"isReadonly":')
-        .join('"IsReadonly":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"isBlock":')
-        .join('"IsBlock":')
-    );
-    this.allappointments = JSON.parse(
-      JSON.stringify(this.allappointments)
-        .split('"description":')
-        .join('"Description":')
-    );
+  // toGreaterCase() {
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"endTime":')
+  //       .join('"EndTime":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"endTimezone":')
+  //       .join('"EndTimezone":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments).split('"id":').join('"Id":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"isAllDay":')
+  //       .join('"IsAllDay":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"recurrenceRule":')
+  //       .join('"RecurrenceRule":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"startTime":')
+  //       .join('"StartTime":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"startTimezone":')
+  //       .join('"StartTimezone":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"subject":')
+  //       .join('"Subject":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"isReadonly":')
+  //       .join('"IsReadonly":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"isBlock":')
+  //       .join('"IsBlock":')
+  //   );
+  //   this.allappointments = JSON.parse(
+  //     JSON.stringify(this.allappointments)
+  //       .split('"description":')
+  //       .join('"Description":')
+  //   );
+  // }
+  // toGreaterCase_patient() {
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"endTime":')
+  //       .join('"EndTime":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"endTimezone":')
+  //       .join('"EndTimezone":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient).split('"id":').join('"Id":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"isAllDay":')
+  //       .join('"IsAllDay":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"recurrenceRule":')
+  //       .join('"RecurrenceRule":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"startTime":')
+  //       .join('"StartTime":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"startTimezone":')
+  //       .join('"StartTimezone":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"subject":')
+  //       .join('"Subject":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"isReadonly":')
+  //       .join('"IsReadonly":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"isBlock":')
+  //       .join('"IsBlock":')
+  //   );
+  //   this.allappointments_patient = JSON.parse(
+  //     JSON.stringify(this.allappointments_patient)
+  //       .split('"description":')
+  //       .join('"Description":')
+  //   );
+  // }
+
+  toGreaterCasePhysician() {
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"endTime":').join('"EndTime":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"endTimezone":').join('"EndTimezone":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"id":').join('"Id":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isAllDay":').join('"IsAllDay":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"recurrenceRule":').join('"RecurrenceRule":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"startTime":').join('"StartTime":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"startTimezone":').join('"StartTimezone":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"subject":').join('"Subject":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isReadonly":').join('"IsReadonly":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"isBlock":').join('"IsBlock":'))
+    this.allappointments_physician = JSON.parse(JSON.stringify(this.allappointments_physician).split('"description":').join('"Description":'))
+  }
+
+  toGreaterCasePatient() {
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"endTime":').join('"EndTime":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"endTimezone":').join('"EndTimezone":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"id":').join('"Id":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isAllDay":').join('"IsAllDay":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"recurrenceRule":').join('"RecurrenceRule":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"startTime":').join('"StartTime":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"startTimezone":').join('"StartTimezone":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"subject":').join('"Subject":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isReadonly":').join('"IsReadonly":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"isBlock":').join('"IsBlock":'))
+    this.allappointments_patient = JSON.parse(JSON.stringify(this.allappointments_patient).split('"description":').join('"Description":'))
   }
 
   saveEditedAppointemnt(appointment: Appointment) {
@@ -400,7 +509,7 @@ export class PatientSchedulingComponent implements OnInit {
       (resp) => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           let editedappointment = resp['result'];
-          this.toGreaterCase();
+          // this.toGreaterCase();
           this.getPhysicianAppintments(this.specialistselected);
           this.notifyService.showSuccess(
             'Appointment has been edited successfully',
@@ -435,17 +544,33 @@ export class PatientSchedulingComponent implements OnInit {
       );
   }
 
-  blockEvents() {
+  blockEvents(Id?:number) {
+    // alert("In block")
     let id = parseInt(
       JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))
     );
+    if(this.allappointments.length!=0){
     this.allappointments.forEach(function (value) {
-      if (value['patientId'] != id) {
-        value['isBlock'] = true;
+      // alert("In for each")
+      if (value['patientId'] != id || value['physicianId'] != Id) {
+        value['IsBlock'] = true;
+        value["Subject"]="Not Available";
+        console.log(value)
       } else {
-        value['isBlock'] = false;
+        value['IsBlock'] = false;
       }
     });
+  }
+    // this.allappointments_patient.forEach(function (value) {
+    //   if (value['patientId'] != id || value['physicianId']!=Id) {
+    //     value['isBlock'] = true;
+    //     console.log(value)
+    //   } else {
+    //     value['isBlock'] = false;
+    //   }
+    // });
+    // this.allappointments=this.allappointments_patient;
+    console.log(this.allappointments)
   }
 
   saveEditHistory(editHistory: any) {
