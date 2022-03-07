@@ -8,6 +8,7 @@ import { formErrorMessages } from '../constant/message.constant';
 import { ApiService } from '../service/api.service';
 import { FormUtilServie } from '../service/form-util.service';
 import { NotificationService } from '../service/notification.service';
+import { AppService } from '../../common/services/timeout.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ import { NotificationService } from '../service/notification.service';
 export class LoginComponent extends FormBaseController<any>  {
 
   errormessage = formErrorMessages;
-  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService, private route: ActivatedRoute) {
+  constructor(private formConfig: FormUtilServie, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService, private route: ActivatedRoute,private appService: AppService) {
     super(formConfig.loginForm, '')
   }
 
@@ -39,11 +40,15 @@ export class LoginComponent extends FormBaseController<any>  {
       res => {
         if (res && res['result'] && res['status'] === 200) {
           StorageService.setSessionDetails(res['result'])
+          this.appService.setUserLoggedIn(true)
           this.router.navigate(['../dashboard'])
         }
         else {
           this.notifyService.showError("Invalid Username or Password", "Error");
         }
+      },
+      (err) => {
+        this.notifyService.showError(err['error'].message, '');
       }
     )
   }
