@@ -85,7 +85,7 @@ export class EmployeeRegistrationComponent extends FormBaseController<any> imple
     );
     console.log(this.employee);
     
-    
+   
   }
  
 }
