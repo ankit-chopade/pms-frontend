@@ -9,16 +9,17 @@ import { formErrorMessages } from 'src/app/modules/default/constant/message.cons
 
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { AllergyDetails } from '../models/AllergyDetails';
-import { AllergyMap } from '../models/AllergyMap';
+
 
 
 
 import { EmergencyDetails } from '../models/EmergencyDetails';
-import { PatientDetails } from '../models/PatientDetails';
+import { PatientDetails } from '../models/DemographicDetail';
 import { User } from '../models/User';
 import { ApiService } from '../service/api.service';
 import { FormUtilService } from '../service/form-util.service';
 import { AllergyDetailsDialogComponent } from './allergy-details-dialog/allergy-details-dialog.component';
+import { PatientAllergy } from '../models/PatientAllergy';
 
 @Component({
   selector: 'app-patient-details',
@@ -31,10 +32,10 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   userData: User;
   patientData: PatientDetails;
-  AllergyMapData: AllergyMap[];
+  AllergyMapData: PatientAllergy[];
   allergyData: AllergyDetails;
   // allergyIds: number[] = [];
-  allergyMaps: AllergyMap[] = [];
+  allergyMaps: PatientAllergy[] = [];
   patientdob: any;
   errormessage = formErrorMessages;
   allergy_details: string = "false";
@@ -58,34 +59,34 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   submitPatientDetailsForm() {
     const emergencyDetails: EmergencyDetails = new EmergencyDetails();
-    emergencyDetails.emergencyContactFristName = this.getControlValue('emergencycontactfirstname');
-    emergencyDetails.emergencyContactLastName = this.getControlValue('emergencycontactlastname');
+    emergencyDetails.fristName = this.getControlValue('emergencycontactfirstname');
+    emergencyDetails.lastName = this.getControlValue('emergencycontactlastname');
     emergencyDetails.patientRelationship = this.getControlValue('emergencycontactrelation');
-    emergencyDetails.emergencyContactEmail = this.getControlValue('emergencycontactemailid');
-    emergencyDetails.emergencyContact = this.getControlValue('emergencycontactnumber');
+    emergencyDetails.email = this.getControlValue('emergencycontactemailid');
+    emergencyDetails.contactNumber = this.getControlValue('emergencycontactnumber');
     emergencyDetails.homeAddress = this.getControlValue('emergencycontacthomeaddress');
     emergencyDetails.accessPatientPortal = this.getControlValue('accesstopatientportal');
 
     this.checkPriviousAllergy();
 
-    const patientEntity = {
-      patientAge: this.getControlValue('age'),
-      patientGender: this.getControlValue('gender'),
-      patientRace: this.getControlValue('race'),
-      patientEthnicity: this.getControlValue('ethnicity'),
+    const demographicDetail = {
+      age: this.getControlValue('age'),
+      gender: this.getControlValue('gender'),
+      race: this.getControlValue('race'),
+      ethnicity: this.getControlValue('ethnicity'),
       languagesKnown: this.getControlValue('languages'),
-      emailid: this.getControlValue('emailid'),
+     // emailid: this.getControlValue('emailid'),
       homeAddress: this.getControlValue('homeaddress'),
       userId: Number(sessionStorage.getItem('userId')),
       active: 1,
-      patientKnowAllergy: this.getControlValue('allergy_details'),
+      has_Allergy: this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
-      allergyMap: this.allergyMaps
+      patientAllergy: this.allergyMaps
 
 
     }
-    console.log(patientEntity);
-    this.apiCommonService.patientDetails(patientEntity).subscribe(
+    console.log(demographicDetail);
+    this.apiCommonService.patientDetails(demographicDetail).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
           this.clear();
@@ -158,21 +159,22 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           console.log( this.age);
           
          
-          this.setControlValue('gender', this.patientData.patientGender)
-          this.setControlValue('race', this.patientData.patientRace)
-          this.setControlValue('ethnicity', this.patientData.patientEthnicity)
+          this.setControlValue('gender', this.patientData.gender)
+          this.setControlValue('race', this.patientData.race)
+          this.setControlValue('ethnicity', this.patientData.ethnicity)
           this.setControlValue('languages', this.patientData.languagesKnown)
           this.setControlValue('homeaddress', this.patientData.homeAddress)
-          this.setControlValue('emergencycontactfirstname', this.patientData.emergencyContactEntity.emergencyContactFristName)
-          this.setControlValue('emergencycontactlastname', this.patientData.emergencyContactEntity.emergencyContactLastName)
+          this.setControlValue('emergencycontactfirstname', this.patientData.emergencyContactEntity.fristName)
+          this.setControlValue('emergencycontactlastname', this.patientData.emergencyContactEntity.lastName)
           this.setControlValue('emergencycontactrelation', this.patientData.emergencyContactEntity.patientRelationship)
-          this.setControlValue('emergencycontactemailid', this.patientData.emergencyContactEntity.emergencyContactEmail)
-          this.setControlValue('emergencycontactnumber', this.patientData.emergencyContactEntity.emergencyContact)
+          this.setControlValue('emergencycontactemailid', this.patientData.emergencyContactEntity.email)
+          this.setControlValue('emergencycontactnumber', this.patientData.emergencyContactEntity.contactNumber)
           this.setControlValue('emergencycontacthomeaddress', this.patientData.emergencyContactEntity.homeAddress)
           this.setControlValue('accesstopatientportal', this.patientData.emergencyContactEntity.accessPatientPortal)
-          this.setControlValue('allergy_details', this.patientData.patientKnowAllergy);
+          this.setControlValue('allergy_details', this.patientData.has_Allergy);
+         console.log(this.patientData.has_Allergy);
 
-          this.AllergyMapData = this.patientData.allergyMap;
+          this.AllergyMapData = this.patientData.patientAllergy;
           for (let AllergyMap of this.AllergyMapData) {
             //   // // console.log(AllergyMap.allergyId);
             const allergyId = {
@@ -195,10 +197,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
               }
             );
           }
-
-
         }
-
       }
     );
   }
@@ -211,7 +210,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   getAllAllergyId(data: any) {
 
-    let obj: AllergyMap = new AllergyMap();
+    let obj: PatientAllergy = new PatientAllergy();
     obj.allergyId = +data['allergyId'];
 
     if (obj.allergyId == 0) {
@@ -252,7 +251,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
             //  alert("Success");
             this.allergyData = res['result'];
 
-            let obj: AllergyMap = new AllergyMap();
+            let obj: PatientAllergy = new PatientAllergy();
             obj.allergyId = this.allergyData.allergyId
 
             this.allergyMaps.push(obj);
@@ -263,12 +262,11 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           }
         }
       );
-
   }
   checkPriviousAllergy() {
 
     for (let Allergy of this.allergydatatemporary) {
-      let obj: AllergyMap = new AllergyMap();
+      let obj: PatientAllergy = new PatientAllergy();
 
       obj.allergyId = Allergy.allergyId
       this.allergyMaps.push(obj);

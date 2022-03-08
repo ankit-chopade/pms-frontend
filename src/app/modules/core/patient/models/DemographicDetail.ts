@@ -1,20 +1,20 @@
 import { AllergyDetails } from "./AllergyDetails";
-import { AllergyMap } from "./AllergyMap";
+import {  PatientAllergy } from "./PatientAllergy";
 
 import { EmergencyDetails } from "./EmergencyDetails";
 
 export class PatientDetails
 {
     
-    patientBasicDetailId:number
-    patientGender:String;
-    patientAge:String;
-    patientRace:String;
-    patientEthnicity:String;
+    demographicDetailId:number
+    gender:String;
+    age:String;
+    race:String;
+    ethnicity:String;
     languagesKnown:String;
     homeAddress:String;
-    patientKnowAllergy:string;
+    has_Allergy:string;
 //	allergyDetails:AllergyDetails[];
-     allergyMap:AllergyMap[];
+     patientAllergy:PatientAllergy[];
      emergencyContactEntity:EmergencyDetails;
 }

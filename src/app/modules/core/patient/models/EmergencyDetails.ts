@@ -1,10 +1,10 @@
 export class EmergencyDetails
 {
-        emergencyContactFristName:string;
-        emergencyContactLastName:string;
-        emergencyContactEmail:string;
+        fristName:string;
+        lastName:string;
+        email:string;
         homeAddress:string;
-        emergencyContact: number;
+        contactNumber: number;
         patientRelationship: string;
         accessPatientPortal:string;
 }
