@@ -74,8 +74,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       patientKnowAllergy:this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
        allergyMap: this.allergyMaps
-
-
     }
     this.apiCommonService.patientDetails(patientEntity).subscribe(
       res => {

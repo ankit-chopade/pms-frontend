@@ -1,0 +1,32 @@
+<!-- <h1 mat-dialog-title> diagnosis detail</h1> -->
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div fxLayoutGap="10px">
+        <mat-form-field  >
+            <mat-label>Diagnosis Code</mat-label>
+            <input matInput type = "text"  formControlName="code"  required>
+            <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{errorMessages.DIAGNOSIS_CODE_REQUIRED}}</span>
+        </mat-form-field>
+        <br>
+        <mat-form-field  >
+            <mat-label>Diagnosis Description</mat-label>
+            <input matInput type="text" formControlName="description" >
+           
+        </mat-form-field>
+        <br>
+            <div>
+            <mat-label>Diagnosis Depricated</mat-label><br>
+            <mat-radio-group  formControlName="isDepricated" name="pdepri" >
+              
+                <mat-radio-button value="0">Yes  &nbsp;</mat-radio-button> 
+                <mat-radio-button value="1">No </mat-radio-button>
+            </mat-radio-group>
+              <br><br>
+            </div>
+        </div>
+    </form>
+<div mat-dialog-actions style="margin-bottom: 0;">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [disabled]="form.invalid" (click)="submit()" cdkFocusInitial>Ok</button>
+</div>
