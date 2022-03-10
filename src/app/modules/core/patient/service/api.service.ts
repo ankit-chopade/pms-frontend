@@ -10,8 +10,9 @@ import { APIConst } from '../constants/api.constant';
 export class ApiService {
 
   private baseUrl = environment.baseUrl;
+  private localhost = "http://localhost:3000/";
 
-
+  
   constructor(private httpClient: HttpClient) {
   }
 
@@ -120,6 +121,14 @@ export class ApiService {
 
   getPatientDetailsForPatientId(param: any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_DETAIL_DOMAIN}`, {params:param});
+  }
+//patient portal screen
+  getAllPatientDeatils() {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.localhost}${"patient_details"}`);
+  }
+   
+  getPatientDetailsById(id:any){
+     return this.httpClient.get<any>(`${this.localhost}${"patient_details"}${'/'}${id}`);
   }
 
 }

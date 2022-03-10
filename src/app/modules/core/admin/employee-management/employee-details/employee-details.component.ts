@@ -15,12 +15,12 @@ export class EmployeeDetailsComponent implements OnInit {
 
   columnsToDisplay: string[] = ['userId','title','firstName','lastName','createdDate','status','editStatus'];
   employeedata:MatTableDataSource<any>;
+  status:string
+  param:any ={userId :0 , active:0}
   @ViewChild('paginator') paginator : MatPaginator ;
   @ViewChild(MatSort, { static: false }) set sort(s: MatSort) {
     this.employeedata.sort = s;
   }
-  status:string
-  param:any ={userId :0 , active:0}
   constructor(private apiCommonService: ApiService,private notifyService: NotificationService,private router: Router) { }
   
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.apiCommonService.employeeDetails().subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-         this.employeedata= new MatTableDataSource( res['result'] );        
+         this.employeedata= new MatTableDataSource( res['result'] );  
          this.employeedata.paginator = this.paginator;         
        
        }
@@ -55,7 +55,9 @@ export class EmployeeDetailsComponent implements OnInit {
     console.log(this.param)
 
   }
+
   filterData($event:any){
+    // this.employeedata.filter = $event.target.value.trim().toLowerCase();
     this.employeedata.filter = $event.target.value;
   }
   sortData(sort : MatSort){
