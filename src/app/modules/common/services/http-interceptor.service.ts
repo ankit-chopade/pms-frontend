@@ -7,7 +7,7 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 export class HttpInterceptorsService implements HttpInterceptor {
     constructor() { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (sessionStorage.getItem('token') == null || sessionStorage.getItem('token') == "" || sessionStorage.getItem('token') == "undefined" ) {
+        if(req.url=="http://localhost:8080/login" || req.url=="http://localhost:8080/registration"|| req.url=="http://localhost:8080/change-password" || req.url=="http://localhost:8080/forgot-password"){
             return next.handle(req)
         }
         let authReq: HttpRequest<any> = req.clone(
@@ -17,7 +17,7 @@ export class HttpInterceptorsService implements HttpInterceptor {
                     .set('Access-Control-Allow-Origin', '*')
                     .set('Access-Control-Allow-Headers', 'Content-Type')
                     .set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT')
-                    .set('Authorization', `${sessionStorage.getItem('token')}`)
+                    .set('Authorization', "Bearer "+`${sessionStorage.getItem('token')}`)
 
             }
         );
