@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  baseUrl:'http://localhost:8080/'
+  baseUrl:'http://localhost:8989/',
+  allergyUrl:'http://localhost:7001/',
+  diagnosisUrl:'http://localhost:7002/',
+  medicationUrl:'http://localhost:7003/',
+  procedureUrl:'http://localhost:7004/',
+  managementUrl:'http://localhost:7005/',
+  scheduleUrl:'http://localhost:7006/',
+  visitUrl:'http://localhost:7007/',
+
+
 };
 
 /*

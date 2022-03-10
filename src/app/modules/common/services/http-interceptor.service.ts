@@ -7,7 +7,8 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 export class HttpInterceptorsService implements HttpInterceptor {
     constructor() { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if(req.url=="http://localhost:8080/login" || req.url=="http://localhost:8080/registration"|| req.url=="http://localhost:8080/change-password" || req.url=="http://localhost:8080/forgot-password"){
+        if(req.url=="http://localhost:7005/management/login" || req.url=="http://localhost:7005/management/registration"|| req.url=="http://localhost:7005/management/change-password" || req.url=="http://localhost:7005/management/forgot-password"){
+
             return next.handle(req)
         }
         let authReq: HttpRequest<any> = req.clone(
