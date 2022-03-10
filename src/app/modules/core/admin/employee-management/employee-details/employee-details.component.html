@@ -1,0 +1,79 @@
+
+<div>
+
+    <div>
+         <mat-form-field appearance="fill">
+             <input matInput placeholder="search here..." autocomplete="off" (keyup)="filterData($event)">
+         </mat-form-field>
+    </div>
+    <mat-table matSort [dataSource]="employeedata" matSort #sort="matSort" (matSortChange)="sortData(sort)" layout-align="center center">
+        <ng-container matColumnDef="userId" >
+            <mat-header-cell mat-sort-header *matHeaderCellDef >Id</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.userId}}</mat-cell>
+        </ng-container> 
+
+        <ng-container matColumnDef="title" >
+            <mat-header-cell *matHeaderCellDef >Title</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.title}}</mat-cell>     
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell mat-sort-header *matHeaderCellDef >First Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>     
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell  *matHeaderCellDef mat-short-header >Last Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>     
+        </ng-container>
+        <ng-container matColumnDef="createdDate">
+            <mat-header-cell *matHeaderCellDef>  Date of Joning  </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.createdDate | date: 'dd-MMM-yyyy'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef > status</mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                {{element.activeStatus == 1 ? "active" : element.activeStatus == 0 ? "in-active" : "blocked" }}   
+                                        
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="editStatus">
+            <mat-header-cell *matHeaderCellDef>Edit status</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="change status">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item  href="javascript:void(0)" *ngIf="element.activeStatus!=1"
+                        (click)="updateStatus(element.userId,1)">
+                        Active
+                     </button>
+                      <button mat-menu-item href="javascript:void(0)" *ngIf="element.activeStatus!=0"
+                        (click)="updateStatus(element.userId,0)">
+                         In-Active
+                      </button>
+                      <button mat-menu-item href="javascript:void(0)" *ngIf="element.activeStatus!=2"
+                      (click)="updateStatus(element.userId,2)">
+                          Block
+                      </button>
+                  </mat-menu>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+    </mat-table>  
+    <mat-paginator 
+        #paginator 
+        [pageSize]="5" 
+        [pageSizeOptions]="[5,10,25,50,100]" >
+    </mat-paginator>          
+</div> 
+
+
+
+
+        
+
+  

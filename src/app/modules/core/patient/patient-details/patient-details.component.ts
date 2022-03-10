@@ -81,9 +81,13 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       active: 1,
       has_Allergy: this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
+<<<<<<< HEAD
       patientAllergy: this.allergyMaps
 
 
+=======
+       allergyMap: this.allergyMaps
+>>>>>>> admin-module-release-1.1
     }
     console.log(demographicDetail);
     this.apiCommonService.patientDetails(demographicDetail).subscribe(

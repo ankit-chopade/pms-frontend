@@ -1,0 +1,32 @@
+<!-- <h1 mat-dialog-title>Procedure Details</h1> -->
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <div fxLayoutGap="10px">
+        <mat-form-field  >
+            <mat-label>Procedure Code</mat-label>
+            <input matInput type = "text"  formControlName="code"  required>
+           
+            <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{errorMessages.PROCEDURE_CODE_REQUIRED}}</span>
+        </mat-form-field>
+        <br>
+        <mat-form-field  >
+            <mat-label>Procedure Description</mat-label>
+            <input matInput type="text" formControlName="description" >
+           
+        </mat-form-field>
+        <br>
+            <div>
+            <mat-label>Procedure Depricated &nbsp;</mat-label><br>
+            <mat-radio-group  formControlName="isDepricated" name="pdepri" >
+                &nbsp;&nbsp;&nbsp;<mat-radio-button value="0">Yes &nbsp;</mat-radio-button> 
+                <mat-radio-button value="1">No </mat-radio-button>
+            </mat-radio-group>
+              <br><br>
+            </div>
+        </div>
+    </form>
+<div mat-dialog-actions style="margin-bottom: 0;">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [disabled]="form.invalid" (click)="submit()" >Ok</button>
+</div>

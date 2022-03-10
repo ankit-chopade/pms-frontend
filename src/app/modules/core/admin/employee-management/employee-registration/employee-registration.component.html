@@ -1,4 +1,4 @@
- <mat-card-content>
+<mat-card-content>
     <div fxLayoutAlign="center center" fxFlexFill>
         <form [formGroup]="form" (submit)="submitregistrationForm()">
             <div fxLayoutAlign="center center" fxFlexFill>
@@ -50,22 +50,24 @@
         <div fxLayout ="row" fxLayoutGap="30px" fxLayoutAlign="center center" fxLayout.xs="column">
              <mat-form-field appearance="outline" >
                 <mat-label>Role</mat-label>
-                <mat-select formControlName="title">
+                <mat-select formControlName="role">
                   <mat-option value="admin">Admin</mat-option>
                   <mat-option value="doctor">Doctor</mat-option>
                   <mat-option value="nurse">Nurse</mat-option>
                 </mat-select>
+                <span *ngIf="checkTouchedAndInvalid('role')"
+                class="error">{{errormessage.ROLE_REQUIRED}} </span> 
               </mat-form-field>                                 
               
             <mat-form-field appearance="outline" >
                 <mat-label>Emplpoyee Id</mat-label>
-                <input matInput type="number" formControlName="contactnumber" required>
-                <span *ngIf="checkTouchedAndInvalid('contactnumber')"
-                class="error">{{errormessage.EmployeeId_REQUIRED}} </span>            
+                <input matInput type="number" formControlName="employeeId" required>
+                <span *ngIf="checkTouchedAndInvalid('employeeId')"
+                class="error">{{errormessage.EMPLOYEEID_REQUIRED}} </span>            
               </mat-form-field>
             </div>
                                  
-           
+         
               <br>
               <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center">
                 <button [disabled]="form.invalid==false" mat-raised-button color='primary'>Submit</button>

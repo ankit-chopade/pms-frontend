@@ -1,0 +1,47 @@
+<form [formGroup]="form">
+    <div>
+      <mat-form-field>
+        <mat-label>Drug Id</mat-label>
+        <input matInput type="text" formControlName="drgId" 
+          required />
+      
+        <span *ngIf="checkTouchedAndInvalid('drgId')" class="error">{{errorMessages.DRUG_CODE_REQUIRED}}</span>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Drug Name</mat-label>
+        <input matInput type="text" formControlName="drgName" >
+        
+      </mat-form-field>
+      <br />
+     
+      <!-- <br> -->
+      <mat-form-field>
+        <mat-label>Drug Generic Name</mat-label>
+        <input matInput type="text" formControlName="drgGenericName" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Drug Brand name</mat-label>
+        <input matInput type="text" formControlName="drgBrandName"  />
+
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Drug Form</mat-label>
+        <input matInput type="text" formControlName="drgForm"  required>
+       
+        <span *ngIf="checkTouchedAndInvalid('drgForm')" class="error">{{errorMessages.DRUG_FORM_REQUIRED}}</span>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Drug Strength</mat-label>
+        <input matInput type="text" formControlName="drgStrength"  >
+       
+      </mat-form-field>
+    </div>
+  </form>
+  <div mat-dialog-actions style="margin-bottom: 0;">
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="submit()" cdkFocusInitial>OK</button>
+  </div>
