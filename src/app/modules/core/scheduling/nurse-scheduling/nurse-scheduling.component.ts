@@ -23,6 +23,7 @@ import { NotificationService } from 'src/app/modules/default/service/notificatio
 declare var moment: any;
 import { createElement } from '@syncfusion/ej2-base';
 import { concatAll } from 'rxjs';
+import { DateTimePicker } from '@syncfusion/ej2-angular-calendars';
 
 @Component({
   selector: 'app-nurse-scheduling',
@@ -48,6 +49,7 @@ export class NurseSchedulingComponent {
   public openededithistorysidebar:boolean=false;
   public editHistoryDatasource:any[];
   public allappointments: Record<string, any>[];
+  public showQuickInfo: Boolean = false;
 
   minValidation: (args: { [key: string]: string }) => boolean = (args: { [key: string]: string }) => {
     return args['value'].length >= 5;
@@ -330,6 +332,28 @@ export class NurseSchedulingComponent {
         this.notifyService.showError("Please try after some time", "Error");
       })
     );
+  }
+  onPopupOpen(args: PopupOpenEventArgs): void {
+    if (args.type === 'Editor') {
+      let startElement: HTMLInputElement = args.element.querySelector(
+        '#StartTime'
+      ) as HTMLInputElement;
+      if (!startElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker(
+          { value: new Date(startElement.value) || new Date() },
+          startElement
+        );
+      }
+      let endElement: HTMLInputElement = args.element.querySelector(
+        '#EndTime'
+      ) as HTMLInputElement;
+      if (!endElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker(
+          { value: new Date(endElement.value) || new Date() },
+          endElement
+        );
+      }
+    }
   }
 
 
