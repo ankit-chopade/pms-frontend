@@ -7,16 +7,17 @@ import { NotificationService } from 'src/app/modules/default/service/notificatio
 import { Diagnosis } from '../models/Diagnosis';
 import { ApiService } from '../service/api.service';
 import { FormUtilsService } from '../service/form-util-service';
-import { DiagonosisDialogComponent } from './diagnosis-dialog/diagonosis-dialog.component';
-
+import { DiagnosisDialogComponent } from './diagnosis-dialog/diagnosis-dialog.component';
 
 @Component({
-  selector: 'app-diagonsis-management',
-  templateUrl: './diagonsis-management.component.html',
-  styleUrls: ['./diagonsis-management.component.scss']
+  selector: 'app-diagnosis-management',
+  templateUrl: './diagnosis-management.component.html',
+  styleUrls: ['./diagnosis-management.component.scss'],
 })
-export class DiagonsisManagementComponent  extends FormBaseController<any> implements OnInit {
-
+export class DiagnosisManagementComponent
+  extends FormBaseController<any>
+  implements OnInit
+{
   constructor(
     private formConfig: FormUtilsService,
     public dialog: MatDialog,
@@ -25,74 +26,72 @@ export class DiagonsisManagementComponent  extends FormBaseController<any> imple
   ) {
     super(formConfig.diagnosisModalDialog, '');
   }
-  @ViewChild('paginator') paginator : MatPaginator ;
-  
-  id:number=0;
-  diagnosisData:Diagnosis[];
+  @ViewChild('paginator') paginator: MatPaginator;
+
+  id: number = 0;
+  diagnosisData: Diagnosis[];
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [
     'code',
     'description',
     'isDepricate',
-   // 'prescribedDate',
-    'delete'
+    // 'prescribedDate',
+    'delete',
   ];
   ngOnInit(): void {
     this.loadGrid();
   }
 
   diagnosisAddButtonClick() {
-    const dialogRef = this.dialog.open(DiagonosisDialogComponent, {
+    this.form.reset();
+    const dialogRef = this.dialog.open(DiagnosisDialogComponent, {
       width: '350px',
       data: this.dataSource,
     });
-     dialogRef.afterClosed().subscribe((result) => { 
-        if (result != null) {
-          
-      this.loadGrid();
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != null) {
+        this.loadGrid();
+      }
+    });
   }
-});
-}
-    
-  
 
   validateExistingDiagnosis(selectedId: number): boolean {
-    if(selectedId===0)
-    {
-       return true;
+    if (selectedId === 0) {
+      return true;
     }
-     let data: any = this.diagnosisData.find(d => d.diagnosisId===selectedId)
+    let data: any = this.diagnosisData.find(
+      (d) => d.diagnosisId === selectedId
+    );
     if (data == null) {
-       return true;
-     }
-     return false;
+      return true;
+    }
+    return false;
   }
 
   loadGrid() {
-    
-      this.apiCommonService.getDiagnosisDetails().subscribe(
-        (res) => {
-          this.diagnosisData=res['result']
-          this.dataSource = new MatTableDataSource(res['result']);
-          this.dataSource.paginator=this.paginator;
-       
-        });
+    this.apiCommonService.getDiagnosisDetails().subscribe((res) => {
+      this.diagnosisData = res['result'];
+      this.dataSource = new MatTableDataSource(res['result']);
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
-  deleteDiagnosisClick(diagnosis: Diagnosis){
-    const param : any= {
-      diagnosisId: diagnosis.diagnosisId
-      
-    }
-    console.log(param)
-     this.apiCommonService.deleteDiagnosisDetail(param).subscribe((res) =>{
+  deleteDiagnosisClick(diagnosis: Diagnosis) {
+    const param: any = {
+      id: diagnosis.diagnosisId,
+    };
+    console.log(param);
+    this.apiCommonService.deleteDiagnosisDetail(param).subscribe((res) => {
       // if (res && res['status'] === 200) {
-         this.loadGrid();
-         this.notifyService.showSuccess("Diagnosis deleted successfully", "Success");
+      this.loadGrid();
+      this.notifyService.showSuccess(
+        'Diagnosis deleted successfully',
+        'Success'
+      );
       //  } else {
       //    this.notifyService.showError("Diagnosis deletion failed", "Error");
       //  }
-     })
+    });
   }
 
   // saveDiagnosisDetails(param: any) {
@@ -106,25 +105,19 @@ export class DiagonsisManagementComponent  extends FormBaseController<any> imple
   //     }
   //   });
   // }
-  editClick(diagnosis:Diagnosis)
-  {
-    console.log(diagnosis)
+  editClick(diagnosis: Diagnosis) {
+    console.log(diagnosis);
     this.setControlValue('code', diagnosis.diagnosisCode);
     this.setControlValue('description', diagnosis.diagnosisDescription);
-    this.setControlValue('isDepricated', diagnosis.diagnosisIsDepricated+"");
-    
+    this.setControlValue('isDepricated', diagnosis.diagnosisIsDepricated + '');
+
     this.setControlValue('selectedId', diagnosis.diagnosisId);
     console.log(this.getControlValue('isDepricated'));
-    const dialogRef = this.dialog.open(DiagonosisDialogComponent, {
+    const dialogRef = this.dialog.open(DiagnosisDialogComponent, {
       width: '350px',
-    
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.loadGrid()
+      this.loadGrid();
     });
-    
   }
 }
-
- 
-

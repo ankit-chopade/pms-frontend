@@ -33,10 +33,10 @@ import { ApiService } from '../service/api.service';
     this.service.updateStatus(this.param).subscribe 
     (res => {
       if (res && res['result'] && res['status'] === 200) {
-        this.notifyService.showSuccess("status updated succesfully","status");
+        this.notifyService.showSuccess("status updated succesfully","Success");
         this.loadPatientDetails();
       }
-      else  {this.notifyService.showSuccess("failed","status");}
+      else  {this.notifyService.showError("failed","Error");}
       }
      );
   } 

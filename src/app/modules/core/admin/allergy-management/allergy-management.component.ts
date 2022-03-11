@@ -33,6 +33,8 @@ export class AllergyManagementComponent extends FormBaseController<any> implemen
     this.loadGrid()
   }
   addAllergies() {
+    
+    this.form.reset();
     const dialogRef = this.dialog.open( AllergyDetailsDialogComponent, {
       width: '300px',
       disableClose: true,
@@ -78,7 +80,7 @@ export class AllergyManagementComponent extends FormBaseController<any> implemen
   }
   delete(id:number){
     const param : any= {
-      allergyId: id
+      id: id
     }
     this.apiCommonService.deletAllergyDetail(param).subscribe((res) =>{
      

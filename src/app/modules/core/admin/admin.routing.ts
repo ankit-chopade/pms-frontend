@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllergyManagementComponent } from './allergy-management/allergy-management.component';
-import { DiagonsisManagementComponent } from './diagonsis-management/diagonsis-management.component';
+import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
 import { EmployeeDetailsComponent } from './employee-management/employee-details/employee-details.component';
 import { EmployeeManagementComponent } from './employee-management/employee-management.component';
 import { EmployeeRegistrationComponent } from './employee-management/employee-registration/employee-registration.component';
@@ -37,8 +37,8 @@ const routes: Routes = [
    ]
   } ,
   {
-    path: 'diagonosis-management',
-    component:DiagonsisManagementComponent
+    path: 'diagnosis-management',
+    component:DiagnosisManagementComponent
   },
   {
     path: 'medication-management',

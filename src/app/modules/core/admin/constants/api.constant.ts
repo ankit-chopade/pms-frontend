@@ -1,8 +1,8 @@
 export const APIConst={
-    EMPLOYEE_DETAILS:'hospital-users',
-    PATIENT_DETAILS:'patient-users',
-    EMPLOYEE_REGISTRATION :'add-user',
-    UPDATE_STATUS :'update-status',
+    EMPLOYEE_DETAILS:'management/hospital-users',
+    PATIENT_DETAILS:'management/patient-users',
+    EMPLOYEE_REGISTRATION :'management/add-user',
+    UPDATE_STATUS :'management/update-status',
 
 
 

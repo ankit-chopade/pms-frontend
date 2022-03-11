@@ -12,8 +12,6 @@ export const environment = {
   managementUrl:'http://localhost:7005/',
   scheduleUrl:'http://localhost:7006/',
   visitUrl:'http://localhost:7007/',
-
-
 };
 
 /*

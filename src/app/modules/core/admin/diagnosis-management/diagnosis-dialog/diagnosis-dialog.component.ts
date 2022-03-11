@@ -2,71 +2,74 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
-import { FormUtilService } from '../../../patient/service/form-util.service';
 import { formErrorMessages } from '../../constants/message.constant';
+import { Diagnosis } from '../../models/Diagnosis';
 import { ApiService } from '../../service/api.service';
 import { FormUtilsService } from '../../service/form-util-service';
 
 @Component({
-  selector: 'app-procedure-dialog',
-  templateUrl: './procedure-dialog.component.html',
-  styleUrls: ['./procedure-dialog.component.scss'],
+  selector: 'app-diagnosis-dialog',
+  templateUrl: './diagnosis-dialog.component.html',
+  styleUrls: ['./diagnosis-dialog.component.scss'],
 })
-export class ProcedureDialogComponent
+export class DiagnosisDialogComponent
   extends FormBaseController<any>
   implements OnInit
 {
   constructor(
     private formConfig: FormUtilsService,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<DiagnosisDialogComponent>,
     private apiCommonService: ApiService,
-    private notifyService: NotificationService,
-    public dialogRef: MatDialogRef<ProcedureDialogComponent>
-  ) {
-    super(formConfig.procedureDetailsForm, '');
+    private notifyService: NotificationService
+  ) //  @Inject(MAT_DIALOG_DATA) public data: DetailsInterface
+  {
+    super(formConfig.diagnosisModalDialog, '');
   }
+
   errorMessages = formErrorMessages;
-  procDetails: any[];
-  procDesc: any[] = [];
-  procCode: any[] = [];
+  diagDetails: any[];
+  diagDesc: any[] = [];
+  diagCode: any[] = [];
   selectedId: number = 0;
+  diagnosisId: number = 0;
   isHiddenDetails: boolean = true;
-  procedureId: number = 0;
+  diagnosisData: Diagnosis;
+  dataSource: Diagnosis[];
+  diagnosisCode: string;
   ngOnInit(): void {}
 
-  onCancelClick(): void {
+  onNoClick(): void {
     this.clearModal();
     this.dialogRef.close();
   }
 
   submit(): void {
-    this.procedureId = this.getControlValue('selectedId');
-    console.log(this.procedureId === 0);
-    if (this.procedureId === 0 || this.procedureId == null) {
-      const procedure = {
-        procedureCode: this.getControlValue('code'),
-        procedureDescription: this.getControlValue('description'),
-        procedureIsDepricated: this.getControlValue('isDepricated'),
-        // procedureId:this.getControlValue('selectedId')
+    this.diagnosisId = this.getControlValue('selectedId');
+    if (this.diagnosisId === 0 || this.diagnosisId == null) {
+      const diagnosis = {
+        diagnosisCode: this.getControlValue('code'),
+        diagnosisDescription: this.getControlValue('description'),
+        diagnosisIsDepricated: this.getControlValue('isDepricated'),
       };
-      console.log(procedure);
-      this.apiCommonService.saveProcedureDetail(procedure).subscribe((res) => {
+
+      this.apiCommonService.saveDiagnosisDetail(diagnosis).subscribe((res) => {
         if (res && res['result'] && res['status'] === 200) {
           this.notifyService.showSuccess('Data added Successfully', 'Success');
         } else {
-          this.notifyService.showSuccess('Procedure addition failed', 'Error');
+          this.notifyService.showSuccess('Diagnosis addition failed', 'Error');
         }
       });
     } else {
-      const procedure = {
-        procedureCode: this.getControlValue('code'),
-        procedureDescription: this.getControlValue('description'),
-        procedureIsDepricated: this.getControlValue('isDepricated'),
-        procedureId: this.getControlValue('selectedId'),
+      const diagnosis = {
+        diagnosisCode: this.getControlValue('code'),
+        diagnosisDescription: this.getControlValue('description'),
+        diagnosisIsDepricated: this.getControlValue('isDepricated'),
+        diagnosisId: this.getControlValue('selectedId'),
       };
-      console.log(procedure);
+
       this.apiCommonService
-        .updateProcedureDetail(procedure)
+        .updateDiagnosisDetail(diagnosis)
         .subscribe((res) => {
           if (res && res['result'] && res['status'] === 200) {
             this.notifyService.showSuccess(
@@ -84,6 +87,7 @@ export class ProcedureDialogComponent
 
     this.setControlValue('selectedId', this.selectedId);
     this.dialogRef.close(this.form.value);
+
     this.clearModal();
   }
   clearModal(): void {

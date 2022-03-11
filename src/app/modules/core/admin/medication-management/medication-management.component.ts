@@ -13,11 +13,14 @@ import { MadicationDialogComponent } from './madication-dialog/madication-dialog
 @Component({
   selector: 'app-medication-management',
   templateUrl: './medication-management.component.html',
-  styleUrls: ['./medication-management.component.scss']
+  styleUrls: ['./medication-management.component.scss'],
 })
-export class MedicationManagementComponent  extends FormBaseController<any> implements OnInit {
-
-  constructor(private formConfig: FormUtilsService,
+export class MedicationManagementComponent
+  extends FormBaseController<any>
+  implements OnInit
+{
+  constructor(
+    private formConfig: FormUtilsService,
     private dialog: MatDialog,
     private apiCommonService: ApiService,
 
@@ -26,8 +29,8 @@ export class MedicationManagementComponent  extends FormBaseController<any> impl
     super(formConfig.medicationDetailsForm, '');
   }
 
-  @ViewChild('paginator') paginator : MatPaginator ;
-  
+  @ViewChild('paginator') paginator: MatPaginator;
+
   dataSource: MatTableDataSource<any>;
   displayedColumns: string[] = [
     'drugId',
@@ -36,7 +39,7 @@ export class MedicationManagementComponent  extends FormBaseController<any> impl
     'drugBrandName',
     'drugForm',
     'drugStrength',
-   // 'prescribedDate',
+    // 'prescribedDate',
     'delete',
   ];
 
@@ -44,15 +47,15 @@ export class MedicationManagementComponent  extends FormBaseController<any> impl
     this.loadGrid();
   }
   medicationAddButtonClick() {
+    this.form.reset();
     // console.log('add button click for medications');
     const dialogRef = this.dialog.open(MadicationDialogComponent, {
       width: '250px',
       data: this.dataSource,
     });
-     dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.loadGrid();
-     }
-     );
+    });
     //   if (result && result['drgId'] && result['drgName']) {
     //     if (this.validateExistingMedications(result['selectedId']) || result['drgName'] == 'Others') {
     //       const param: any = {
@@ -70,32 +73,32 @@ export class MedicationManagementComponent  extends FormBaseController<any> impl
     //     } else {
     //       this.notifyService.showError('Diagnosis Already Exists', 'Error');
     //     }
-    //   } 
+    //   }
     // });
   }
 
-  
   loadGrid() {
-    this.apiCommonService.getMedicationDetails().subscribe((res)=>{
+    this.apiCommonService.getMedicationDetails().subscribe((res) => {
       if (res && res['result'] && res['status'] === 200) {
         this.dataSource = new MatTableDataSource(res['result']);
-        this.dataSource.paginator=this.paginator;
+        this.dataSource.paginator = this.paginator;
       }
-    })
+    });
   }
 
-  deleteClick(Medication: medication){
-    const param : any= {
-      medicationId: Medication.medicationId
-    }
-    this.apiCommonService.deleteMedicationDetail(param).subscribe((res) =>{
-     
-        this.loadGrid();
-        this.notifyService.showSuccess("Medication deleted successfully", "Success");
-      } 
-    );
+  deleteClick(Medication: medication) {
+    const param: any = {
+      id: Medication.medicationId,
+    };
+    this.apiCommonService.deleteMedicationDetail(param).subscribe((res) => {
+      this.loadGrid();
+      this.notifyService.showSuccess(
+        'Medication deleted successfully',
+        'Success'
+      );
+    });
   }
-  editClick(medicationdata: medication){
+  editClick(medicationdata: medication) {
     this.setControlValue('drgId', medicationdata.drugId);
     this.setControlValue('drgName', medicationdata.drugName);
     this.setControlValue('drgGenericName', medicationdata.drugGenericName);
@@ -107,21 +110,8 @@ export class MedicationManagementComponent  extends FormBaseController<any> impl
       width: '250px',
       data: this.dataSource,
     });
-     dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.loadGrid();
-     }
-     );
-  }
-  saveDrugDetails(param: any) {
-    this.apiCommonService.saveMedicationDetails(param).subscribe((res) => {
-      if (res && res['result'] && res['status'] === 200) {
-        this.loadGrid();
-        this.notifyService.showSuccess("Medication added successfully", "Success");
-      } else {
-        this.notifyService.showSuccess("Medication addition failed", "Error");
-      }
     });
   }
 }
-
-

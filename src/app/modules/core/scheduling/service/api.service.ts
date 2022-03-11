@@ -11,42 +11,43 @@ import { APIConst } from '../constants/api.constants';
 export class ApiService {
 
   private baseUrl = environment.baseUrl;
+  private scheduleUrl = environment.scheduleUrl;
 
 
   constructor(private httpClient: HttpClient) {
   }
   
   getPhysician() {
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PHYSICIAN}`);
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.PHYSICIAN}`);
   } 
 
   savePatientAppintment(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_APPOINTMENT}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.SAVE_APPOINTMENT}`,param);
   } 
 
   getPhysicianAppintments(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PHYSICIAN_APPOINTMENTS}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.PHYSICIAN_APPOINTMENTS}`,param);
   } 
 
   saveEditedAppointemnt(param:any){
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.EDIT_APPOINTMENT}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.EDIT_APPOINTMENT}`,param);
   }
   
   deletePhysicianAppintments(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DELETE_PHYSICIAN_APPOINTMENT}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.DELETE_PHYSICIAN_APPOINTMENT}`,param);
   } 
 
   saveEditHistory(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_EDIT_HISTORY}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.SAVE_EDIT_HISTORY}`,param);
   } 
 
   getEditHistory(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_EDIT_HISTORY}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.GET_EDIT_HISTORY}`,param);
   } 
   getPatient(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT}`);
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.PATIENT}`);
   }
   getPatientAppintments(param:any) {
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENTS}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.scheduleUrl}${APIConst.PATIENT_APPOINTMENTS}`,param);
   }
 }

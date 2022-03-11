@@ -44,20 +44,19 @@ export class EmployeeRegistrationComponent extends FormBaseController<any> imple
   
   }
   submitregistrationForm(){
-      role: this.getControlValue('role');
-      if(this.role=='admin')
+      let role= this.getControlValue('role');
+      if(role=='admin')
       {
-       this.notifyService.showSuccess("Employee registered successfully.","registration")
+        this.roleId=2
+      }
+      else if(role=='doctor')
+      {
+        this.roleId=3
       }
       else{
-        if(this.role=='doctor')
-        {
-          this.roleId=3
-        }
-        else{
-          this.roleId=4
-        }
+        this.roleId=4
       }
+      
       this.employeeId= this.getControlValue('employeeId');
       
       const param = {
@@ -75,10 +74,10 @@ export class EmployeeRegistrationComponent extends FormBaseController<any> imple
      this.apiCommonService.employeeRegistration(this.employee).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-              this.notifyService.showSuccess("Employee registered successfully.","registration")     
+              this.notifyService.showSuccess("Employee registered successfully.","Success")     
         }
         else {
-          this.notifyService.showSuccess("Employee registeration failed","registration")     
+          this.notifyService.showError("Employee registeration failed","Error")     
 
         }
       }

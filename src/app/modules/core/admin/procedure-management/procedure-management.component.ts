@@ -40,7 +40,7 @@ export class ProcedureManagementComponent extends FormBaseController<any> implem
 
   procedureAddButtonClick() {
     // call api for loading data in proc code and proc description
-
+    this.form.reset();
     const dialogRef = this.dialog.open(ProcedureDialogComponent, {
       width: '350px',
       data: this.dataSource,
@@ -84,7 +84,7 @@ export class ProcedureManagementComponent extends FormBaseController<any> implem
    delete(procedure:procedure)
    {
      const param : any= {
-    procedureId: procedure.procedureId
+    id: procedure.procedureId
   }
   console.log(param)
    this.apiCommonService.deleteProcedureDetail(param).subscribe((res) =>{

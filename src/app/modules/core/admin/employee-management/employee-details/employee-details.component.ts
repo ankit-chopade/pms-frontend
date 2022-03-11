@@ -33,6 +33,7 @@ export class EmployeeDetailsComponent implements OnInit {
         if (res && res['result'] && res['status'] === 200) {
          this.employeedata= new MatTableDataSource( res['result'] );        
          this.employeedata.paginator = this.paginator;         
+       console.log(res['result']);
        
        }
       }
@@ -44,10 +45,10 @@ export class EmployeeDetailsComponent implements OnInit {
     this.apiCommonService.updateStatus(this.param).subscribe 
     (res => {
       if (res && res['result'] && res['status'] === 200) {
-        this.notifyService.showSuccess("status updated succesfully","status");   
+        this.notifyService.showSuccess("status updated succesfully","Success");   
          this.loadEmployeeData();
       }
-      else  {this.notifyService.showSuccess("failed","status");}
+      else  {this.notifyService.showError("failed","Error");}
     }
    
   );

@@ -8,14 +8,14 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DiagonsisManagementComponent } from './diagonsis-management/diagonsis-management.component';
 import { AllergyManagementComponent } from './allergy-management/allergy-management.component';
 import { MedicationManagementComponent } from './medication-management/medication-management.component';
 import { ProcedureManagementComponent } from './procedure-management/procedure-management.component';
-import { DiagonosisDialogComponent } from './diagonsis-management/diagnosis-dialog/diagonosis-dialog.component';
 import { MadicationDialogComponent } from './medication-management/madication-dialog/madication-dialog.component';
 import { ProcedureDialogComponent } from './procedure-management/procedure-dialog/procedure-dialog.component';
 import { AllergyDetailsDialogComponent } from './allergy-management/allergy-details-dialog/allergy-details-dialog.component';
+import { DiagnosisDialogComponent } from './diagnosis-management/diagnosis-dialog/diagnosis-dialog.component';
+import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
 
 
 
@@ -26,10 +26,10 @@ import { AllergyDetailsDialogComponent } from './allergy-management/allergy-deta
     PatientManagementComponent,
     EmployeeDetailsComponent,
     AllergyManagementComponent,
-    DiagonsisManagementComponent,
+    DiagnosisManagementComponent,
     MedicationManagementComponent,
     ProcedureManagementComponent,
-    DiagonosisDialogComponent,
+    DiagnosisDialogComponent,
     MadicationDialogComponent,
     ProcedureDialogComponent,
     AllergyDetailsDialogComponent

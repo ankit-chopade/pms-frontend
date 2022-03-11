@@ -85,7 +85,7 @@ export class MadicationDialogComponent extends FormBaseController<any> implement
   submit(): void {
     this.medicationId = this.getControlValue('selectedId')
     console.log(this.medicationId === 0)
-    if (this.medicationId === 0) {
+    if (this.medicationId === 0 || this.medicationId==null) {
       const medication = {
         drugName: this.getControlValue('drgName'),
         drugId: this.getControlValue('drgId'),
@@ -118,7 +118,7 @@ export class MadicationDialogComponent extends FormBaseController<any> implement
       medicationId:this.getControlValue('selectedId')
     }
     console.log(medication);
-    this.apiCommonService.saveMedicationDetails(medication).subscribe(
+    this.apiCommonService.updateMedicationDetails(medication).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
           this.notifyService.showSuccess("Data added Successfully", "Success")
@@ -142,7 +142,6 @@ export class MadicationDialogComponent extends FormBaseController<any> implement
     this.setControlValue('drgBrandName', '');
     this.setControlValue('drgForm', '');
     this.setControlValue('drgStrength', '');
-    this.setControlValue('details', '');
     this.form.reset();
   }
 
