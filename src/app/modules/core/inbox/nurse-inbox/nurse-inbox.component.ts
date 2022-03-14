@@ -17,7 +17,7 @@ export class NurseInboxComponent implements OnInit {
   constructor(private apiCommonService: ApiService) {
     const today = new Date(); 
   }
-  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description', 'Day', 'Time'];
+  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description', 'Time'];
   dataSource:any[];
   ngOnInit(): void {
     this.getDayAndDate()

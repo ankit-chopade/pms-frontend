@@ -18,5 +18,11 @@ import { APIConst } from "../constant/api.constant";
     getAppointmentDetailsToPatient(param:any){
         return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS}`, {params:param});
       }
-    
+      getAppointmentDetailsByDateAndPatientId(param:any){
+        return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PATIENTID}`, {params:param});
+      }
+
+      getAppointmentsByDateAndPhysicianId(param:any){
+        return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PHYSICIANID}`, {params:param});
+      }
     }

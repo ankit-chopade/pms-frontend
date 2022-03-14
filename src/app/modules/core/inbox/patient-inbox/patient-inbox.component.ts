@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DayAndDate } from '../model/DayAndDate';
+import { PatientAppointment } from '../model/patientappointment';
 import { ApiService } from '../service/api.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { ApiService } from '../service/api.service';
 export class PatientInboxComponent implements OnInit {
   layout: any[];
   userId: number;
+  AppoinmentData:PatientAppointment[]
   dayAndDateList: any[]=[];
   days:string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   nextDay: number=0;
@@ -21,13 +23,14 @@ export class PatientInboxComponent implements OnInit {
     
   }
 
-  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description', 'Day', 'Time'];
-  dataSource:any[];
+  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description',  'Time'];
+  patientData:PatientAppointment[]=[];
+  dataSource:any[]=[];
   ngOnInit(): void {
     this.getDayAndDate()
     this.userId= Number(sessionStorage.getItem('userId'))
     console.log(this.userId)
-    console.log(this.layout)
+    
     // const customDate: string=new Date().toISOString().replace('T',' '); 
     // const param = {
     //   date: customDate
@@ -49,13 +52,24 @@ export class PatientInboxComponent implements OnInit {
     const customDate: string=date.toISOString().replace('T',' '); 
 
     const param = {
-      date: customDate
+      date: customDate,
+      patientId: this.userId
     };
-    this.apiCommonService.getAppointmentDetailsToPatient(param).subscribe(
+    this.apiCommonService.getAppointmentDetailsByDateAndPatientId(param).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           this.dataSource = resp['result'];
+          // this.AppoinmentData = resp['result'];
+          // console.log(this.patientData)
+          // this.AppoinmentData.find(element =>
+          //   {
+          //     console.log(element)
+          //     if( element.patientId==this.userId)
+          //          this.patientData.push(element);
+          //   })
+          //   this.dataSource=this.patientData;
           console.log(this.dataSource);
+         
         }
 
 
