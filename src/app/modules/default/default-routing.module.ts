@@ -5,6 +5,7 @@ import { DefaultComponent } from './default/default.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+import { NavigationAuthGuardService } from './service/navigationauthguard.service';
 import { RegistrationdeactivateauthguardService } from './service/registrationdeactivateauthguard.service';
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
       path: 'forgot', component: ForgotPasswordComponent
     },
     { 
-      path: 'change', component: ChangePasswordComponent
+      path: 'change', component: ChangePasswordComponent, canActivate: [NavigationAuthGuardService]
     },
     { 
       path: '', component: LoginComponent
