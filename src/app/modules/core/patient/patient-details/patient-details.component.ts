@@ -59,7 +59,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   submitPatientDetailsForm() {
     const emergencyDetails: EmergencyDetails = new EmergencyDetails();
-    emergencyDetails.fristName = this.getControlValue('emergencycontactfirstname');
+    emergencyDetails.firstName = this.getControlValue('emergencycontactfirstname');
     emergencyDetails.lastName = this.getControlValue('emergencycontactlastname');
     emergencyDetails.patientRelationship = this.getControlValue('emergencycontactrelation');
     emergencyDetails.email = this.getControlValue('emergencycontactemailid');
@@ -76,6 +76,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       ethnicity: this.getControlValue('ethnicity'),
       languagesKnown: this.getControlValue('languages'),
      // emailid: this.getControlValue('emailid'),
+      contactNumber: this.getControlValue('contactnumber'),
       homeAddress: this.getControlValue('homeaddress'),
       userId: Number(sessionStorage.getItem('userId')),
       active: 1,
@@ -127,7 +128,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
   ngOnInit(): void {
     const userId = {
-      id: Number(sessionStorage.getItem('userId'))
+      userId: Number(sessionStorage.getItem('userId'))
     }
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
@@ -164,7 +165,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('ethnicity', this.patientData.ethnicity)
           this.setControlValue('languages', this.patientData.languagesKnown)
           this.setControlValue('homeaddress', this.patientData.homeAddress)
-          this.setControlValue('emergencycontactfirstname', this.patientData.emergencyContactEntity.fristName)
+          this.setControlValue('emergencycontactfirstname', this.patientData.emergencyContactEntity.firstName)
           this.setControlValue('emergencycontactlastname', this.patientData.emergencyContactEntity.lastName)
           this.setControlValue('emergencycontactrelation', this.patientData.emergencyContactEntity.patientRelationship)
           this.setControlValue('emergencycontactemailid', this.patientData.emergencyContactEntity.email)

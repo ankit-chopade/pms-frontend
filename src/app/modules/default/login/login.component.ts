@@ -48,7 +48,8 @@ export class LoginComponent extends FormBaseController<any>  {
         }
       },
       (err) => {
-        this.notifyService.showError(err['error'].message, '');
+        // this.notifyService.showError(err['error'].message, '');
+        this.notifyService.showError("Invalid Username or Password", "Error");
       }
     )
   }

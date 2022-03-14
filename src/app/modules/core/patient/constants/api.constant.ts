@@ -1,12 +1,12 @@
 export const APIConst={
-    PATIENT_DETAILS:'patientBasicDetail',
-    ALLERGY_DETAILS_BY_ID:'allergyById',
-    ALLERGY_DETAILS:'allergy',
-    GET_USER_DATA:'user',
-    GET_PATIENT_DATA:'getPatientbyId',
+    PATIENT_DETAILS:'management/demographic',
+    ALLERGY_DETAILS_BY_ID:'management/allergybyId',
+    ALLERGY_DETAILS:'management/allergy',
+    GET_USER_DATA:'management/userById',
+    GET_PATIENT_DATA:'management/demographicById',
 
-    GET_ALLERGY_DETAILS:'/allergy/allergycode',
-    SAVE_ALLERGY_DETAILS:'allergy',
+    GET_ALLERGY_DETAILS:'management/allergy/allergycode',
+    SAVE_ALLERGY_DETAILS:'management/allergy',
 
 
     MEDICATION_DOMAIN:'medication/',
@@ -14,6 +14,7 @@ export const APIConst={
     DIAGNOSIS_DOMAIN:'diagnosis/',
     VITAL_SIGN_DOMAIN:'vital-sign/',
     PATIENT_DETAIL_DOMAIN:'patient-detail/',
+    VISIT_DOMAIN:'visit/',
 
     // medication & diagnosis api urls
     GET_DETAILS_BY_PATIENT_ID:'getDetailsByPatientId',
@@ -33,6 +34,8 @@ export const APIConst={
         PROCEDURE_DETAILS:'patient-procedure',
         MEDICATION_DETAILS:'patient-medication',
     },
+
+    NON_DEPRICATED: '/getNonDepricated',
 
     //medication apis
     MEDI_DETAILS:'',

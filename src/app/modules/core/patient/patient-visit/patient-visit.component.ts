@@ -37,10 +37,10 @@ export class PatientVisitComponent extends FormBaseController<any> implements On
   // displayedColumns: string[] = ['code', 'description', 'isDepricate'];
 
   links = [
-    {
-      label:'Patient Details',
-      route:'patient-details'
-    },
+    // {
+    //   label:'Patient Details',
+    //   route:'patient-details'
+    // },
     {
       label: 'Vital Signs',
       route: 'vital-signs'

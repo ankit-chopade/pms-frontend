@@ -4,7 +4,7 @@
     </button>
 </div>
 <div fxLayoutAlign="center center" >
-    <table mat-table [dataSource]="dataSource" layout-align="center center" >
+    <table mat-table [dataSource]="dataSource" layout-align="center center" class="mat-elevation-z8" >
         <ng-container matColumnDef="drugId">
             <th mat-header-cell *matHeaderCellDef> Drug ID &nbsp;</th>
             <td mat-cell *matCellDef="let element"> {{element.drugId}} </td>

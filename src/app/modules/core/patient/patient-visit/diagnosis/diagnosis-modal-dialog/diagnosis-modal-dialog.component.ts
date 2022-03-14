@@ -36,7 +36,7 @@ export class DiagnosisModalDialogComponent
   }
 
   loadDiagnosisDetails() {
-    this.apiCommonService.getDiagnosisDetails().subscribe(
+    this.apiCommonService.getNonDepricatedDiagnosisDetails().subscribe(
       res => {
         this.diagDetails = res['result'];
         this.diagDetails.forEach((eachDetails) => {
@@ -54,16 +54,13 @@ export class DiagnosisModalDialogComponent
   }
 
   submit(): void {
+    this.setControlValue('isDepricated', 0); // static data fr isdepricated false
     this.setControlValue('selectedId', this.selectedId);
     this.dialogRef.close(this.form.value);
     this.clearModal();
 
   }
   clearModal(): void {
-    this.setControlValue('code', '');
-    this.setControlValue('description', '');
-    this.setControlValue('isDepricated', '');
-    this.setControlValue('details','');
     this.form.reset();
   }
 

@@ -1,6 +1,6 @@
 export class EmergencyDetails
 {
-        fristName:string;
+        firstName:string;
         lastName:string;
         email:string;
         homeAddress:string;

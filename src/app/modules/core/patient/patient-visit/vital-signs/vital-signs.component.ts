@@ -21,7 +21,7 @@ export class VitalSignsComponent
   editDisable:boolean = false;
   vitalId: number = 0;
 
-  appointmentId: number = 24; //Static Value
+  appointmentId: number = 2; //Static Value
 
   constructor(
     private formConfig: FormUtilService,
@@ -37,7 +37,7 @@ export class VitalSignsComponent
 
   loadData(appointmentId: number) {
     const param = {
-      appointmentId: appointmentId,
+      id: appointmentId,
     };
     this.apiCommonService.getVitalSigns(param).subscribe((res) => {
       if (res && res['result'] != null) {
@@ -89,6 +89,7 @@ export class VitalSignsComponent
 
   updateVitalSignClick() {
     const param = {
+      vitalId: this.vitalId,
       appointmentId: this.appointmentId,
       height: this.getControlValue('height'),
       weight: this.getControlValue('weight'),

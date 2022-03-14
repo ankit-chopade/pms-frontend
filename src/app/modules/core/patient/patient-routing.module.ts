@@ -18,7 +18,7 @@ const routes: Routes = [
       path : 'patient-visit',
       component: PatientVisitComponent,
       children: [{
-        path: '', redirectTo: 'patient-details', pathMatch: 'full'
+        path: '', redirectTo: 'vital-signs', pathMatch: 'full'
       },
       {
         path: 'diagnosis',

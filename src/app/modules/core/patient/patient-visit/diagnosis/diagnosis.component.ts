@@ -16,7 +16,7 @@ export class DiagnosisComponent
   extends FormBaseController<any>
   implements OnInit
 {
-  appointmentId: number = 104; //Static Value
+  appointmentId: number = 2; //Static Value
 
   constructor(
     private formConfig: FormUtilService,
@@ -79,7 +79,7 @@ export class DiagnosisComponent
 
   loadGrid() {
     const param: any = {
-      appointmentId: this.appointmentId
+      id: this.appointmentId
     };
     this.apiCommonService.getDiagnosisDetailsForPatient(param).subscribe(
       (res) => {

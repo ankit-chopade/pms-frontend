@@ -34,7 +34,7 @@ export class PatientRegistrationComponent extends FormBaseController<any> {
       lastName: this.getControlValue('lastname'),
       dob: this.getControlValue('dob'),
       emailId: this.getControlValue('username'),
-      contactNumber: this.getControlValue('contactnumber'),
+      contactNo: this.getControlValue('contactnumber'),
       password: this.getControlValue('password'),
       roleId: 5,
       active: 1,

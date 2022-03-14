@@ -16,7 +16,7 @@ export class ProcedureComponent
   extends FormBaseController<any>
   implements OnInit
 {
-  appointmentId: number = 104; //Static Value
+  appointmentId: number = 2; //Static Value
   
   constructor(
     private formConfig: FormUtilService,
@@ -28,9 +28,7 @@ export class ProcedureComponent
   }
 
   dataSource: any[] = [
-    // {code:'A001', description:'Sample Drug', isDepricated:'yes'}
   ];
-  // dataSource:DetailsInterface[] =
   displayedColumns: string[] = [
     'code',
     'description',
@@ -45,8 +43,6 @@ export class ProcedureComponent
   }
 
   procedureAddButtonClick() {
-    // call api for loading data in proc code and proc description
-
     const dialogRef = this.dialog.open(PatientProcedureModalDialogComponent, {
       width: '350px',
       data: this.dataSource,
@@ -85,7 +81,7 @@ export class ProcedureComponent
 
   loadGrid() {
     const param: any = {
-      appointmentId: this.appointmentId,
+      id: this.appointmentId,
     };
     this.apiCommonService.getProcDetailsForPatient(param).subscribe((res) => {
       this.dataSource = res['result'];

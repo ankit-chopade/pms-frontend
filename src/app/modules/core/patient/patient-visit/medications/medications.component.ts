@@ -16,7 +16,7 @@ export class MedicationsComponent
   extends FormBaseController<any>
   implements OnInit
 {
-  appointmentId: number = 104; //Static Value
+  appointmentId: number = 2; //Static Value
 
   constructor(
     private formConfig: FormUtilService,
@@ -80,7 +80,7 @@ export class MedicationsComponent
 
   loadGrid() {
     const param: any = {
-      appointmentId: this.appointmentId,
+      id: this.appointmentId,
     };
     this.apiCommonService.getMedicationDetailsForPatient(param).subscribe((res) => {
         this.dataSource = res['result'];
