@@ -9,6 +9,8 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./patient-inbox.component.scss']
 })
 export class PatientInboxComponent implements OnInit {
+  patientname: string;
+  panelOpenState = false; 
   layout: any[];
   userId: number;
   AppoinmentData:PatientAppointment[]
@@ -23,10 +25,12 @@ export class PatientInboxComponent implements OnInit {
     
   }
 
-  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description',  'Time'];
+ // displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description',  'Time'];
   patientData:PatientAppointment[]=[];
   dataSource:any[]=[];
   ngOnInit(): void {
+    this.patientname=sessionStorage.getItem('firstName') + ' ' 
+    + sessionStorage.getItem('lastName');
     this.getDayAndDate()
     this.userId= Number(sessionStorage.getItem('userId'))
     console.log(this.userId)

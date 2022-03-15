@@ -6,6 +6,7 @@ import {MatTableModule} from '@angular/material/table';
 import { InboxRoutingModule } from './inbox-routing.module';
 import { NurseInboxComponent } from './nurse-inbox/nurse-inbox.component';
 import { PhysicianInboxComponent } from './physician-inbox/physician-inbox.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -19,7 +20,8 @@ import { PhysicianInboxComponent } from './physician-inbox/physician-inbox.compo
     CommonModule,
     MatTabsModule,    
     MatTableModule,
-    InboxRoutingModule
+    InboxRoutingModule,
+    MatExpansionModule
   ]
 })
 export class InboxModule { }
