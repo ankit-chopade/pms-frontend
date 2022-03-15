@@ -51,8 +51,7 @@ export class ProcedureComponent
       if (
         result &&
         result['code'] &&
-        result['description'] &&
-        result['isDepricated']
+        result['description']
       ) {
         if (this.validateExistingProcedure(result['selectedId']) || result['description'] == 'Others') {
           const param: any = {

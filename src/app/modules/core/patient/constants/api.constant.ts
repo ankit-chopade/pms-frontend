@@ -1,6 +1,6 @@
 export const APIConst={
     PATIENT_DETAILS:'management/demographic',
-    ALLERGY_DETAILS_BY_ID:'management/allergybyId',
+    ALLERGY_DETAILS_BY_ID:'management/allergyById',
     ALLERGY_DETAILS:'management/allergy',
     GET_USER_DATA:'management/userById',
     GET_PATIENT_DATA:'management/demographicById',
@@ -10,7 +10,7 @@ export const APIConst={
 
 
     MEDICATION_DOMAIN:'medication/',
-    PROCEDURE_DOMAIN:'procedure',
+    PROCEDURE_DOMAIN:'procedure/',
     DIAGNOSIS_DOMAIN:'diagnosis/',
     VITAL_SIGN_DOMAIN:'vital-sign/',
     PATIENT_DETAIL_DOMAIN:'patient-detail/',
@@ -35,7 +35,7 @@ export const APIConst={
         MEDICATION_DETAILS:'patient-medication',
     },
 
-    NON_DEPRICATED: '/getNonDepricated',
+    NON_DEPRICATED: 'getNonDepricated',
 
     //medication apis
     MEDI_DETAILS:'',

@@ -48,8 +48,7 @@ export class DiagnosisComponent
       if (
         result &&
         result['code'] &&
-        result['description'] &&
-        result['isDepricated']
+        result['description']
       ) {
         if (this.validateExistingDiagnosis(result['selectedId']) || result['description'] == 'Others') {
           // console.log(result);
