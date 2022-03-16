@@ -9,7 +9,8 @@ import { APIConst } from '../constants/api.constant';
 })
 export class ApiService {
 
-  private baseUrl = environment.baseUrl;
+ //private baseUrl = environment.baseUrl;
+  private baseUrl = environment.managementUrl
   private diagnosisUrl = environment.diagnosisUrl;
   private allergyUrl = environment.allergyUrl;
   private medicationUrl = environment.medicationUrl;

@@ -55,10 +55,18 @@
     <mat-label>Allergy Clinical Information </mat-label>
     <input matInput formControlName="allergyClinicalInfo">
   </mat-form-field>
+  <div>
+    <mat-label> allergy Is fatal :</mat-label>
+    <br>
+    <mat-radio-group  formControlName="allergyIsFatal">
+    <mat-radio-button value="1">Yes &nbsp;</mat-radio-button>
+    <mat-radio-button value="0">No</mat-radio-button>
+</mat-radio-group>
+  </div> 
 </form>
 
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="add()" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <button mat-button [disabled]="form.invalid" (click)="add()" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
 
 </div>

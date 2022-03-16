@@ -15,7 +15,7 @@
                         class="tabsmargin">
                         <mat-form-field appearance="outline" class="title">
                             <mat-label>Title</mat-label>
-                            <mat-select formControlName="title">
+                            <mat-select formControlName="title" >
                                 <mat-option value="Mr.">Mr.</mat-option>
                                 <mat-option value="Ms.">Ms.</mat-option>
                                 <mat-option value="Mrs.">Mrs.</mat-option>
@@ -26,21 +26,21 @@
                         <mat-form-field appearance="outline">
                             <mat-label>First Name</mat-label>
                             <input matInput formControlName="firstname" required>
-                            <span *ngIf="checkTouchedAndInvalid('firstname')"
-                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('firstname')"
+                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Last Name</mat-label>
                             <input matInput formControlName="lastname" required>
-                            <span *ngIf="checkTouchedAndInvalid('lastname')"
-                                class="error">{{errormessage.LASTNAME_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('lastname')"
+                                class="error">{{errormessage.LASTNAME_REQUIRED}} </mat-error>
                         </mat-form-field>
                     </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-form-field appearance="outline" class="dob">
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
+                        <mat-form-field appearance="outline" class="dob" >
                             <mat-label>DOB:</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                            <input matInput [matDatepicker]="picker" formControlName="dob" required class="dob">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -48,8 +48,8 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Age</mat-label>
                             <input matInput formControlName="age" type="number" required>
-                            <span *ngIf="checkTouchedAndInvalid('age')" class="error">{{errormessage.AGE_REQUIRED}}
-                            </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('age')" class="error">{{errormessage.AGE_REQUIRED}}
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
@@ -61,50 +61,51 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
                         <mat-form-field appearance="outline">
                             <mat-label>Race</mat-label>
                             <input matInput formControlName="race" type="text" required>
-                            <span *ngIf="checkTouchedAndInvalid('race')" class="error">{{errormessage.RACE_REQUIRED}}
-                            </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('race')" class="error">{{errormessage.RACE_REQUIRED}}
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Ethnicity </mat-label>
                             <input matInput formControlName="ethnicity" type="text" required>
-                            <span *ngIf="checkTouchedAndInvalid('ethnicity')"
-                                class="error">{{errormessage.ETHNICITY_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('ethnicity')"
+                                class="error">{{errormessage.ETHNICITY_REQUIRED}} </mat-error>
                         </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Languages Known </mat-label>
-                            <input matInput formControlName="languages" type="text" required>
-                            <span *ngIf="checkTouchedAndInvalid('languages')"
-                                class="error">{{errormessage.LANGUAGEKNOWN_REQUIRED}} </span>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Email Address</mat-label>
-                            <input matInput placeholder="Ex. pat@example.com" formControlName="emailid" required
-                                type="email">
-                            <span *ngIf="checkTouchedAndInvalid('emailid')"
-                                class="error">{{errormessage.EMAILID_FORMAT}} </span>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Home Address</mat-label>
-                            <input matInput formControlName="homeaddress" required
-                                type="text">
-                            <span *ngIf="checkTouchedAndInvalid('homeaddress')"
-                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </span>
-                        </mat-form-field>
-
                         <mat-form-field appearance="outline">
                             <mat-label>Contact number</mat-label>
                             <input matInput type="number" formControlName="contactnumber" required>
-                            <span *ngIf="checkTouchedAndInvalid('contactnumber')"
-                                class="error">{{errormessage.CONTACT_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('contactnumber')"
+                                class="error">{{errormessage.CONTACT_REQUIRED}} </mat-error>
+                        </mat-form-field>
+                       
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
+                        <mat-form-field appearance="outline" class="email">
+                            <mat-label>Email Address</mat-label>
+                            <input matInput placeholder="Ex. pat@example.com" formControlName="emailid" required
+                                type="email">
+                            <mat-error *ngIf="checkTouchedAndInvalid('emailid')"
+                                class="error">{{errormessage.EMAILID_FORMAT}} </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="language">
+                            <mat-label>Languages Known </mat-label>
+                            <input matInput formControlName="languages" type="text" required>
+                            <mat-error *ngIf="checkTouchedAndInvalid('languages')"
+                                class="error">{{errormessage.LANGUAGEKNOWN_REQUIRED}} </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
+                        <mat-form-field appearance="outline" class="address">
+                            <mat-label>Home Address</mat-label>
+                            <textarea matInput formControlName="homeaddress" required
+                                type="text" class="address">
+                                </textarea>
+                            <mat-error *ngIf="checkTouchedAndInvalid('homeaddress')"
+                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </mat-error>
                         </mat-form-field>
                     </div>
                 </mat-tab>
@@ -115,15 +116,15 @@
                         <mat-form-field appearance="outline">
                             <mat-label>First Name</mat-label>
                             <input matInput formControlName="emergencycontactfirstname" required type="text">
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontactfirstname')"
-                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactfirstname')"
+                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </mat-error>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Last Name</mat-label>
                             <input matInput formControlName="emergencycontactlastname" required>
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
-                                class="error">{{errormessage.LASTNAME_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
+                                class="error">{{errormessage.LASTNAME_REQUIRED}} </mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="outline" >
                             <mat-label>Relationship</mat-label>
@@ -146,28 +147,28 @@
                         </mat-form-field> -->
                     </div>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" class="email">
                             <mat-label>Email Address</mat-label>
                             <input matInput placeholder="Ex. pat@example.com" formControlName="emergencycontactemailid"
                                 required type="email">
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontactemailid')"
-                                class="error">{{errormessage.EMAILID_FORMAT}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactemailid')"
+                                class="error">{{errormessage.EMAILID_FORMAT}} </mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" class="contactnumber">
                             <mat-label>Contact number</mat-label>
                             <input matInput type="number" formControlName="emergencycontactnumber" required>
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontactnumber')"
-                                class="error">{{errormessage.CONTACT_REQUIRED}} </span>
+                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactnumber')"
+                                class="error">{{errormessage.CONTACT_REQUIRED}} </mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
                         <mat-checkbox formControlName="addrsameaspatient" [(ngModel)]="addrsameaspatient" (change)="sameAddres()">Address same as Patient </mat-checkbox>
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" class="homeaddress">
                             <mat-label>Home Address</mat-label>
-                            <input matInput placeholder="Ex. pat@example.com"
-                                formControlName="emergencycontacthomeaddress" required type="text">
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
-                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </span>
+                            <textarea matInput placeholder="Ex. pat@example.com"
+                                formControlName="emergencycontacthomeaddress" required type="text"></textarea>
+                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
+                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" class="radiooverflow"
@@ -243,6 +244,14 @@
                                 {{element.allergyClinicalInfo}}
                             </td>
                         </ng-container>
+                         <ng-container matColumnDef="allergyIsFatal">
+                            <th mat-header-cell *matHeaderCellDef>
+                                allergy Is Fatal
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{element.allergyIsFatal == 1 ? "Yes":"No"  }}
+                            </td>
+                        </ng-container>  
                         <ng-container matColumnDef="delete">
                             <th mat-header-cell *matHeaderCellDef>
                                 

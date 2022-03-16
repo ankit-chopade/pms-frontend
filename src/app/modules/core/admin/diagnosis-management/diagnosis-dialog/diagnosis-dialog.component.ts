@@ -37,7 +37,17 @@ export class DiagnosisDialogComponent
   diagnosisData: Diagnosis;
   dataSource: Diagnosis[];
   diagnosisCode: string;
-  ngOnInit(): void {}
+  
+  ngOnInit(): void {
+    this.diagnosisId = this.getControlValue('selectedId');
+    if(this.diagnosisId === 0 ||this.diagnosisId == null)
+    {
+      this.isHiddenDetails=true
+    }
+    else{
+      this.isHiddenDetails=false
+    }
+  }
 
   onNoClick(): void {
     this.clearModal();

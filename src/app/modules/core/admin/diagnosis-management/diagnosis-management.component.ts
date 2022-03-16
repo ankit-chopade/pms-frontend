@@ -35,7 +35,6 @@ export class DiagnosisManagementComponent
     'code',
     'description',
     'isDepricate',
-    // 'prescribedDate',
     'delete',
   ];
   ngOnInit(): void {
@@ -110,7 +109,6 @@ export class DiagnosisManagementComponent
     this.setControlValue('code', diagnosis.diagnosisCode);
     this.setControlValue('description', diagnosis.diagnosisDescription);
     this.setControlValue('isDepricated', diagnosis.diagnosisIsDepricated + '');
-
     this.setControlValue('selectedId', diagnosis.diagnosisId);
     console.log(this.getControlValue('isDepricated'));
     const dialogRef = this.dialog.open(DiagnosisDialogComponent, {

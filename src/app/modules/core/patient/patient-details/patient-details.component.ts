@@ -47,7 +47,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     super(formConfig.patientDetailsForm);
   }
 
-  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo', 'delete'];
+  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo', 'allergyIsFatal','delete'];
   addrsameaspatient: string;
 
   allergydatasource: AllergyDetails[] = [];
@@ -127,8 +127,11 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     this.allergydatasource = [...this.allergydatasource];
   }
   ngOnInit(): void {
+    // const userId = {
+    //   userId: Number(sessionStorage.getItem('userId'))
+    // }
     const userId = {
-      userId: Number(sessionStorage.getItem('userId'))
+      userId: 22
     }
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
@@ -157,7 +160,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
           this.patientData = res['result'];
           //   // // console.log(this.patientData);
-          console.log( this.age);
+          console.log(this.patientData);
           
          
           this.setControlValue('gender', this.patientData.gender)
@@ -173,8 +176,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('emergencycontacthomeaddress', this.patientData.emergencyContactEntity.homeAddress)
           this.setControlValue('accesstopatientportal', this.patientData.emergencyContactEntity.accessPatientPortal)
           this.setControlValue('allergy_details', this.patientData.has_Allergy);
-         console.log(this.patientData.has_Allergy);
-
+      
           this.AllergyMapData = this.patientData.patientAllergy;
           for (let AllergyMap of this.AllergyMapData) {
             //   // // console.log(AllergyMap.allergyId);
@@ -213,7 +215,8 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
     let obj: PatientAllergy = new PatientAllergy();
     obj.allergyId = +data['allergyId'];
-
+    obj.allergyIsFatal= +data['allergyIsFatal'];
+    console.log(obj.allergyIsFatal);
     if (obj.allergyId == 0) {
 
       // console.log("enter in get allergy")

@@ -32,7 +32,16 @@ export class ProcedureDialogComponent
   selectedId: number = 0;
   isHiddenDetails: boolean = true;
   procedureId: number = 0;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.procedureId = this.getControlValue('selectedId');
+    if(this.procedureId === 0 ||this.procedureId == null)
+    {
+      this.isHiddenDetails=true
+    }
+    else{
+      this.isHiddenDetails=false
+    }
+  }
 
   onCancelClick(): void {
     this.clearModal();

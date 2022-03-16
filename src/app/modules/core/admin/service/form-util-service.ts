@@ -35,9 +35,9 @@ export class FormUtilsService {
       diagnosisModalDialog = this.fb.group({
         code: ['', Validators.required],
         description: ['',Validators.required],
-        isDepricated: ['',Validators.required],
+        isDepricated: ['',],
         selectedId: [],
-        diagnosis:[]
+        isHiddenDetails:[]
       });
     
       procedureDetailsForm = this.fb.group({
