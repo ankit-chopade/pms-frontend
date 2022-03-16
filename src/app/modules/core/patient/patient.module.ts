@@ -17,6 +17,8 @@ import { VitalSignsComponent } from './patient-visit/vital-signs/vital-signs.com
 import { MedicationsComponent } from './patient-visit/medications/medications.component';
 import { MedicationsModalDialogComponent } from './patient-visit/medications/medications-modal-dialog/medications-modal-dialog.component';
 import { PatientDemographicsDetailsComponent } from './patient-visit/patient-demographics-details/patient-demographics-details.component';
+import { ChartModule } from 'angular-highcharts';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 
 
 
@@ -35,13 +37,15 @@ import { PatientDemographicsDetailsComponent } from './patient-visit/patient-dem
     MedicationsComponent,
     MedicationsModalDialogComponent,
     PatientDemographicsDetailsComponent,
+    PatientDashboardComponent,
   ],
   imports: [
     CommonModule,
     PatientRoutingModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartModule
   ]
 })
 export class PatientModule { }

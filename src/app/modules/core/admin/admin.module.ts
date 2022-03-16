@@ -16,6 +16,7 @@ import { ProcedureDialogComponent } from './procedure-management/procedure-dialo
 import { AllergyDetailsDialogComponent } from './allergy-management/allergy-details-dialog/allergy-details-dialog.component';
 import { DiagnosisDialogComponent } from './diagnosis-management/diagnosis-dialog/diagnosis-dialog.component';
 import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
+import { ChartModule } from 'angular-highcharts';
 
 
 
@@ -39,7 +40,8 @@ import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-m
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ChartModule
   ]
 })
 export class AdminModule { }

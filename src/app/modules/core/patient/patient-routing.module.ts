@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { DiagnosisComponent } from './patient-visit/diagnosis/diagnosis.component';
 import { MedicationsComponent } from './patient-visit/medications/medications.component';
@@ -9,48 +10,51 @@ import { ProcedureComponent } from './patient-visit/procedure/procedure.componen
 import { VitalSignsComponent } from './patient-visit/vital-signs/vital-signs.component';
 
 const routes: Routes = [
-    
-    {
-      path: 'patient-details',
-      component: PatientDetailsComponent
-    },
-    {
-      path : 'patient-visit',
-      component: PatientVisitComponent,
-      children: [{
-        path: '', redirectTo: 'vital-signs', pathMatch: 'full'
+  {
+    path: '',
+    component: PatientDashboardComponent,
+  },
+  {
+    path: 'patient-details',
+    component: PatientDetailsComponent,
+  },
+  {
+    path: 'patient-visit',
+    component: PatientVisitComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'vital-signs',
+        pathMatch: 'full',
       },
       {
         path: 'diagnosis',
         // loadChildren: () => import('./patient-visit/diagnosis/').then((m) => m.DiagnosisComponent)
-        component: DiagnosisComponent
+        component: DiagnosisComponent,
       },
       {
         path: 'patient-details',
-        component: PatientDemographicsDetailsComponent 
+        component: PatientDemographicsDetailsComponent,
       },
       {
         path: 'procedures',
-        component: ProcedureComponent
+        component: ProcedureComponent,
       },
       {
         path: 'vital-signs',
-        component: VitalSignsComponent
+        component: VitalSignsComponent,
       },
       {
         path: 'medications',
-        component: MedicationsComponent
-      }]
-    }  
-    
-  ];
-
+        component: MedicationsComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
 export class PatientRoutingModule {
-  constructor(){
-  }
-
- }
+  constructor() {}
+}

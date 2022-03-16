@@ -1,0 +1,58 @@
+<div fxLayout="column">
+
+    <div fxLayoutAlign="center center" >
+        <div fxLayout.lg="row" fxLayout.xl="row" fxlayout.xs="column" fxLayout.sm="column" >
+            <mat-card class="vital-sign-card mat-elevation-z2">
+                <mat-card-title>
+                    <h4>Temperature</h4>
+                </mat-card-title>
+                <br>
+                <mat-card-content>
+                    <span class="span-text">{{temperature}}</span>
+                    <span>&deg; C</span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="vital-sign-card mat-elevation-z2">
+                <mat-card-title>
+                    <h4>Pulse</h4>
+                </mat-card-title>
+                <br>
+                <mat-card-content>
+                    <span class="span-text">{{pulse}}</span>
+                    <sub>BPM</sub>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout.lg="row" fxLayout.xl="row" fxlayout.xs="column" fxLayout.sm="column" >
+
+            <mat-card class="vital-sign-card mat-elevation-z2 ">
+                <mat-card-title>
+                    <h4>Height</h4>
+                </mat-card-title>
+                <br>
+                <mat-card-content>
+                    <span class="span-text">{{height}}</span>
+                    <span><sub>cms</sub></span>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="vital-sign-card mat-elevation-z2">
+                <mat-card-title>
+                    <h4>Weight</h4>
+                </mat-card-title>
+                <br>
+                <mat-card-content>
+                    <span class="span-text">{{weight}}</span>
+                    <sub>kg</sub>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout.xs="column" fxlayout="row">
+        <mat-card class="data-chart mat-elevation-z2">
+            <div [chart]="chart"></div>
+        </mat-card>
+        <mat-card class="data-chart mat-elevation-z2">
+            <div [chart]="chart2"></div>
+        </mat-card>
+    </div>
+</div>

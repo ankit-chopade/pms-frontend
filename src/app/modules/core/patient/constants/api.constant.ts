@@ -16,19 +16,8 @@ export const APIConst={
     PATIENT_DETAIL_DOMAIN:'patient-detail/',
     VISIT_DOMAIN:'visit/',
 
-    // medication & diagnosis api urls
-    GET_DETAILS_BY_PATIENT_ID:'getDetailsByPatientId',
-    GET_DETAILS_BY_CODE:'getDetailsByCode',
-    GET_DETAILS_BY_DESCRIPTION:'getDetailsByDescription',
 
-    VITAL_DETAILS:'vital-signs',
-    // PROCEDURE_DETAILS:'procedure-details'
-   // PROCEDURE_DETAILS:'procedure',
-    PATIENT_PROC_DETAILS:'patient-proc-details',
-    PROC_DETAILS_FOR_PROC_CODE:'proc',
-    PROC_DETAILS_FOR_PROC_DESC:'proc',
-
-    // Diagnosis apis
+    // vital apis
     PATIENT:{
         DIAGNOSIS_DETAILS:'patient-diagnosis',
         PROCEDURE_DETAILS:'patient-procedure',
@@ -37,6 +26,8 @@ export const APIConst={
 
     NON_DEPRICATED: '/getNonDepricated',
 
-    //medication apis
-    MEDI_DETAILS:'',
+    // dashboard apis
+    BLOOD_PRESSURE_LIST:'get-blood-pressure',
+    RESPIRATION_LIST:'get-respiration-rate',
+    DASHBOARD_VITAL_SIGN:'get-latest-vital-signs',
 }

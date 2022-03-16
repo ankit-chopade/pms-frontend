@@ -9,59 +9,52 @@ import { MedicationManagementComponent } from './medication-management/medicatio
 import { PatientManagementComponent } from './patient-management/patient-management.component';
 import { ProcedureManagementComponent } from './procedure-management/procedure-management.component';
 
-
-
 const routes: Routes = [
-    
-    {
-      path: 'patient-management',
-      component:PatientManagementComponent
-    },
-   
   {
-    path : 'employee-management',
+    path: 'patient-management',
+    component: PatientManagementComponent,
+  },
+
+  {
+    path: 'employee-management',
     component: EmployeeManagementComponent,
     children: [
-       {
-         path: '', redirectTo: 'employee-details', pathMatch: 'full'
-       },
-    {
-      path: 'employee-registration',
-    
-      component: EmployeeRegistrationComponent
-    },
-    {
-      path: 'employee-details',
-      component: EmployeeDetailsComponent 
-    },
-   ]
-  } ,
+      {
+        path: '',
+        redirectTo: 'employee-details',
+        pathMatch: 'full',
+      },
+      {
+        path: 'employee-registration',
+        component: EmployeeRegistrationComponent,
+      },
+      {
+        path: 'employee-details',
+        component: EmployeeDetailsComponent,
+      },
+    ],
+  },
   {
     path: 'diagnosis-management',
-    component:DiagnosisManagementComponent
+    component: DiagnosisManagementComponent,
   },
   {
     path: 'medication-management',
-    component:MedicationManagementComponent
+    component: MedicationManagementComponent,
   },
   {
     path: 'procedure-management',
-    component:ProcedureManagementComponent
+    component: ProcedureManagementComponent,
   },
   {
     path: 'allergy-management',
-    component:AllergyManagementComponent
+    component: AllergyManagementComponent,
   },
 ];
-
- 
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
 export class AdminRoutingModule {
-  constructor(){
-  }
-
- }
+  constructor() {}
+}

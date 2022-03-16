@@ -138,4 +138,11 @@ export class FormUtilService {
     contactnumber: ['', [Validators.required, Validators.pattern('\\d{10}')]],
     emailid: ['', Validators.email],
   });
+
+  dashboardPatient = this.fb.group({
+    height:[],
+    weight: [],
+    temperature: [],
+    pulse: [],
+  });
 }

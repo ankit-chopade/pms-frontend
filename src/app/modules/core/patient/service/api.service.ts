@@ -129,7 +129,23 @@ export class ApiService {
 
   // master diagnosis data
   getNonDepricatedDiagnosisDetails(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.diagnosisUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.NON_DEPRICATED}`)
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.diagnosisUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.NON_DEPRICATED}`);
+  }
+
+
+
+
+  // dashboard details
+  getBloodPressureList(param:any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.BLOOD_PRESSURE_LIST}`,{params:param});
+  }
+
+  getRespirationList(param:any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.RESPIRATION_LIST}`,{params:param});
+  }
+
+  getLatestVitalSigns(param:any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.DASHBOARD_VITAL_SIGN}`, {params:param});
   }
 
 }
