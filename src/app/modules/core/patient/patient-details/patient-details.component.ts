@@ -1,18 +1,12 @@
 import { DataSource } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { formErrorMessages } from 'src/app/modules/default/constant/message.constant';
-
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { AllergyDetails } from '../models/AllergyDetails';
-
-
-
-
 import { EmergencyDetails } from '../models/EmergencyDetails';
 import { PatientDetails } from '../models/DemographicDetail';
 import { User } from '../models/User';
@@ -32,30 +26,26 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   userData: User;
   patientData: PatientDetails;
-  AllergyMapData: PatientAllergy[];
+  patientAllergyData: PatientAllergy[]=[];
   allergyData: AllergyDetails;
-  // allergyIds: number[] = [];
-  allergyMaps: PatientAllergy[] = [];
+  patientAllergy: PatientAllergy[] = [];
   patientdob: any;
   errormessage = formErrorMessages;
   allergy_details: string = "false";
   latest_date: any;
   todayDate: Date;
   age: number;
- 
   constructor(private dialog: MatDialog, private formConfig: FormUtilService, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService, private datePipe: DatePipe) {
     super(formConfig.patientDetailsForm);
   }
 
   allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo', 'allergyIsFatal','delete'];
   addrsameaspatient: string;
-
   allergydatasource: AllergyDetails[] = [];
   allergydatatemporary: AllergyDetails[] = [];
-  deleteallegydata: any[] = [];
   otherType: AllergyDetails = new AllergyDetails();
-
-  // allergy_details_dto: AllergyDetails[] = [];
+  patientAllergyList: number[] = [];
+ 
 
   submitPatientDetailsForm() {
     const emergencyDetails: EmergencyDetails = new EmergencyDetails();
@@ -82,7 +72,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       active: 1,
       has_Allergy: this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
-      patientAllergy: this.allergyMaps
+      patientAllergy: this.patientAllergy
 
 
     }
@@ -127,12 +117,13 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     this.allergydatasource = [...this.allergydatasource];
   }
   ngOnInit(): void {
-    // const userId = {
-    //   userId: Number(sessionStorage.getItem('userId'))
-    // }
-    const userId = {
-      userId: 22
-    }
+
+  const userId = {
+     userId: Number(sessionStorage.getItem('userId')) 
+  }
+// const userId = {
+//         userId: 22
+//      }
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
@@ -149,8 +140,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.calculateAge();
           this.setControlValue('age', this.age);
         }
-
-
       }
     );
     this.apiCommonService.getpatientDetails(userId).subscribe(
@@ -158,11 +147,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
         if (res && res['result'] && res['status'] === 200) {
           // alert("Success");
 
-          this.patientData = res['result'];
-          //   // // console.log(this.patientData);
-          console.log(this.patientData);
-          
-         
+          this.patientData = res['result'];   
           this.setControlValue('gender', this.patientData.gender)
           this.setControlValue('race', this.patientData.race)
           this.setControlValue('ethnicity', this.patientData.ethnicity)
@@ -177,33 +162,37 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('accesstopatientportal', this.patientData.emergencyContactEntity.accessPatientPortal)
           this.setControlValue('allergy_details', this.patientData.has_Allergy);
       
-          this.AllergyMapData = this.patientData.patientAllergy;
-          for (let AllergyMap of this.AllergyMapData) {
-            //   // // console.log(AllergyMap.allergyId);
-            const allergyId = {
-              'allergyId': Number(AllergyMap.allergyId)
-            }
-            this.apiCommonService.getAllergyDetailsById(allergyId).subscribe(
-              res => {
-                if (res && res['result'] && res['status'] === 200) {
-
-                  //  alert("Success");
-                  this.allergyData = res['result'];
-                  // // console.log(this.allergyData);
-
-                  if (this.allergyData != null) {
-                    this.allergydatatemporary.push(this.allergyData);
-                  }
-                  this.allergydatasource = [...this.allergydatatemporary];
-                  // // console.log(this.allergydatasource);
-                }
-              }
-            );
+          this.patientAllergyData = this.patientData.patientAllergy;
+         
+          console.log(this.patientAllergyData);
+          for (let patientAllergy of this.patientAllergyData) {
+            this.patientAllergyList.push(patientAllergy.allergyId);    
           }
+          console.log(this.patientAllergyList);
         }
+        const patientAllergyIdList = {
+          allergyId: this.patientAllergyList
+        }
+        console.log(patientAllergyIdList);
+          this.apiCommonService.getAllergyListDetails(patientAllergyIdList).subscribe(
+            res => {
+
+              if (res && res['result'] && res['status'] === 200) {
+                 this.allergydatasource = res['result'];
+                 console.log(this.allergydatasource)
+                // if (this.allergyData != null) {
+                //   this.allergydatatemporary.push(this.allergyData);
+                // }
+                // this.allergydatasource = [...this.allergydatatemporary];
+              }
+            }
+          );
       }
-    );
-  }
+      ); 
+        }
+    
+    
+  
 
   sameAddres() {
     if (this.addrsameaspatient) {
@@ -233,7 +222,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       if (this.validateExistingAllergy(obj.allergyId)) {
         this.allergydatasource.push(data);
 
-        this.allergyMaps.push(obj);
+        this.patientAllergy.push(obj);
       }
       else {
         this.notifyService.showError("This Allergy is alerady present", "");
@@ -258,7 +247,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
             let obj: PatientAllergy = new PatientAllergy();
             obj.allergyId = this.allergyData.allergyId
 
-            this.allergyMaps.push(obj);
+            this.patientAllergy.push(obj);
             //// console.log(obj);
           }
           else {
@@ -273,7 +262,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       let obj: PatientAllergy = new PatientAllergy();
 
       obj.allergyId = Allergy.allergyId
-      this.allergyMaps.push(obj);
+      this.patientAllergy.push(obj);
       console.log(obj);
 
     }
@@ -298,8 +287,8 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       if (element.allergyId == id) this.allergydatatemporary.splice(index, 1)
     });
 
-    this.allergyMaps.forEach((element, index) => {
-      if (element.allergyId == id) this.allergyMaps.splice(index, 1)
+    this.patientAllergy.forEach((element, index) => {
+      if (element.allergyId == id) this.patientAllergy.splice(index, 1)
     });
 
     this.loadGrid();
