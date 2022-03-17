@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AllergyManagementComponent } from './allergy-management/allergy-management.component';
 import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
 import { EmployeeDetailsComponent } from './employee-management/employee-details/employee-details.component';
@@ -10,6 +11,10 @@ import { PatientManagementComponent } from './patient-management/patient-managem
 import { ProcedureManagementComponent } from './procedure-management/procedure-management.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component:AdminDashboardComponent
+  },
   {
     path: 'patient-management',
     component: PatientManagementComponent,
@@ -50,6 +55,7 @@ const routes: Routes = [
     path: 'allergy-management',
     component: AllergyManagementComponent,
   },
+ 
 ];
 
 @NgModule({

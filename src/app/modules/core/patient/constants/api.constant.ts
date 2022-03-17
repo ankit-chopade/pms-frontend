@@ -8,7 +8,7 @@ export const APIConst={
     GET_ALLERGY_LIST : 'management/allergyList',
 
     GET_ALLERGY_DETAILS:'management/allergy/allergycode',
-    SAVE_ALLERGY_DETAILS:'management/allergy',
+   
 
     MEDICATION_DOMAIN:'medication/',
     PROCEDURE_DOMAIN:'procedure/',

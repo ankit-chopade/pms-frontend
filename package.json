@@ -49,6 +49,7 @@
     "@angular/compiler-cli": "~13.1.0",
     "@types/highcharts": "^7.0.0",
     "@types/jasmine": "~3.10.0",
+    "@types/jquery": "^3.5.14",
     "@types/lodash": "^4.14.178",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",

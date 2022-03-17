@@ -18,6 +18,7 @@ import { DiagnosisDialogComponent } from './diagnosis-management/diagnosis-dialo
 import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
 import { ChartModule } from 'angular-highcharts';
 import { EmployeeDialogComponent } from './employee-management/employee-details/employee-dialog/employee-dialog.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
@@ -35,7 +36,8 @@ import { EmployeeDialogComponent } from './employee-management/employee-details/
     MadicationDialogComponent,
     ProcedureDialogComponent,
     AllergyDetailsDialogComponent,
-    EmployeeDialogComponent
+    EmployeeDialogComponent,
+    AdminDashboardComponent
   ],
   imports: [
     CommonModule,

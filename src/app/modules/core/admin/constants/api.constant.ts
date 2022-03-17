@@ -9,7 +9,9 @@ export const APIConst={
     MEDICATION_DOMAIN:'medication',
     PROCEDURE_DOMAIN:'procedure',
     DIAGNOSIS_DOMAIN:'diagnosis',
-    ALLERGY_DETAILS:'allergy'
+    ALLERGY_DETAILS:'allergy',
+
+    MONTHLY_WISE_DATA:"management/monthlydata"
     // medication & diagnosis api urls
    
     
