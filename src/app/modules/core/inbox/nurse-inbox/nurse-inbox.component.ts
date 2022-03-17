@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DayAndDate } from '../model/DayAndDate';
+import { PatientAppointment } from '../model/patientappointment';
 import { ApiService } from '../service/api.service';
 
 @Component({
@@ -8,31 +9,36 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./nurse-inbox.component.scss']
 })
 export class NurseInboxComponent implements OnInit {
-  layout: any[];
   userId: number;
-  dayAndDateList: any[]=[];
-  days:string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   nextDay: number=0;
-
+  selected: Date = new Date();
+  patientname: string;
   constructor(private apiCommonService: ApiService) {
-    const today = new Date(); 
   }
-  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description', 'Time'];
+  patientData:PatientAppointment[]=[];
   dataSource:any[];
   ngOnInit(): void {
-    this.getDayAndDate()
+    //this.getDayAndDate()
+    this.patientname=sessionStorage.getItem('firstName') + ' ' 
+    + sessionStorage.getItem('lastName');
     this.userId= Number(sessionStorage.getItem('userId'))
-    console.log(this.userId)
-    console.log(this.layout)
+    this.getAppointmentByDate();
   }
 
-  getAppointmentByDate(date:Date){
-    console.log(date)
-  //  const customDate: string=new Date().toISOString().replace('T',' '); 
-    const customDate: string=date.toISOString().replace('T',' '); 
+  getAppointmentByDate(){
+    console.log("selected date");
+    console.log("generated date");
+    let selectedDate : Date = this.selected;
+    
+    const customDate: string=new Date(selectedDate.getFullYear(),selectedDate.getMonth(), (selectedDate.getDate())+1)
+      .toISOString().replace('T',' ');
+    console.log(customDate); 
+    this.userId= Number(sessionStorage.getItem('userId'))
+    console.log(this.userId)
 
     const param = {
-      date: customDate
+      date: customDate,
+      patientId: this.userId
     };
     this.apiCommonService.getAppointmentDetailsToPatient(param).subscribe(
       resp => {
@@ -46,25 +52,25 @@ export class NurseInboxComponent implements OnInit {
       
   }
 
-  getDayAndDate(){
-   let currentDate: Date= new Date();
+  // getDayAndDate(){
+  //  let currentDate: Date= new Date();
    
-    for (let index = 0; index < 7; index++) {
-      let dayAndDate= new DayAndDate();
-      let date=currentDate.setDate(currentDate.getDate()+this.nextDay);
-      this.nextDay=+1;
+  //   for (let index = 0; index < 7; index++) {
+  //     let dayAndDate= new DayAndDate();
+  //     let date=currentDate.setDate(currentDate.getDate()+this.nextDay);
+  //     this.nextDay=+1;
      
-      console.log(date)
-      let newDate:Date=new Date(date);
-      dayAndDate.date=newDate
-      console.log(dayAndDate)
-      dayAndDate.day=this.days[newDate.getDay()]
-        console.log(dayAndDate);
-      this.dayAndDateList.push(dayAndDate);      
-    }
+  //     console.log(date)
+  //     let newDate:Date=new Date(date);
+  //     dayAndDate.date=newDate
+  //     console.log(dayAndDate)
+  //     dayAndDate.day=this.days[newDate.getDay()]
+  //       console.log(dayAndDate);
+  //     this.dayAndDateList.push(dayAndDate);      
+  //   }
 
-    console.log(this.dayAndDateList)
+  //   console.log(this.dayAndDateList)
     
-  }
+  // }
 
 }

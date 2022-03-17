@@ -138,4 +138,8 @@ export class FormUtilService {
     contactnumber: ['', [Validators.required, Validators.pattern('\\d{10}')]],
     emailid: ['', Validators.email],
   });
+
+  inboxForm = this.fb.group({
+    selectedDate : []
+  })
 }

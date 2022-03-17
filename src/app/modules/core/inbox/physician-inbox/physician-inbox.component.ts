@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
+import { FormUtilService } from '../../patient/service/form-util.service';
 import { DayAndDate } from '../model/DayAndDate';
 import { PatientAppointment } from '../model/patientappointment';
 import { ApiService } from '../service/api.service';
@@ -8,84 +10,62 @@ import { ApiService } from '../service/api.service';
   templateUrl: './physician-inbox.component.html',
   styleUrls: ['./physician-inbox.component.scss']
 })
-export class PhysicianInboxComponent implements OnInit {
+export class PhysicianInboxComponent extends FormBaseController<any> implements OnInit {
   physicianname: string;
-  layout: any[];
   userId: number;
-  AppoinmentData:PatientAppointment[]
-  dayAndDateList: any[]=[];
-  days:string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  nextDay: number=0;
+  AppoinmentData: PatientAppointment[]
+  selected: Date = new Date();
 
-  constructor(private apiCommonService: ApiService) {
-    const today = new Date();
-   // this.layout = [...Array(7).keys()].map(i => days[(i + today.getDay()) % days.length],today.getDate());
-    //this.layout[this.layout.length - 1] = this.layout[this.layout.length - 1];
-    
+  constructor(private apiCommonService: ApiService, private formConfig: FormUtilService) {
+    super(formConfig.inboxForm)
   }
 
-  displayedColumns: string[] = ['AppointmentID', 'MeetingTitle', 'Description',  'Time'];
-  patientData:PatientAppointment[]=[];
-  dataSource:any[]=[];
+  patientData: PatientAppointment[] = [];
+  dataSource: any[] = [];
+
   ngOnInit(): void {
-    this.physicianname=sessionStorage.getItem('firstName') + ' ' 
-    + sessionStorage.getItem('lastName');
-    this.getDayAndDate()
-    this.userId= Number(sessionStorage.getItem('userId'))
-    console.log(this.userId)
-
-
+    this.physicianname = sessionStorage.getItem('firstName') + ' '
+      + sessionStorage.getItem('lastName');
+    this.userId = Number(sessionStorage.getItem('userId'))
+    this.getAppointmentByDate();
   }
-  getAppointmentByDate(date:Date){
-    console.log(date)
-  //  const customDate: string=new Date().toISOString().replace('T',' '); 
-    const customDate: string=date.toISOString().replace('T',' '); 
+
+  deleteAppointmentsByAppointmentId(id: number) {
+    const deleteParam = {
+      appointmentId: id
+    };
+
+    this.apiCommonService.deleteAppointmentsByAppointmentId(deleteParam).subscribe(
+      resp => {
+        if (resp['status'] === 200 && resp['result'] && resp != null) {
+          this.dataSource = resp['result'];
+          this.getAppointmentByDate();
+          console.log(this.dataSource);
+        }
+      })
+  }
+  getAppointmentByDate() {
+    console.log("selected date");
+    console.log("generated date");
+    let selectedDate: Date = this.selected;
+
+    const customDate: string = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), (selectedDate.getDate()) + 1)
+      .toISOString().replace('T', ' ');
+    console.log(customDate);
+    this.userId = Number(sessionStorage.getItem('userId'))
+    console.log(this.userId)
 
     const param = {
       date: customDate,
-      patientId: this.userId
+      physicianId: this.userId
     };
+
     this.apiCommonService.getAppointmentsByDateAndPhysicianId(param).subscribe(
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           this.dataSource = resp['result'];
-          // this.AppoinmentData = resp['result'];
-          // console.log(this.patientData)
-          // this.AppoinmentData.find(element =>
-          //   {
-          //     console.log(element)
-          //     if( element.patientId==this.userId)
-          //          this.patientData.push(element);
-          //   })
-          //   this.dataSource=this.patientData;
           console.log(this.dataSource);
-         
         }
-
-
       })
-      
   }
-
-  getDayAndDate(){
-   let currentDate: Date= new Date();
-   
-    for (let index = 0; index < 7; index++) {
-      let dayAndDate= new DayAndDate();
-      let date=currentDate.setDate(currentDate.getDate()+this.nextDay);
-      this.nextDay=+1;
-     
-      console.log(date)
-      let newDate:Date=new Date(date);
-      dayAndDate.date=newDate
-      console.log(dayAndDate)
-      dayAndDate.day=this.days[newDate.getDay()]
-        console.log(dayAndDate);
-      this.dayAndDateList.push(dayAndDate);      
-    }
-
-    console.log(this.dayAndDateList)
-    
-  }
-  
 }

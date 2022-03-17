@@ -1,44 +1,29 @@
-<html>
-
-<body>
-
-    <mat-tab-group>
-        <mat-tab *ngFor="let item of dayAndDateList">
-            <ng-template mat-tab-label><span (click)="getAppointmentByDate(item.date)"> {{item.day}}</span></ng-template>
-        </mat-tab>
-    </mat-tab-group>
+<div fxLayout="row" fxLayoutAlign="none" fxLayout.xs="column" fxLayoutGap="10px">
+  
+    <div  fxFlex="77%" fxFill> <!-- fxLayoutAlign="start center"  -->
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let dataSource of dataSource"  [expanded]="">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+      <mat-expansion-panel *ngFor="let dataSource of dataSource" [expanded]="">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="title-row column color-secondary-text" fxFlex="33%" appTruncate>
             {{dataSource.subject}}
-            </mat-panel-title>
-            <mat-panel-description>
+          </mat-panel-title>
+          <mat-panel-description>
             {{dataSource.description}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>Appointment ID: {{dataSource.appointmentId}}</p>
-          <p>Date: {{dataSource.startTime | date: 'dd/MM/yyyy'}}</p>
-          <p>Time: {{dataSource.startTime | date:"shortTime"}}</p>
-          <p>Physician Name: {{dataSource.physicianName}}</p>
-          <p>Patient Name: {{patientname}}</p>
-        </mat-expansion-panel>
-        <!-- <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Self aware panel
-            </mat-panel-title>
-            <mat-panel-description>
-              Currently I am {{panelOpenState ? 'open' : 'closed'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel> -->
-      </mat-accordion>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>Appointment ID: {{dataSource.appointmentId}}</p>
+        <p>Date: {{dataSource.startTime | date: 'dd/MM/yyyy'}}</p>
+        <p>Time: {{dataSource.startTime | date:"shortTime"}}</p>
+        <p>Physician Name: {{dataSource.physicianName}}</p>
+        <p>Patient Name: {{patientname}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div fxLayoutAlign="end center" fxFlex="23%">
+    <mat-card class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selected" (selectedChange)="getAppointmentByDate()">
+      </mat-calendar>
 
-
-
-</body>
-
-</html>
+    </mat-card>
+  </div>
+</div>

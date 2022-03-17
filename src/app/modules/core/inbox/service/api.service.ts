@@ -5,24 +5,28 @@ import { environment } from "src/environments/environment";
 import { APIConst } from "../constant/api.constant";
 
 @Injectable({
-    providedIn: 'root'
-  })
-  export class ApiService {
-  
-    private baseUrl = environment.baseUrl;
-  
-  
-    constructor(private httpClient: HttpClient) {
-    }
+  providedIn: 'root'
+})
+export class ApiService {
+  [x: string]: any;
 
-    getAppointmentDetailsToPatient(param:any){
-        return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS}`, {params:param});
-      }
-      getAppointmentDetailsByDateAndPatientId(param:any){
-        return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PATIENTID}`, {params:param});
-      }
+  private baseUrl = environment.baseUrl;
 
-      getAppointmentsByDateAndPhysicianId(param:any){
-        return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PHYSICIANID}`, {params:param});
-      }
-    }
+
+  constructor(private httpClient: HttpClient) {
+  }
+
+  getAppointmentDetailsToPatient(param: any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS}`, { params: param });
+  }
+  getAppointmentDetailsByDateAndPatientId(param: any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PATIENTID}`, { params: param });
+  }
+
+  getAppointmentsByDateAndPhysicianId(param: any) {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_APPOINTMENT_DETAILS_BY_DATE_AND_PHYSICIANID}`, { params: param });
+  }
+  deleteAppointmentsByAppointmentId(param: any) {
+    return this.httpClient.delete<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DELETE_PATIENT_APPOINTMENT_DETAILS}`, { params: param });
+  }
+}
