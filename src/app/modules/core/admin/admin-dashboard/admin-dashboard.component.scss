@@ -1,0 +1,9 @@
+.maximun-width{
+    width: 40%;
+  }
+
+@media only screen and (max-width: 600px) {
+    .maximun-width {
+        width: 80%;
+    }
+}

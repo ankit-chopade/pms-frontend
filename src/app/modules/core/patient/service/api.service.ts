@@ -43,7 +43,7 @@ export class ApiService {
 
   saveAllergyDetails(param:any){
  
-    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.SAVE_ALLERGY_DETAILS}`,param);
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS}`,param);
   }
 
   getAllergyDetailsbyCodeDetails(param:any){

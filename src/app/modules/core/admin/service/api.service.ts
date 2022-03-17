@@ -145,4 +145,8 @@ export class ApiService {
       param
     );
   }
+
+  monthlyData() {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.managementUrl}${APIConst.MONTHLY_WISE_DATA}`);
+  }
 }

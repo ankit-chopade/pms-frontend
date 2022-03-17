@@ -6,7 +6,7 @@ export const APIConst={
     GET_PATIENT_DATA:'management/demographicById',
 
     GET_ALLERGY_DETAILS:'management/allergy/allergycode',
-    SAVE_ALLERGY_DETAILS:'management/allergy',
+   
 
 
     MEDICATION_DOMAIN:'medication/',

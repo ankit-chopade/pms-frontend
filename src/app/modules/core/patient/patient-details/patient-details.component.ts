@@ -246,10 +246,11 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       allergyDetailsEntity.allergyType = this.otherType.allergyType,
       allergyDetailsEntity.allergyDescription = this.otherType.allergyDescription,
       allergyDetailsEntity.allergyClinicalInfo = this.otherType.allergyClinicalInfo,
+      console.log(allergyDetailsEntity);
       this.apiCommonService.saveAllergyDetails(allergyDetailsEntity).subscribe(
         res => {
           if (res && res['result'] && res['status'] === 200) {
-            //  alert("Success");
+            alert("Success");
             this.allergyData = res['result'];
 
             let obj: PatientAllergy = new PatientAllergy();
