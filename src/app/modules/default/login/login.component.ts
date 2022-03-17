@@ -42,6 +42,20 @@ export class LoginComponent extends FormBaseController<any>  {
           StorageService.setSessionDetails(res['result'])
           this.appService.setUserLoggedIn(true)
           this.router.navigate(['../dashboard'])
+          
+          if(sessionStorage.getItem("roleId")=='5'){
+            this.router.navigate(['../dashboard/inbox/patient-inbox'])
+
+          }
+          else if(sessionStorage.getItem("roleId")=='4'){
+            this.router.navigate(['../dashboard/inbox/nurse-inbox'])
+          }
+          else if(sessionStorage.getItem("roleId")=='3'){
+            this.router.navigate(['../dashboard/inbox/physician-inbox'])
+          }
+          else {
+            this.notifyService.showError("Please try after some time","Error");
+          }
         }
         else {
           this.notifyService.showError("Invalid Username or Password", "Error");
