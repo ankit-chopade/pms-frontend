@@ -23,13 +23,6 @@ import { NavigationAuthGuardService } from './modules/default/service/navigation
   declarations: [
     AppComponent,
     ConfirmPasswordDirective,
-    
-    
-    
-   
-    
-    
-
   ],
   imports: [
     BrowserModule,

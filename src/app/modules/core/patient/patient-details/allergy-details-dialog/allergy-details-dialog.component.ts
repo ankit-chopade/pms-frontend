@@ -17,6 +17,7 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   allergydatBackup: AllergyDetails[];
   selectedId: string;
   selectedAllergyId:number = 0;
+  allergyIsFatal:number=0;
   selectedType: string;
   selectedName: string;
   allergyTypes: string[] = ['Animal', 'Bacteria airway', 'Bacteria skin', 'Contact', 'Drug', 'Food', 'Fungi', 'Insect', 'Mite', 'Parasite', 'Plant', 'Vaccine', 'Venom or Salivary', 'Others'];
@@ -73,6 +74,9 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   add() {
     
     this.setControlValue('allergyId',this.selectedAllergyId);
+  
+    this.allergyIsFatal=this.getControlValue('allergyIsFatal')
+     this.setControlValue('allergyIsFatal',this.allergyIsFatal)
     this.dialogRef.close(this.form.value);
     this.clear();
   }

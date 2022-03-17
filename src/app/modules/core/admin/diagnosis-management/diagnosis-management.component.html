@@ -16,16 +16,13 @@
         <td mat-cell *matCellDef="let element"> {{(element.diagnosisDescription == 'Others') ? element.diagnosisDetails  : element.diagnosisDescription}} </td>    
     </ng-container>
     
-    <ng-container matColumnDef="isDepricate">
+    <ng-container matColumnDef="isDepricate" >
         <th mat-header-cell  *matHeaderCellDef mat-short-header>Depricated </th>
         <td mat-cell *matCellDef="let element">
              {{element.diagnosisIsDepricated == 1 ? "No":"Yes" }}</td>    
     </ng-container>
    
-    <!-- <ng-container matColumnDef="prescribedDate">
-        <th mat-header-cell *matHeaderCellDef mat-short-header>Prescribed Date</th>
-        <td mat-cell *matCellDef="let element"> {{element.prescribedDate}} </td>     
-    </ng-container> -->
+   
     <ng-container matColumnDef="delete" >
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element" >

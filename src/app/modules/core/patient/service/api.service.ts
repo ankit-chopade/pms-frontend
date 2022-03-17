@@ -9,7 +9,8 @@ import { APIConst } from '../constants/api.constant';
 })
 export class ApiService {
 
-  private baseUrl = environment.baseUrl;
+ //private baseUrl = environment.baseUrl;
+  private baseUrl = environment.managementUrl
   private diagnosisUrl = environment.diagnosisUrl;
   private allergyUrl = environment.allergyUrl;
   private medicationUrl = environment.medicationUrl;
@@ -19,6 +20,9 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {
   }
+  patients() {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENTS}`);
+  }
 
   patientDetails(param: any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_DETAILS}`, param);
@@ -26,6 +30,9 @@ export class ApiService {
 
   getAllergyDetailsById(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
+  }
+  getAllergyListDetails(param:any){
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_LIST}`,{params:param});
   }
 
   getAllergyDetails(){
@@ -104,10 +111,6 @@ export class ApiService {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.MEDICATION_DETAILS}`, param);
   }
   
-  getMedicationDetails(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.MEDICATION_DOMAIN}`)
-  }
-  
   getMedicationDetailsForPatient(param:any) { 
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.MEDICATION_DETAILS}`,{params:param});
   }
@@ -146,6 +149,11 @@ export class ApiService {
 
   getLatestVitalSigns(param:any) {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.DASHBOARD_VITAL_SIGN}`, {params:param});
+  }
+
+    // master medication data
+  getMedicationDetails(){
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.MEDICATION_DOMAIN}`)
   }
 
 }

@@ -2,5 +2,8 @@
 
 /node_modules/
 /.angular/
+<<<<<<< HEAD
 
 package-lock.json
+=======
+>>>>>>> b7bbbde7a1338eb7c1e8651f5bb38ececc907c15

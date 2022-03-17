@@ -39,6 +39,12 @@ export class ApiService {
     );
   }
 
+  updateEmployeeDetails(param:any){
+    return this.httpClient.put<IAPIWrapper<any>>(
+      `${this.managementUrl}${APIConst.UPDATE_EMPLOYEE}`,
+      param
+    );
+  }
   // Diagnosis apis
 
   getDiagnosisDetails() {

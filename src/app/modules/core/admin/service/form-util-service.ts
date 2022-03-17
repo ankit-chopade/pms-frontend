@@ -29,15 +29,22 @@ export class FormUtilsService {
         selectedId: [],
       
       });
+
+      empEditDialog = this.fb.group({
+        userId : ['',Validators.required],
+        title : ['',Validators.required],
+        firstName : ['',Validators.required],
+        lastName : ['',Validators.required]       
+      });
     
       diagnosisDetailsForm = this.fb.group({});
     
       diagnosisModalDialog = this.fb.group({
         code: ['', Validators.required],
         description: ['',Validators.required],
-        isDepricated: ['',Validators.required],
+        isDepricated: ['',],
         selectedId: [],
-        diagnosis:[]
+        isHiddenDetails:[]
       });
     
       procedureDetailsForm = this.fb.group({

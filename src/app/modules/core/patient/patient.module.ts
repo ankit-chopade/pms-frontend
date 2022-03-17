@@ -19,6 +19,8 @@ import { MedicationsModalDialogComponent } from './patient-visit/medications/med
 import { PatientDemographicsDetailsComponent } from './patient-visit/patient-demographics-details/patient-demographics-details.component';
 import { ChartModule } from 'angular-highcharts';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { PatientPortalScreenComponent } from './patient-portal-screen/patient-portal-screen.component';
+import { PatientPortalDetailsComponent } from './patient-portal-details/patient-portal-details.component';
 
 
 
@@ -38,6 +40,8 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
     MedicationsModalDialogComponent,
     PatientDemographicsDetailsComponent,
     PatientDashboardComponent,
+    PatientPortalScreenComponent,
+    PatientPortalDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -18,6 +18,7 @@
 .radiooverflow
 {
     overflow: hidden;
+    width: 820px;
 }
 
 .dob
@@ -44,5 +45,36 @@ table{
 }
 
 .title{
-    width: 23%;
+    width: 180px;
+}
+.my-select-panel-class {
+    width:100px;
+    max-width:10px;
+    background-color: red;
+    font-size: 10px;
+}
+mat-form-field{
+   width: 180px;
+
+}
+.dob{
+    width: 180px;
+}
+.email{
+    width: 280px;
+}
+.language{
+    width: 270px;
+}
+.address{
+    width: 560px;
+}
+mat-label{
+    font-size: 17px;
+}
+.contactnumber{
+    width: 270px;
+}
+.homeaddress{
+    width: 370px;
 }

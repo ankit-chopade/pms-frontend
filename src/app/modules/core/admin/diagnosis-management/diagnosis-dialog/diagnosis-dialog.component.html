@@ -15,7 +15,7 @@
            
         </mat-form-field>
         <br>
-            <div>
+            <div *ngIf = "!isHiddenDetails">
             <mat-label>Diagnosis Depricated</mat-label><br>
             <mat-radio-group  formControlName="isDepricated" name="pdepri" >
               

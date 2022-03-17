@@ -106,6 +106,7 @@ export class FormUtilService {
     emergencycontactlastname: ['', Validators.required],
     emergencycontactrelation: ['', Validators.required],
     emergencycontactemailid: ['', Validators.required],
+    emergencyhomeaddress: ['', Validators.required],
     emergencycontactnumber: [
       '',
       [Validators.required, Validators.pattern('\\d{10}')],
@@ -121,13 +122,15 @@ export class FormUtilService {
   });
 
   allergyDetailsForm = this.fb.group({
-    allergy_details: ['', Validators.required],
+    allergy_details: ['',],
     allergyCode: ['', Validators.required],
     allergyType: ['', Validators.required],
     allergyName: ['', Validators.required],
     allergyDescription: ['', Validators.required],
     allergyClinicalInfo: ['', Validators.required],
-    allergyId: [],
+    allergyIsFatal: [],
+    allergyId:[]
+   
   });
   employeeRegistrationForm = this.fb.group({
     title: ['', Validators.required],

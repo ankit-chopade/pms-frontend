@@ -14,6 +14,7 @@ export class PatientDetails
     languagesKnown:String;
     homeAddress:String;
     has_Allergy:string;
+   
 //	allergyDetails:AllergyDetails[];
      patientAllergy:PatientAllergy[];
      emergencyContactEntity:EmergencyDetails;
