@@ -16,6 +16,7 @@ import { ProcedureDialogComponent } from './procedure-management/procedure-dialo
 import { AllergyDetailsDialogComponent } from './allergy-management/allergy-details-dialog/allergy-details-dialog.component';
 import { DiagnosisDialogComponent } from './diagnosis-management/diagnosis-dialog/diagnosis-dialog.component';
 import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-management.component';
+import { EmployeeDialogComponent } from './employee-management/employee-details/employee-dialog/employee-dialog.component';
 
 
 
@@ -32,7 +33,8 @@ import { DiagnosisManagementComponent } from './diagnosis-management/diagnosis-m
     DiagnosisDialogComponent,
     MadicationDialogComponent,
     ProcedureDialogComponent,
-    AllergyDetailsDialogComponent
+    AllergyDetailsDialogComponent,
+    EmployeeDialogComponent
   ],
   imports: [
     CommonModule,

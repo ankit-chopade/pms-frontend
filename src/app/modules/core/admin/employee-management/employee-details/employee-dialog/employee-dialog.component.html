@@ -1,0 +1,35 @@
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+  
+      <div fxLayoutGap="10px">
+          <mat-form-field  >
+              <mat-label>Id</mat-label>
+              <input matInput [readonly]="disabled" type = "text"  formControlName="userId"  required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Title</mat-label>
+            <mat-select formControlName="title">
+              <mat-option value="Mr.">Mr.</mat-option>
+              <mat-option value="Ms.">Ms.</mat-option>
+              <mat-option value="Mrs.">Mrs.</mat-option>
+              <mat-option value="Dr.">Dr.</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field  >
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstName" >             
+        </mat-form-field>
+        <br>  
+            <mat-form-field  >
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="lastName" >             
+            </mat-form-field>  
+        </div>
+    </form>
+  <div mat-dialog-actions style="margin-bottom: 0;">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="submit()" cdkFocusInitial>save</button>
+  </div>
+  

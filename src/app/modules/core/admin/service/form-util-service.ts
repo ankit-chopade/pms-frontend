@@ -29,6 +29,13 @@ export class FormUtilsService {
         selectedId: [],
       
       });
+
+      empEditDialog = this.fb.group({
+        userId : ['',Validators.required],
+        title : ['',Validators.required],
+        firstName : ['',Validators.required],
+        lastName : ['',Validators.required]       
+      });
     
       diagnosisDetailsForm = this.fb.group({});
     

@@ -3,7 +3,7 @@ export const APIConst={
     PATIENT_DETAILS:'management/patient-users',
     EMPLOYEE_REGISTRATION :'management/add-user',
     UPDATE_STATUS :'management/update-status',
-
+    UPDATE_EMPLOYEE :'management/update-hospital-user',
 
 
     MEDICATION_DOMAIN:'medication',

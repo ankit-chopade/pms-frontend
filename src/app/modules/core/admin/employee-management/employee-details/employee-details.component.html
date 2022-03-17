@@ -38,9 +38,11 @@
             </mat-cell>
         </ng-container>
         <ng-container matColumnDef="editStatus">
-            <mat-header-cell *matHeaderCellDef>Edit status</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
             <mat-cell *matCellDef="let element">
-
+                <button mat-icon-button (click)="editClick(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="change status">
                     <mat-icon>more_vert</mat-icon>
                   </button>
