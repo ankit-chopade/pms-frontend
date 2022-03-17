@@ -4,7 +4,7 @@ export const APIConst={
     ALLERGY_DETAILS:'management/allergy',
     GET_USER_DATA:'management/userById',
     GET_PATIENT_DATA:'management/demographicById',
-
+    GET_ALLERGY_LIST : 'management/allergyList',
     GET_ALLERGY_DETAILS:'management/allergy/allergycode',
     SAVE_ALLERGY_DETAILS:'management/allergy',
 

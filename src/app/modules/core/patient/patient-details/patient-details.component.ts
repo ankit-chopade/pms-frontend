@@ -32,7 +32,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
   userData: User;
   patientData: PatientDetails;
-  AllergyMapData: PatientAllergy[];
+  patientAllergyData: PatientAllergy[]=[];
   allergyData: AllergyDetails;
   // allergyIds: number[] = [];
   allergyMaps: PatientAllergy[] = [];
@@ -42,7 +42,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   latest_date: any;
   todayDate: Date;
   age: number;
- 
+  roleId:number;
   constructor(private dialog: MatDialog, private formConfig: FormUtilService, private apiCommonService: ApiService, private router: Router, private notifyService: NotificationService, private datePipe: DatePipe) {
     super(formConfig.patientDetailsForm);
   }
@@ -54,7 +54,8 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   allergydatatemporary: AllergyDetails[] = [];
   deleteallegydata: any[] = [];
   otherType: AllergyDetails = new AllergyDetails();
-
+  userId:number;
+  patientAllergyList: number[] = [];
   // allergy_details_dto: AllergyDetails[] = [];
 
   submitPatientDetailsForm() {
@@ -127,12 +128,13 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     this.allergydatasource = [...this.allergydatasource];
   }
   ngOnInit(): void {
-    // const userId = {
-    //   userId: Number(sessionStorage.getItem('userId'))
-    // }
-    const userId = {
-      userId: 22
-    }
+
+  const userId = {
+     userId: Number(sessionStorage.getItem('userId')) 
+  }
+// const userId = {
+//         userId: 22
+//      }
     this.apiCommonService.getuserDetails(userId).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
@@ -149,8 +151,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.calculateAge();
           this.setControlValue('age', this.age);
         }
-
-
       }
     );
     this.apiCommonService.getpatientDetails(userId).subscribe(
@@ -158,11 +158,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
         if (res && res['result'] && res['status'] === 200) {
           // alert("Success");
 
-          this.patientData = res['result'];
-          //   // // console.log(this.patientData);
-          console.log(this.patientData);
-          
-         
+          this.patientData = res['result'];   
           this.setControlValue('gender', this.patientData.gender)
           this.setControlValue('race', this.patientData.race)
           this.setControlValue('ethnicity', this.patientData.ethnicity)
@@ -177,33 +173,37 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('accesstopatientportal', this.patientData.emergencyContactEntity.accessPatientPortal)
           this.setControlValue('allergy_details', this.patientData.has_Allergy);
       
-          this.AllergyMapData = this.patientData.patientAllergy;
-          for (let AllergyMap of this.AllergyMapData) {
-            //   // // console.log(AllergyMap.allergyId);
-            const allergyId = {
-              'allergyId': Number(AllergyMap.allergyId)
-            }
-            this.apiCommonService.getAllergyDetailsById(allergyId).subscribe(
-              res => {
-                if (res && res['result'] && res['status'] === 200) {
-
-                  //  alert("Success");
-                  this.allergyData = res['result'];
-                  // // console.log(this.allergyData);
-
-                  if (this.allergyData != null) {
-                    this.allergydatatemporary.push(this.allergyData);
-                  }
-                  this.allergydatasource = [...this.allergydatatemporary];
-                  // // console.log(this.allergydatasource);
-                }
-              }
-            );
+          this.patientAllergyData = this.patientData.patientAllergy;
+         
+          console.log(this.patientAllergyData);
+          for (let patientAllergy of this.patientAllergyData) {
+            this.patientAllergyList.push(patientAllergy.allergyId);    
           }
+          console.log(this.patientAllergyList);
         }
+        const patientAllergyIdList = {
+          allergyId: this.patientAllergyList
+        }
+        console.log(patientAllergyIdList);
+          this.apiCommonService.getAllergyListDetails(patientAllergyIdList).subscribe(
+            res => {
+
+              if (res && res['result'] && res['status'] === 200) {
+                 this.allergydatasource = res['result'];
+                 console.log(this.allergydatasource)
+                // if (this.allergyData != null) {
+                //   this.allergydatatemporary.push(this.allergyData);
+                // }
+                // this.allergydatasource = [...this.allergydatatemporary];
+              }
+            }
+          );
       }
-    );
-  }
+      ); 
+        }
+    
+    
+  
 
   sameAddres() {
     if (this.addrsameaspatient) {

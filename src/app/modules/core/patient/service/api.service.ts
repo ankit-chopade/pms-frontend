@@ -32,7 +32,11 @@ export class ApiService {
   getAllergyDetails(){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS}`);
   }
-  
+  getAllergyListDetails(param:any){
+
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_LIST}`,{params:param});
+
+  }
   getuserDetails(param:any){
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_USER_DATA}`,{params:param});
