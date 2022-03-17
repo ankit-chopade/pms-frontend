@@ -20,6 +20,9 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {
   }
+  patients() {
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENTS}`);
+  }
 
   patientDetails(param: any) {
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.PATIENT_DETAILS}`, param);
@@ -27,6 +30,9 @@ export class ApiService {
 
   getAllergyDetailsById(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
+  }
+  getAllergyListDetails(param:any){
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_LIST}`,{params:param});
   }
 
   getAllergyDetails(){

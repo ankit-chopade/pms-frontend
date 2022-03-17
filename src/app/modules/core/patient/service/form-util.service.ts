@@ -106,6 +106,7 @@ export class FormUtilService {
     emergencycontactlastname: ['', Validators.required],
     emergencycontactrelation: ['', Validators.required],
     emergencycontactemailid: ['', Validators.required],
+    emergencyhomeaddress: ['', Validators.required],
     emergencycontactnumber: [
       '',
       [Validators.required, Validators.pattern('\\d{10}')],

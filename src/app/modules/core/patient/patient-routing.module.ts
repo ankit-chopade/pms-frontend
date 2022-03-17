@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { PatientPortalDetailsComponent } from './patient-portal-details/patient-portal-details.component';
+import { PatientPortalScreenComponent } from './patient-portal-screen/patient-portal-screen.component';
 import { DiagnosisComponent } from './patient-visit/diagnosis/diagnosis.component';
 import { MedicationsComponent } from './patient-visit/medications/medications.component';
 import { PatientDemographicsDetailsComponent } from './patient-visit/patient-demographics-details/patient-demographics-details.component';
@@ -9,7 +11,13 @@ import { ProcedureComponent } from './patient-visit/procedure/procedure.componen
 import { VitalSignsComponent } from './patient-visit/vital-signs/vital-signs.component';
 
 const routes: Routes = [
-    
+  {
+    path : ':details/:userId' , component :PatientPortalDetailsComponent
+  },
+  {
+    path : 'portal-screen',
+    component : PatientPortalScreenComponent
+  },
     {
       path: 'patient-details',
       component: PatientDetailsComponent
