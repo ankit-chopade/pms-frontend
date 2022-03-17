@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
 import { DefaultComponent } from './default/default.component';
 import { RouterModule } from '@angular/router';
+import { NavigationAuthGuardService } from './service/navigationauthguard.service';
 
 
 
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     DefaultRoutingModule,
     RouterModule,
-  ]
+  ],
+  providers: [NavigationAuthGuardService]
 })
 export class DefaultModule 
 {

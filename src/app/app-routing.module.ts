@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './modules/core/dashboard/layout/layout.component';
+import { NavigationAuthGuardService } from './modules/default/service/navigationauthguard.service';
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -8,7 +9,8 @@ const routes: Routes = [
     children:
       [{
         path: '',
-        loadChildren: () => import('./modules/core/core.module').then((m) => m.CoreModule)
+        loadChildren: () => import('./modules/core/core.module').then((m) => m.CoreModule), 
+        canActivate: [NavigationAuthGuardService]
       }]
   },
   {
@@ -19,6 +21,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [NavigationAuthGuardService]
 })
 export class AppRoutingModule { }
