@@ -21,6 +21,7 @@ import { ChartModule } from 'angular-highcharts';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientPortalScreenComponent } from './patient-portal-screen/patient-portal-screen.component';
 import { PatientPortalDetailsComponent } from './patient-portal-details/patient-portal-details.component';
+import { VisitHistoryComponent } from './visit-history/visit-history.component';
 
 
 
@@ -42,6 +43,7 @@ import { PatientPortalDetailsComponent } from './patient-portal-details/patient-
     PatientDashboardComponent,
     PatientPortalScreenComponent,
     PatientPortalDetailsComponent,
+    VisitHistoryComponent,
   ],
   imports: [
     CommonModule,

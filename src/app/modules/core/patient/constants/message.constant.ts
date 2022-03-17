@@ -25,7 +25,7 @@ export const formErrorMessages = {
   PROCEDURE_DETAILS_REQUIRED: 'Please enter the details',
 
   // vital_signs
-  HEIGHT_VALUE_ERROR: 'Please enter a height below 250 and above 0 in cms',
+  HEIGHT_VALUE_ERROR: 'Please enter height below 250 and above 0',
   WEIGHT_REQUIRED: 'Please enter a value',
 
   // medications

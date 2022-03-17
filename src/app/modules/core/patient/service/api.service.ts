@@ -31,6 +31,7 @@ export class ApiService {
   getAllergyDetailsById(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS_BY_ID}`,{params:param});
   }
+  
   getAllergyListDetails(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_LIST}`,{params:param});
   }
@@ -40,16 +41,13 @@ export class ApiService {
   }
  
   getuserDetails(param:any){
- 
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_USER_DATA}`,{params:param});
   }
   getpatientDetails(param:any){
- 
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_PATIENT_DATA}`,{params:param});
   }
 
   saveAllergyDetails(param:any){
- 
     return this.httpClient.post<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.ALLERGY_DETAILS}`,param);
   }
 
@@ -57,8 +55,8 @@ export class ApiService {
  
     return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.GET_ALLERGY_DETAILS}`,{params:param});
   }
-  // Vital signs api
 
+  // Vital signs api
   getVitalSigns(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.VITAL_SIGN_DOMAIN}`, {params:param});
   }
@@ -69,8 +67,6 @@ export class ApiService {
   updateVitalDetails(param: any){
     return this.httpClient.put<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.VITAL_SIGN_DOMAIN}`, param);
   }
-  
-  
   
   // procedure apis
   getProcDetailsForPatient(param: any){
@@ -86,14 +82,9 @@ export class ApiService {
   }
 
   // Diagnosis apis
-  
   saveDiagnosisDetails(param:any){
     return this.httpClient.post<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, param);
   }
-
-  // getDiagnosisDetails(){
-  //   return this.httpClient.get<IAPIWrapper<any>>(`${this.baseUrl}${APIConst.DIAGNOSIS_DOMAIN}`)
-  // }
 
   getDiagnosisDetailsForPatient(param:any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
@@ -103,10 +94,7 @@ export class ApiService {
     return this.httpClient.delete<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.DIAGNOSIS_DETAILS}`, {params:param});
   }
 
-  
-
   //Medication apis
-
   saveMedicationDetails(param:any){
     return this.httpClient.post<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.MEDICATION_DETAILS}`, param);
   }
@@ -120,7 +108,6 @@ export class ApiService {
   }
 
   //Patient details screen
-
   getPatientDetailsForPatientId(param: any){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT_DETAIL_DOMAIN}`, {params:param});
   }
@@ -135,9 +122,6 @@ export class ApiService {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.diagnosisUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.NON_DEPRICATED}`);
   }
 
-
-
-
   // dashboard details
   getBloodPressureList(param:any) {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.BLOOD_PRESSURE_LIST}`,{params:param});
@@ -151,9 +135,14 @@ export class ApiService {
     return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.DASHBOARD_VITAL_SIGN}`, {params:param});
   }
 
-    // master medication data
+  // master medication data
   getMedicationDetails(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.MEDICATION_DOMAIN}`)
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.medicationUrl}${APIConst.MEDICATION_DOMAIN}`)
+  }
+
+  //visit-history
+   getAllVisitsDetails(param:any){
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.VISIT_HISTORY}`, param);
   }
 
 }
