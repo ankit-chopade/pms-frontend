@@ -105,7 +105,7 @@ export class ApiService {
   }
   
   getMedicationDetails(){
-    return this.httpClient.get<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.MEDICATION_DOMAIN}`)
+    return this.httpClient.get<IAPIWrapper<any>>(`${this.medicationUrl}${APIConst.MEDICATION_DOMAIN}`)
   }
   
   getMedicationDetailsForPatient(param:any) { 
@@ -131,5 +131,13 @@ export class ApiService {
   getNonDepricatedDiagnosisDetails(){
     return this.httpClient.get<IAPIWrapper<any>>(`${this.diagnosisUrl}${APIConst.DIAGNOSIS_DOMAIN}${APIConst.NON_DEPRICATED}`)
   }
+
+
+
+  //visit-history
+   getAllVisitsDetails(param:any){
+    return this.httpClient.post<IAPIWrapper<any>>(`${this.visitUrl}${APIConst.VISIT_DOMAIN}${APIConst.PATIENT.VISIT_HISTORY}`, param);
+  }
+
 
 }

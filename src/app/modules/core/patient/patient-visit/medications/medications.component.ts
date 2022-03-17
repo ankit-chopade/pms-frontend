@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { ApiService } from '../../service/api.service';
@@ -16,18 +19,24 @@ export class MedicationsComponent
   extends FormBaseController<any>
   implements OnInit
 {
-  appointmentId: number = 2; //Static Value
+  appointmentId: number //Static Value
+  isEdit: boolean = true
+  action: string;
 
   constructor(
     private formConfig: FormUtilService,
     private dialog: MatDialog,
     private apiCommonService: ApiService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     super(formConfig.medicationDetailsForm, '');
   }
 
-  dataSource: any[] = [];
+  data: any[] = []
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = [
     'drugId',
     'drugName',
@@ -40,13 +49,22 @@ export class MedicationsComponent
   ];
 
   ngOnInit(): void {
+    if (this.route.snapshot.params["id"] != undefined) {
+      this.appointmentId = this.route.snapshot.params["id"]
+      this.action = this.route.snapshot.params["action"]
+      if (this.action == "view")
+        this.isEdit = false;
+      else
+        this.isEdit = true;
+    }
     this.loadGrid();
   }
   medicationAddButtonClick() {
     // console.log('add button click for medications');
     const dialogRef = this.dialog.open(MedicationsModalDialogComponent, {
-      width: '250px',
-      data: this.dataSource,
+      // width: '250px',
+      // height:'500px',
+      data: this.data,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result['drgId'] && result['drgName']) {
@@ -71,7 +89,7 @@ export class MedicationsComponent
   }
 
   validateExistingMedications(selectedId: number): boolean {
-    let data: any = this.dataSource.find(m => m.medicationId == selectedId && m.appointmentId == this.appointmentId)
+    let data: any = this.data.find(m => m.medicationId == selectedId && m.appointmentId == this.appointmentId)
     if (data == null) {
       return true;
     }
@@ -83,13 +101,15 @@ export class MedicationsComponent
       id: this.appointmentId,
     };
     this.apiCommonService.getMedicationDetailsForPatient(param).subscribe((res) => {
-        this.dataSource = res['result'];
-        this.dataSource.forEach((element) => {
+        this.data = res['result'];
+        this.data.forEach((element) => {
           let customDate = element.createdDate.split(' ')[0].split('-');
           element.prescribedDate = customDate[2] + '-' + customDate[1] + '-' + customDate[0];
           // element.appointmentId = this.appointmentId; // need to remove this
           element.deleteButton = (element.appointmentId == this.appointmentId) ? "delete" : ""
         });
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
       });
   }
 
@@ -115,6 +135,17 @@ export class MedicationsComponent
       } else {
         this.notifyService.showSuccess("Medication addition failed", "Error");
       }
+    });
+  }
+
+  nextButtonClick() {
+    this.router.navigate(['../dashboard/patient/procedures/view',this.action, this.appointmentId], {
+      skipLocationChange: true
+    });
+  }
+  previousButtonClick() {
+    this.router.navigate(['../dashboard/patient/procedures/',this.action, this.appointmentId], {
+      skipLocationChange: true
     });
   }
 }

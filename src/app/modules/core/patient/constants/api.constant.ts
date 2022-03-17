@@ -33,6 +33,7 @@ export const APIConst={
         DIAGNOSIS_DETAILS:'patient-diagnosis',
         PROCEDURE_DETAILS:'patient-procedure',
         MEDICATION_DETAILS:'patient-medication',
+        VISIT_HISTORY:'patient-visit-history',
     },
 
     NON_DEPRICATED: '/getNonDepricated',

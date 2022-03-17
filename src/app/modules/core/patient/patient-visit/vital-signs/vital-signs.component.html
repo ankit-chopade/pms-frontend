@@ -1,43 +1,135 @@
-<div fxLayoutAlign="end">
-    <button mat-icon-button (click)="editButtonClick()" [disabled]="!disabled">
-        <mat-icon>create</mat-icon>
-    </button>
-</div>
-<br>
-<form [formGroup]="form">
-    <div>
-        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayout.md="column" fxLayout.lt-lg="column" fxLayoutAlign="center center">
-            <mat-form-field appearance="outline">
-                <mat-label>Height (in cm)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="height"  >
-                <span *ngIf="form.controls['height'].hasError('max') || form.controls['height'].hasError('min') || checkTouchedAndInvalid('height')" class="error">{{errorMessages.HEIGHT_VALUE_ERROR}}</span>
-            </mat-form-field>
-            <!-- <br> -->
-            <mat-form-field appearance="outline">
-                <mat-label>Weight (in kg)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="weight" on-focusout="roundOffWeight()">
-                <span *ngIf="checkTouchedAndInvalid('weight')" class="error">{{errorMessages.WEIGHT_REQUIRED}}</span>
-            </mat-form-field>
-            <!-- <br> -->
-            <mat-form-field appearance="outline">
-                <mat-label>Blood Pressure (in mm Hg) </mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="bloodPressure">
-            </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" fxLayout.md="column" fxLayout.lt-lg="column" fxLayoutAlign="center center">
-            <mat-form-field appearance="outline">
-                <mat-label>Body Temperature (in Fahrenheit)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="bodyTemperature">
-            </mat-form-field>
-            <!-- <br> -->
+<div class="mat-elevation-z8" style="padding: 10px">
+  <div fxLayoutAlign="center">
+    <h1><u> Vital Signs</u></h1>
+  </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Respiration Rate(in BPM)</mat-label>
-                <input matInput type="number" [readonly]="disabled" formControlName="respirationRate" value="20">
-            </mat-form-field>
+  <div fxLayoutAlign="end">
+    <button
+      mat-icon-button
+      (click)="editButtonClick()"
+      [disabled]="!isEdit"
+    >
+      <mat-icon></mat-icon>
+    </button>
+  </div>
+  <div style="padding-right: 10px; padding-left: 10px">
+    <form [formGroup]="form">
+      <div
+        fxLayout="row"
+        fxLayoutGap="10%"
+        fxLayout.xs="column"
+        fxLayout.md="column"
+        fxLayout.lt-lg="column"
+      >
+        <div fxLayout="column" fxFlex="30">
+          <mat-form-field>
+            <mat-label>Height (in cm)</mat-label>
+            <input
+              matInput
+              type="number"
+              [readonly]="!isEdit"
+              formControlName="height"
+            />
+            <mat-error
+              *ngIf="
+                form.controls['height'].hasError('max') ||
+                form.controls['height'].hasError('min') ||
+                checkTouchedAndInvalid('height')
+              "
+              class="error"
+              >*{{ errorMessages.HEIGHT_VALUE_ERROR }}</mat-error
+            >
+          </mat-form-field>
         </div>
-        <div fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout.xs="column" > 
-            <button mat-raised-button color="primary" (click)="saveVitalSignsClick()" [disabled] = 'disabled'>Submit</button>
+
+        <div fxLayout="column" fxFlex="30">
+          <mat-form-field>
+            <mat-label>Weight (in kg)</mat-label>
+            <input
+              matInput
+              type="number"
+              [readonly]="!isEdit"
+              formControlName="weight"
+              on-focusout="roundOffWeight()"
+            />
+            <span *ngIf="checkTouchedAndInvalid('weight')" class="error">{{
+              errorMessages.WEIGHT_REQUIRED
+            }}</span>
+          </mat-form-field>
         </div>
+        <!-- <br> -->
+        <div fxLayout="column" fxFlex="30">
+          <mat-form-field>
+            <mat-label>Blood Pressure (in mm Hg) </mat-label>
+            <input
+              matInput
+              type="text"
+              [readonly]="!isEdit"
+              formControlName="bloodPressure"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div
+        fxLayout="row"
+        fxLayoutGap="10%"
+        fxLayout.xs="column"
+        fxLayout.md="column"
+        fxLayout.lt-lg="column"
+      >
+        <!-- <br> -->
+        <div fxLayout="column" fxFlex="30">
+          <mat-form-field>
+            <mat-label>Body Temperature (in Fahrenheit)</mat-label>
+            <input
+              matInput
+              type="number"
+              [readonly]="!isEdit"
+              formControlName="bodyTemperature"
+            />
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex="30">
+          <mat-form-field>
+            <mat-label>Respiration Rate(in BPM)</mat-label>
+            <input
+              matInput
+              type="number"
+              [readonly]="!isEdit"
+              formControlName="respirationRate"
+              value="20"
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="column" fxFlex="30"></div>
+      </div>
+    </form>
+  </div>
+  <br />
+  <div fxLayout="row">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxFlex="50"
+      fxLayoutGap="5px"
+    >
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveVitalSignsClick()"
+        [disabled]="!isEdit || form.invalid"
+      >
+        Save
+      </button>
     </div>
-</form>
+    <div fxFlex="84"></div>
+
+    <div fxLayout="row" fxFlex fxLayoutAlign="end center">
+      <button mat-raised-button color="light" (click)="nextButtonClick()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

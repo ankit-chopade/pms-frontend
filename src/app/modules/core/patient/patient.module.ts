@@ -17,6 +17,7 @@ import { VitalSignsComponent } from './patient-visit/vital-signs/vital-signs.com
 import { MedicationsComponent } from './patient-visit/medications/medications.component';
 import { MedicationsModalDialogComponent } from './patient-visit/medications/medications-modal-dialog/medications-modal-dialog.component';
 import { PatientDemographicsDetailsComponent } from './patient-visit/patient-demographics-details/patient-demographics-details.component';
+import { VisitHistoryComponent } from './visit-history/visit-history.component';
 
 
 
@@ -35,6 +36,7 @@ import { PatientDemographicsDetailsComponent } from './patient-visit/patient-dem
     MedicationsComponent,
     MedicationsModalDialogComponent,
     PatientDemographicsDetailsComponent,
+    VisitHistoryComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Procedure Details</h1>
+<h2 style="text-align: center;" mat-dialog-title> <u>Add Procedure</u></h2>
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="submit()">
 
@@ -23,7 +23,7 @@
         <br>
         <mat-form-field   *ngIf = "!isHiddenDetails">
             <mat-label>Procedure Details</mat-label>
-            <input matInput type="text" formControlName="details" required>
+            <textarea rows="3" matInput type="text" formControlName="details" required></textarea>
             <span *ngIf="checkTouchedAndInvalid('details')" class="error">{{errorMessages.PROCEDURE_DETAILS_REQUIRED}}</span>
         </mat-form-field>
         <br>
@@ -37,7 +37,30 @@
             </div> -->
         </div>
     </form>
-<div mat-dialog-actions style="margin-bottom: 0;">
-  <button mat-button (click)="onCancelClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data" (click)="submit()" cdkFocusInitial>Ok</button>
+    <div fxLayout="row">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxFlex="50"
+          fxLayoutGap="5px"
+        >
+          <button
+            mat-raised-button
+            color="primary"
+            [mat-dialog-close]="data"
+            (click)="submit()"
+            cdkFocusInitial
+            class="btn-sm"
+          >
+            Save
+          </button>
+        </div>
+        <div fxFlex="84"></div>
+  
+        <div fxLayout="row" fxFlex fxLayoutAlign="end center">
+          <button class="btn-sm" mat-raised-button color="warn" (click)="onCancelClick()">
+            Cancel
+          </button>
+        </div>
+      </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
 import { formErrorMessages } from '../../constants/message.constant';
@@ -17,21 +18,47 @@ export class VitalSignsComponent
   errorMessages = formErrorMessages
   disabled: boolean = false;
   // updateDisable: boolean = true;
-  saveDisabled:boolean = false;
-  editDisable:boolean = false;
+  // saveDisabled:boolean = false;
+  // editDisable:boolean = false;
   vitalId: number = 0;
 
-  appointmentId: number = 2; //Static Value
+  //appointmentId: number = 2; //Static Value
+  appointmentId: number 
+
+  isEdit:boolean=true
+  action:string;
 
   constructor(
     private formConfig: FormUtilService,
     private apiCommonService: ApiService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private route:ActivatedRoute,
+    private router: Router
+
   ) {
     super(formConfig.vitalSignsForm);
   }
 
   ngOnInit(): void {
+    
+
+    if(this.route.snapshot.params["id"]!=undefined){
+      let id:any =this.route.snapshot.params["id"]
+      let action:any =this.route.snapshot.params["action"]
+
+      console.log(id +"Fetched")
+    
+      this.appointmentId=id
+      this.action=action
+      if(this.action=="view"){
+        this.isEdit=false;
+      }
+      else{
+        this.isEdit=true;
+      }
+
+    }
+
     this.loadData(this.appointmentId);
   }
 
@@ -49,12 +76,12 @@ export class VitalSignsComponent
         this.vitalId = res['result'] .vitalId;
         // this.vitalId = 10;
         this.disabled = true;
-        this.saveDisabled = true;
-        this.editDisable = false;
+        // this.saveDisabled = true;
+        // this.editDisable = false;
       } else {
         this.disabled = false;
-        this.saveDisabled = true;
-        this.editDisable = true;
+        // this.saveDisabled = true;
+        // this.editDisable = true;
       }
     });
   }
@@ -64,8 +91,8 @@ export class VitalSignsComponent
     const param = {
       vitalId: this.vitalId,
       appointmentId: this.appointmentId,
-      height: this.getControlValue('height'),
-      weight: this.getControlValue('weight'),
+      height: +this.getControlValue('height'),
+      weight: +this.getControlValue('weight'),
       bloodPressure: this.getControlValue('bloodPressure'),
       bodyTemperature: this.getControlValue('bodyTemperature'),
       respirationRate: this.getControlValue('respirationRate'),
@@ -112,5 +139,11 @@ export class VitalSignsComponent
       const value = Number(this.getControlValue('weight')).toFixed(2);
       this.setControlValue('weight', value);
     }
+  }
+
+  nextButtonClick(){
+    this.router.navigate(['../dashboard/patient/diagnosis/',this.action,this.appointmentId],{
+      skipLocationChange:true
+  });
   }
 }
