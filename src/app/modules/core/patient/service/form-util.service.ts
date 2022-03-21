@@ -106,19 +106,19 @@ export class FormUtilService {
     emergencycontactlastname: ['', Validators.required],
     emergencycontactrelation: ['', Validators.required],
     emergencycontactemailid: ['', Validators.required],
-    emergencyhomeaddress: ['', Validators.required],
-    emergencycontactnumber: [
-      '',
+    emergencycontacthomeaddress: ['',Validators.required],
+    emergencycontactnumber: [ '',
       [Validators.required, Validators.pattern('\\d{10}')],
     ],
     addrsameaspatient: [],
-    emergencycontacthomeaddress: [''],
-    allergy_details: [],
+  
+    allergy_details: [''],
     allergyid: [],
     allergytype: [],
     allergyname: [],
     allergydesc: [],
     allergyclinicalinfo: [],
+    emergencyhomeaddress: [''],
   });
 
   allergyDetailsForm = this.fb.group({

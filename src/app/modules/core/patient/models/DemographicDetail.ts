@@ -13,9 +13,7 @@ export class PatientDetails
     ethnicity:String;
     languagesKnown:String;
     homeAddress:String;
-    has_Allergy:string;
-   
-//	allergyDetails:AllergyDetails[];
+    hasAllergy:string;
      patientAllergy:PatientAllergy[];
      emergencyContactEntity:EmergencyDetails;
 }
