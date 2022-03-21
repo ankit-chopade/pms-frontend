@@ -70,7 +70,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       homeAddress: this.getControlValue('homeaddress'),
       userId: Number(sessionStorage.getItem('userId')),
       active: 1,
-      has_Allergy: this.getControlValue('allergy_details'),
+      hasAllergy: this.getControlValue('allergy_details'),
       emergencyContactEntity: emergencyDetails,
       patientAllergy: this.patientAllergy
 
@@ -161,7 +161,7 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
           this.setControlValue('emergencycontactnumber', this.patientData.emergencyContactEntity.contactNumber)
           this.setControlValue('emergencycontacthomeaddress', this.patientData.emergencyContactEntity.homeAddress)
           this.setControlValue('accesstopatientportal', this.patientData.emergencyContactEntity.accessPatientPortal)
-          this.setControlValue('allergy_details', this.patientData.has_Allergy);
+          this.setControlValue('allergy_details', this.patientData.hasAllergy);
       
           this.patientAllergyData = this.patientData.patientAllergy;
          
