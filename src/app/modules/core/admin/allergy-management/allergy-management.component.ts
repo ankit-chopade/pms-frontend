@@ -25,43 +25,23 @@ export class AllergyManagementComponent extends FormBaseController<any> implemen
     super(formConfig.allergyDetailsForm, '');
   }
 
-  @ViewChild('paginator') paginator : MatPaginator ;
-  
+  @ViewChild('paginator') paginator: MatPaginator;
+
   dataSource: MatTableDataSource<any>;
-  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo','delete'];
+  allergycolumns: string[] = ['allergyid', 'allergytype', 'allergyname', 'allergydesc', 'allergyclinicalinfo', 'delete'];
   ngOnInit(): void {
     this.loadGrid()
   }
   addAllergies() {
-    
     this.form.reset();
-    const dialogRef = this.dialog.open( AllergyDetailsDialogComponent, {
-      width: '300px',
+    const dialogRef = this.dialog.open(AllergyDetailsDialogComponent, {
       disableClose: true,
-     
-
     }
     );
     dialogRef.afterClosed().subscribe(
-      resp => {
+      () => {
         this.loadGrid();
-        if (resp != null) {
-         console.log(resp);
-          
-        
-        //  this.apiCommonService.saveAllergyDetails(resp).subscribe(
-        //   res => {
-        //     if (res && res['result'] && res['status'] === 200) {
-        //       this.notifyService.showSuccess("Data added Successfully", "Success")
-        //       this.loadGrid();
-        //     }
-        //     else {
-        //       this.notifyService.showSuccess("Addition failed", "Error");
-        //     }
-        //   }
-        // );
-         
-        }
+
       }
     );
   }
@@ -72,25 +52,24 @@ export class AllergyManagementComponent extends FormBaseController<any> implemen
       resp => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           this.dataSource = new MatTableDataSource(resp['result']);
-          this.dataSource.paginator=this.paginator;
+          this.dataSource.paginator = this.paginator;
         }
       }
     );
-  
+
   }
-  delete(id:number){
-    const param : any= {
+  delete(id: number) {
+    const param: any = {
       id: id
     }
-    this.apiCommonService.deletAllergyDetail(param).subscribe((res) =>{
-     
+    this.apiCommonService.deletAllergyDetail(param).subscribe((res) => {
+
       this.loadGrid();
       this.notifyService.showSuccess(" Deleted successfully", "Success");
-    } 
-  );
+    }
+    );
   }
-  editClick(allergy:AllergyDetails)
-  {
+  editClick(allergy: AllergyDetails) {
     this.setControlValue('allergyCode', allergy.allergyCode);
     this.setControlValue('allergyType', allergy.allergyType);
     this.setControlValue('allergyName', allergy.allergyName);
@@ -99,11 +78,11 @@ export class AllergyManagementComponent extends FormBaseController<any> implemen
     this.setControlValue('selectedId', allergy.allergyId);
     const dialogRef = this.dialog.open(AllergyDetailsDialogComponent, {
       width: '250px',
-      
+
     });
-     dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.loadGrid();
-     }
-     );
+    }
+    );
   }
 }

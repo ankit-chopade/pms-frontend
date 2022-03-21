@@ -11,7 +11,6 @@ import { ConfirmPasswordDirective } from './shared/confirm-password.directive';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorsService } from './modules/common/services/http-interceptor.service';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
-import { MomentModule } from 'angular2-moment'; // optional, provides moment-style pipes for date formatting
 import { NavigationAuthGuardService } from './modules/default/service/navigationauthguard.service';
 
 
@@ -30,7 +29,6 @@ import { NavigationAuthGuardService } from './modules/default/service/navigation
     BrowserAnimationsModule,
     SharedModule,
     NgIdleKeepaliveModule.forRoot(),
-    MomentModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-IN' },
   { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorsService, multi: true },

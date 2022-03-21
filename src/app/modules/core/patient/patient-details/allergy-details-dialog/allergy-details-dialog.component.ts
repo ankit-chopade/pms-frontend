@@ -82,7 +82,8 @@ export class AllergyDetailsDialogComponent extends FormBaseController<any> imple
   }
 
   cancel() {
-    this.clear()
+
+    this.form.reset()
     this.dialogRef.close();
   }
   clear() {

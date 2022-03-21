@@ -46,7 +46,7 @@ export class VisitHistoryComponent implements OnInit {
     })
   }
   view(appointmentId:Number){
-    this.router.navigate(['../dashboard/patient/vital-signs/view',appointmentId],{
+    this.router.navigate(['../dashboard/patient/vital-signs/edit',appointmentId],{
         skipLocationChange:true
     });
    

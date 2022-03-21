@@ -42,19 +42,15 @@ export class ProcedureManagementComponent extends FormBaseController<any> implem
     // call api for loading data in proc code and proc description
     this.form.reset();
     const dialogRef = this.dialog.open(ProcedureDialogComponent, {
-      width: '350px',
       data: this.dataSource,
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.loadGrid()
     });
   }
 
   validateExistingProcedure(selectedId: number): boolean {
-    // let data: any = this.dataSource.find(p => p.procedureId == selectedId && p.appointmentId == this.appointmentId)
-    // if (data == null) {
-    //   return true;
-    // }
+  
     return false;
   }
 
@@ -74,7 +70,6 @@ export class ProcedureManagementComponent extends FormBaseController<any> implem
      this.setControlValue('isDepricated', procedure.procedureIsDepricated+"");
      this.setControlValue('selectedId', procedure.procedureId);
     const dialogRef = this.dialog.open(ProcedureDialogComponent, {
-      width: '350px',
       data: this.dataSource,
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -86,14 +81,10 @@ export class ProcedureManagementComponent extends FormBaseController<any> implem
      const param : any= {
     id: procedure.procedureId
   }
-  console.log(param)
-   this.apiCommonService.deleteProcedureDetail(param).subscribe((res) =>{
-    // if (res && res['status'] === 200) {
+   this.apiCommonService.deleteProcedureDetail(param).subscribe(() =>{
        this.loadGrid();
        this.notifyService.showSuccess("Diagnosis deleted successfully", "Success");
-    //  } else {
-    //    this.notifyService.showError("Diagnosis deletion failed", "Error");
-    //  }
+   
    })
    
    }

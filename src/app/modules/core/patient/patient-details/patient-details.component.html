@@ -1,285 +1,482 @@
-<!DOCTYPE html>
-<html>
+<div class="mat-elevation-z8" style="padding: 10px">
+  <form [formGroup]="form">
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
+      <!-- <div fxLayoutAlign="strech center" fxFlexFill class="box"> -->
+      <mat-tab label="Patient Details">
+        <br />
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    <!-- <div class="content"> -->
-    <form [formGroup]="form" >
-        <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
-            <div fxLayoutAlign="strech center" fxFlexFill class="box">
-                <mat-tab label="Patient Details">
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-                        class="tabsmargin">
-                        <mat-form-field appearance="outline" class="title">
-                            <mat-label>Title</mat-label>
-                            <mat-select formControlName="title" >
-                                <mat-option value="Mr.">Mr.</mat-option>
-                                <mat-option value="Ms.">Ms.</mat-option>
-                                <mat-option value="Mrs.">Mrs.</mat-option>
-                                <mat-option value="Dr.">Dr.</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>First Name</mat-label>
-                            <input matInput formControlName="firstname" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('firstname')"
-                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Last Name</mat-label>
-                            <input matInput formControlName="lastname" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('lastname')"
-                                class="error">{{errormessage.LASTNAME_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
-                        <mat-form-field appearance="outline" class="dob" >
-                            <mat-label>DOB:</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dob" required class="dob">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Age</mat-label>
-                            <input matInput formControlName="age" type="number" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('age')" class="error">{{errormessage.AGE_REQUIRED}}
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Gender</mat-label>
-                            <mat-select formControlName="gender">
-                                <mat-option value="Male">Male</mat-option>
-                                <mat-option value="Female">Female</mat-option>
-                                <mat-option value="Other">Other</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
-                        <mat-form-field appearance="outline">
-                            <mat-label>Race</mat-label>
-                            <input matInput formControlName="race" type="text" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('race')" class="error">{{errormessage.RACE_REQUIRED}}
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Ethnicity </mat-label>
-                            <input matInput formControlName="ethnicity" type="text" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('ethnicity')"
-                                class="error">{{errormessage.ETHNICITY_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Contact number</mat-label>
-                            <input matInput type="number" formControlName="contactnumber" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('contactnumber')"
-                                class="error">{{errormessage.CONTACT_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                       
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
-                        <mat-form-field appearance="outline" class="email">
-                            <mat-label>Email Address</mat-label>
-                            <input matInput placeholder="Ex. pat@example.com" formControlName="emailid" required
-                                type="email">
-                            <mat-error *ngIf="checkTouchedAndInvalid('emailid')"
-                                class="error">{{errormessage.EMAILID_FORMAT}} </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="language">
-                            <mat-label>Languages Known </mat-label>
-                            <input matInput formControlName="languages" type="text" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('languages')"
-                                class="error">{{errormessage.LANGUAGEKNOWN_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column" >
-                        <mat-form-field appearance="outline" class="address">
-                            <mat-label>Home Address</mat-label>
-                            <textarea matInput formControlName="homeaddress" required
-                                type="text" class="address">
-                                </textarea>
-                            <mat-error *ngIf="checkTouchedAndInvalid('homeaddress')"
-                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                    </div>
-                </mat-tab>
-                <!-- Emergency Contact Info -->
-                <mat-tab label="Emergency Contact Information">
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-                        class="tabsmargin">
-                        <mat-form-field appearance="outline">
-                            <mat-label>First Name</mat-label>
-                            <input matInput formControlName="emergencycontactfirstname" required type="text">
-                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactfirstname')"
-                                class="error">{{errormessage.FIRSTNAME_REQUIRED}} </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline">
-                            <mat-label>Last Name</mat-label>
-                            <input matInput formControlName="emergencycontactlastname" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
-                                class="error">{{errormessage.LASTNAME_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" >
-                            <mat-label>Relationship</mat-label>
-                            <mat-select formControlName="emergencycontactrelation">
-                                <mat-option value="father">Father</mat-option>
-                                <mat-option value="mother">Mother</mat-option>
-                                <mat-option value="sibling">Sibling</mat-option>
-                                <mat-option value="spouse">Spouse</mat-option>
-                                <mat-option value="friend">Friend</mat-option>
-                                <mat-option value="other">Other</mat-option>
-                                <span *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
-                                class="error">{{errormessage.RELATIONSHIP_REQUIRED}} </span>
-                            </mat-select>
-                        </mat-form-field>
-                        <!-- <mat-form-field appearance="outline">
-                            <mat-label>Relationship </mat-label>
-                            <input matInput formControlName="emergencycontactrelation" required>
-                            <span *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
-                                class="error">{{errormessage.RELATIONSHIP_REQUIRED}} </span>
-                        </mat-form-field> -->
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-form-field appearance="outline" class="email">
-                            <mat-label>Email Address</mat-label>
-                            <input matInput placeholder="Ex. pat@example.com" formControlName="emergencycontactemailid"
-                                required type="email">
-                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactemailid')"
-                                class="error">{{errormessage.EMAILID_FORMAT}} </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="contactnumber">
-                            <mat-label>Contact number</mat-label>
-                            <input matInput type="number" formControlName="emergencycontactnumber" required>
-                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontactnumber')"
-                                class="error">{{errormessage.CONTACT_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">
-                        <mat-checkbox formControlName="addrsameaspatient" [(ngModel)]="addrsameaspatient" (change)="sameAddres()">Address same as Patient </mat-checkbox>
-                        <mat-form-field appearance="outline" class="homeaddress">
-                            <mat-label>Home Address</mat-label>
-                            <textarea matInput placeholder="Ex. pat@example.com"
-                                formControlName="emergencycontacthomeaddress" required type="text"></textarea>
-                            <mat-error *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
-                                class="error">{{errormessage.HOMEADDRESS_REQUIRED}} </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" class="radiooverflow"
-                        fxLayoutGap="10px">
-                        <label id="access-portal-radio-group">Do you need access to patient portal?</label>
-                        <mat-radio-group fxLayoutGap="10px" aria-labelledby="access-portal-radio-group"
-                            fxLayoutGap="10px" formControlName="accesstopatientportal">
-                            <mat-radio-button value="yes">Yes</mat-radio-button>
-                            <mat-radio-button value="no">No</mat-radio-button>
-                        </mat-radio-group>
-
-                        <!-- This textarea is dummy, dont remove it -->
-                        <textarea style="visibility: hidden;height: 0%;width: 0%;"></textarea>
-                    </div>
-                </mat-tab>
+        <div style="padding-right: 10px; padding-left: 10px">
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="title">
+                <mat-label>Title</mat-label>
+                <mat-select formControlName="title">
+                  <mat-option value="Mr.">Mr.</mat-option>
+                  <mat-option value="Ms.">Ms.</mat-option>
+                  <mat-option value="Mrs.">Mrs.</mat-option>
+                  <mat-option value="Dr.">Dr.</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <mat-tab label="Allergy Details">
-                <!-- Allergy details must be auto populated from data base -->
-                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-                    class="tabsmargin">
-                    <label id="allergy-details-radio-group">Patient has any known allergies?</label>
-                    <mat-radio-group aria-labelledby="allergy-details-radio-group" formControlName="allergy_details"
-                        fxLayoutGap="10px" [(ngModel)]="allergy_details">
-                        <mat-radio-button value="yes">Yes</mat-radio-button>
-                        <mat-radio-button value="no">No</mat-radio-button>
-                    </mat-radio-group><br>
-                </div><br>
-                <div *ngIf="allergy_details =='yes'">
-                    <div fxLayoutAlign="end">
-                        <button mat-icon-button (click)="addAllergies()">
-                            <mat-icon>add</mat-icon>
-                        </button></div>
 
-                    <table mat-table [dataSource]="allergydatasource">
-                        <ng-container matColumnDef="allergyid">
-                            <th mat-header-cell *matHeaderCellDef>
-                                ID
-                            </th>
-                            <td mat-cell *matCellDef="let element">
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstname" required />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('firstname')"
+                  class="error"
+                  >{{ errormessage.FIRSTNAME_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastname" required />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('lastname')"
+                  class="error"
+                  >{{ errormessage.LASTNAME_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <br />
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="dob">
+                <mat-label>DOB:</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="dob"
+                  required
+                  class="dob"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
 
-                                {{element.allergyCode}}
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="allergytype">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Type
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.allergyType}}
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="allergyname">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Name
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.allergyName}}
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="allergydesc">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Description
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.allergyDescription}}
-                            </td>
-                        </ng-container>
-                        <ng-container matColumnDef="allergyclinicalinfo">
-                            <th mat-header-cell *matHeaderCellDef>
-                                Clinical Information
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.allergyClinicalInfo}}
-                            </td>
-                        </ng-container>
-                         <ng-container matColumnDef="allergyIsFatal">
-                            <th mat-header-cell *matHeaderCellDef>
-                                allergy Is Fatal
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                {{element.allergyIsFatal == 1 ? "Yes":"No"  }}
-                            </td>
-                        </ng-container>  
-                        <ng-container matColumnDef="delete">
-                            <th mat-header-cell *matHeaderCellDef>
-                                
-                            </th>
-                            <td mat-cell *matCellDef="let element">
-                                <button mat-icon-button (click)="delete(element.allergyId)">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="allergycolumns"></tr>
-                        <tr mat-row *matRowDef="let row;columns:allergycolumns"></tr>
-                    </table>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Age</mat-label>
+                <input matInput formControlName="age" type="number" required />
+                <mat-error *ngIf="checkTouchedAndInvalid('age')" class="error"
+                  >{{ errormessage.AGE_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <br />
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Race</mat-label>
+                <input matInput formControlName="race" type="text" required />
+                <mat-error *ngIf="checkTouchedAndInvalid('race')" class="error"
+                  >{{ errormessage.RACE_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-                </div>
-                <br>
-                <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column">
-                    <button [disabled]="form.invalid" (click)="submitPatientDetailsForm()" mat-raised-button color='primary'>Submit</button>
-                    <!-- [disabled]="form.invalid" mat-raised-button -->
-                    <!-- This textarea is dummy, dont remove it -->
-                    <textarea style="visibility: hidden;height: 0%;width: 0%;"></textarea>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </form>
-    <!-- </div> -->
-    <!-- </div> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Ethnicity </mat-label>
+                <input
+                  matInput
+                  formControlName="ethnicity"
+                  type="text"
+                  required
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('ethnicity')"
+                  class="error"
+                  >{{ errormessage.ETHNICITY_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Contact number</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="contactnumber"
+                  required
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('contactnumber')"
+                  class="error"
+                  >{{ errormessage.CONTACT_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <br />
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="email">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. pat@example.com"
+                  formControlName="emailid"
+                  required
+                  type="email"
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emailid')"
+                  class="error"
+                  >{{ errormessage.EMAILID_FORMAT }}
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-</body>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="language">
+                <mat-label>Languages Known </mat-label>
+                <input
+                  matInput
+                  formControlName="languages"
+                  type="text"
+                  required
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('languages')"
+                  class="error"
+                  >{{ errormessage.LANGUAGEKNOWN_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="address">
+                <mat-label>Home Address</mat-label>
+                <textarea
+                  rows="3"
+                  cols="1"
+                  matInput
+                  formControlName="homeaddress"
+                  required
+                  type="text"
+                  class="address"
+                >
+                </textarea>
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('homeaddress')"
+                  class="error"
+                  >{{ errormessage.HOMEADDRESS_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <!-- Emergency Contact Info -->
+      <mat-tab label="Emergency Contact Information">
+        <br />
+        <div style="padding-right: 10px; padding-left: 10px">
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input
+                  matInput
+                  formControlName="emergencycontactfirstname"
+                  required
+                  type="text"
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emergencycontactfirstname')"
+                  class="error"
+                  >{{ errormessage.FIRSTNAME_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-</html>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input
+                  matInput
+                  formControlName="emergencycontactlastname"
+                  required
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emergencycontactlastname')"
+                  class="error"
+                  >{{ errormessage.LASTNAME_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field>
+                <mat-label>Relationship</mat-label>
+                <mat-select formControlName="emergencycontactrelation">
+                  <mat-option value="father">Father</mat-option>
+                  <mat-option value="mother">Mother</mat-option>
+                  <mat-option value="sibling">Sibling</mat-option>
+                  <mat-option value="spouse">Spouse</mat-option>
+                  <mat-option value="friend">Friend</mat-option>
+                  <mat-option value="other">Other</mat-option>
+                  <span
+                    *ngIf="checkTouchedAndInvalid('emergencycontactrelation')"
+                    class="error"
+                    >{{ errormessage.RELATIONSHIP_REQUIRED }}
+                  </span>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="email">
+                <mat-label>Email Address</mat-label>
+                <input
+                  matInput
+                  placeholder="Ex. pat@example.com"
+                  formControlName="emergencycontactemailid"
+                  required
+                  type="email"
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emergencycontactemailid')"
+                  class="error"
+                  >{{ errormessage.EMAILID_FORMAT }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="contactnumber">
+                <mat-label>Contact number</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  formControlName="emergencycontactnumber"
+                  required
+                />
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emergencycontactnumber')"
+                  class="error"
+                  >{{ errormessage.CONTACT_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="column" fxFlex="30">
+              <mat-checkbox
+                formControlName="addrsameaspatient"
+                [(ngModel)]="addrsameaspatient"
+                (change)="sameAddres()"
+                >Address same as Patient
+              </mat-checkbox>
+            </div>
+          </div>
+
+          <div
+            fxLayout="row"
+            fxLayoutGap="10%"
+            fxLayout.xs="column"
+            fxLayout.md="column"
+            fxLayout.lt-lg="column"
+          >
+            <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-form-field class="address">
+                <mat-label>Home Address</mat-label>
+                <textarea
+                  matInput
+                  placeholder="Ex. pat@example.com"
+                  formControlName="emergencycontacthomeaddress"
+                  required
+                  type="text"
+                  rows="3"
+                  cols="1"
+                  class="address"
+
+                ></textarea>
+                <mat-error
+                  *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
+                  class="error"
+                  >{{ errormessage.HOMEADDRESS_REQUIRED }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <br />
+            <div fxLayout="column" fxFlex="30">
+              <mat-radio-group
+                fxLayoutGap="10px"
+                aria-labelledby="access-portal-radio-group"
+                fxLayoutGap="10px"
+                formControlName="accesstopatientportal"
+              >
+                <label id="access-portal-radio-group"
+                  >Do you need access to patient portal?</label
+                >
+                <mat-radio-button value="yes">Yes</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Allergy Details">
+        <!-- Allergy details must be auto populated from data base -->
+        <br />
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+          fxLayout.xs="column"
+          class="tabsmargin"
+        >
+          <label id="allergy-details-radio-group"
+            >Patient has any known allergies?</label
+          >
+          <mat-radio-group
+            aria-labelledby="allergy-details-radio-group"
+            formControlName="allergy_details"
+            fxLayoutGap="10px"
+            [(ngModel)]="allergy_details"
+          >
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button> </mat-radio-group
+          ><br />
+        </div>
+        <br />
+        <div *ngIf="allergy_details == 'yes'">
+          <div fxLayoutAlign="end">
+            <button mat-icon-button (click)="addAllergies()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <table mat-table [dataSource]="allergydatasource">
+            <ng-container matColumnDef="allergyid">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyCode }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="allergytype">
+              <th mat-header-cell *matHeaderCellDef>Type</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyType }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="allergyname">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyName }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="allergydesc">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyDescription }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="allergyclinicalinfo">
+              <th mat-header-cell *matHeaderCellDef>Clinical Information</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyClinicalInfo }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="allergyIsFatal">
+              <th mat-header-cell *matHeaderCellDef>allergy Is Fatal</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.allergyIsFatal == 1 ? "Yes" : "No" }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="delete(element.allergyId)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="allergycolumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: allergycolumns"></tr>
+          </table>
+        </div>
+        <br />
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column">
+          <button
+            [disabled]="form.invalid"
+            (click)="submitPatientDetailsForm()"
+            mat-raised-button
+            color="primary"
+          >
+            Submit
+          </button>
+          <!-- [disabled]="form.invalid" mat-raised-button -->
+          <!-- This textarea is dummy, dont remove it -->
+          <textarea
+            style="visibility: hidden; height: 0%; width: 0%"
+          ></textarea>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+  <!-- </div> -->
+  <!-- </div> -->
+</div>

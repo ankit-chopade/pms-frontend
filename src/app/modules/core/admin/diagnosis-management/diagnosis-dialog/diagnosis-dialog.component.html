@@ -1,32 +1,58 @@
-<!-- <h1 mat-dialog-title> diagnosis detail</h1> -->
+<h2 style="text-align: center" mat-dialog-title><u>Add Diagnosis</u></h2>
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="submit()">
-
     <div fxLayoutGap="10px">
-        <mat-form-field  >
-            <mat-label>Diagnosis Code</mat-label>
-            <input matInput type = "text"  formControlName="code"  required>
-            <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{errorMessages.DIAGNOSIS_CODE_REQUIRED}}</span>
-        </mat-form-field>
-        <br>
-        <mat-form-field  >
-            <mat-label>Diagnosis Description</mat-label>
-            <input matInput type="text" formControlName="description" >
-           
-        </mat-form-field>
-        <br>
-            <div *ngIf = "!isHiddenDetails">
-            <mat-label>Diagnosis Depricated</mat-label><br>
-            <mat-radio-group  formControlName="isDepricated" name="pdepri" >
-              
-                <mat-radio-button value="0">Yes  &nbsp;</mat-radio-button> 
-                <mat-radio-button value="1">No </mat-radio-button>
-            </mat-radio-group>
-              <br><br>
-            </div>
-        </div>
-    </form>
-<div mat-dialog-actions style="margin-bottom: 0;">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [disabled]="form.invalid" (click)="submit()" cdkFocusInitial>Ok</button>
+      <mat-form-field>
+        <mat-label>Diagnosis Code</mat-label>
+        <input matInput type="text" formControlName="code" required />
+        <span *ngIf="checkTouchedAndInvalid('code')" class="error">{{
+          errorMessages.DIAGNOSIS_CODE_REQUIRED
+        }}</span>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Diagnosis Description</mat-label>
+        <input matInput type="text" formControlName="description" />
+      </mat-form-field>
+      <br />
+      <div *ngIf="!isHiddenDetails">
+        <mat-label>Diagnosis Depricated</mat-label><br />
+        <mat-radio-group formControlName="isDepricated" name="pdepri">
+          <mat-radio-button value="0">Yes &nbsp;</mat-radio-button>
+          <mat-radio-button value="1">No </mat-radio-button>
+        </mat-radio-group>
+        <br /><br />
+      </div>
+    </div>
+  </form>
+</div>
+<div fxLayout="row">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxFlex="50"
+    fxLayoutGap="5px"
+  >
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      cdkFocusInitial
+      class="btn-sm"
+    >
+      Save
+    </button>
+  </div>
+  <div fxFlex="84"></div>
+
+  <div fxLayout="row" fxFlex fxLayoutAlign="end center">
+    <button
+      class="btn-sm"
+      mat-raised-button
+      color="warn"
+      (click)="onNoClick()"
+    >
+      Cancel
+    </button>
+  </div>
 </div>

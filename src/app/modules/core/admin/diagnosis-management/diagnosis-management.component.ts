@@ -16,8 +16,7 @@ import { DiagnosisDialogComponent } from './diagnosis-dialog/diagnosis-dialog.co
 })
 export class DiagnosisManagementComponent
   extends FormBaseController<any>
-  implements OnInit
-{
+  implements OnInit {
   constructor(
     private formConfig: FormUtilsService,
     public dialog: MatDialog,
@@ -44,13 +43,12 @@ export class DiagnosisManagementComponent
   diagnosisAddButtonClick() {
     this.form.reset();
     const dialogRef = this.dialog.open(DiagnosisDialogComponent, {
-      width: '350px',
       data: this.dataSource,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result != null) {
-        this.loadGrid();
-      }
+    dialogRef.afterClosed().subscribe(() => {
+
+      this.loadGrid();
+
     });
   }
 
@@ -81,29 +79,15 @@ export class DiagnosisManagementComponent
     };
     console.log(param);
     this.apiCommonService.deleteDiagnosisDetail(param).subscribe((res) => {
-      // if (res && res['status'] === 200) {
       this.loadGrid();
       this.notifyService.showSuccess(
         'Diagnosis deleted successfully',
         'Success'
       );
-      //  } else {
-      //    this.notifyService.showError("Diagnosis deletion failed", "Error");
-      //  }
+     
     });
   }
 
-  // saveDiagnosisDetails(param: any) {
-  //   console.log(param)
-  //   this.apiCommonService.saveDiagnosisDetail(param).subscribe((res) => {
-  //     if (res && res['result'] && res['status'] === 200) {
-  //       this.loadGrid();
-  //       this.notifyService.showSuccess("Diagnosis added successfully", "Success");
-  //     } else {
-  //       this.notifyService.showSuccess("Diagnosis addition failed", "Error");
-  //     }
-  //   });
-  // }
   editClick(diagnosis: Diagnosis) {
     console.log(diagnosis);
     this.setControlValue('code', diagnosis.diagnosisCode);
@@ -112,9 +96,8 @@ export class DiagnosisManagementComponent
     this.setControlValue('selectedId', diagnosis.diagnosisId);
     console.log(this.getControlValue('isDepricated'));
     const dialogRef = this.dialog.open(DiagnosisDialogComponent, {
-      width: '350px',
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.loadGrid();
     });
   }

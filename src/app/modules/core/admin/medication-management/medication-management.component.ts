@@ -48,33 +48,13 @@ export class MedicationManagementComponent
   }
   medicationAddButtonClick() {
     this.form.reset();
-    // console.log('add button click for medications');
     const dialogRef = this.dialog.open(MadicationDialogComponent, {
-      width: '250px',
       data: this.dataSource,
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.loadGrid();
     });
-    //   if (result && result['drgId'] && result['drgName']) {
-    //     if (this.validateExistingMedications(result['selectedId']) || result['drgName'] == 'Others') {
-    //       const param: any = {
-    //         appointmentId: this.appointmentId,
-    //         medicationId: result['selectedId'],
-    //         drugId: result['drgId'],
-    //         drugName: result['drgName'],
-    //         drugGenericName: result['drgGenericName'],
-    //         drugManufacturerName: result['drgBrandName'],
-    //         drugForm: result['drgForm'],
-    //         drugStrength: result['drgStrength'],
-    //         medicationDetails: result['details'] == undefined? null : result['details']
-    //       };
-    //       this.saveDrugDetails(param);
-    //     } else {
-    //       this.notifyService.showError('Diagnosis Already Exists', 'Error');
-    //     }
-    //   }
-    // });
+  
   }
 
   loadGrid() {
@@ -110,7 +90,7 @@ export class MedicationManagementComponent
       width: '250px',
       data: this.dataSource,
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.loadGrid();
     });
   }

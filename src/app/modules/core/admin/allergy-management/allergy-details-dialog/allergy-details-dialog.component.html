@@ -1,54 +1,73 @@
-<form [formGroup]="form">
+<h2 style="text-align: center" mat-dialog-title><u>Add Allergy</u></h2>
+<div mat-dialog-content>
+  <form [formGroup]="form" >
+    <div fxLayoutGap="10px">
+      <mat-form-field >
+        <mat-label>Allergy ID</mat-label>
+        <input matInput type="text" formControlName="allergyCode" required />
+      </mat-form-field>
+      <br />
+      <mat-form-field >
+        <mat-label>Allergy Type</mat-label>
+        <mat-select
+          (selectionChange)="getAllergyDetailsByType()"
+          [(value)]="selectedType"
+          formControlName="allergyType"
+        >
+          <mat-option *ngFor="let type of allergyTypes" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+      <mat-form-field   *ngIf="flag == false">
+        <mat-label>Allergy Name</mat-label>
+        <input matInput type="text" formControlName="allergyName" required />
+      </mat-form-field>
+      <br  *ngIf="flag == false" />
+      <mat-form-field >
+        <mat-label>Allergy Description </mat-label>
+        <textarea matInput formControlName="allergyDescription"></textarea>
+      </mat-form-field>
+      <br />
+      <mat-form-field >
+        <mat-label>Allergy Clinical Information </mat-label>
+        <input matInput formControlName="allergyClinicalInfo" />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        fxFlex="50"
+        fxLayoutGap="5px"
+      >
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="cancel()"
+          cdkFocusInitial
+          class="btn-sm"
+        >
+          Save
+        </button>
+      </div>
+      <div fxFlex="84"></div>
 
-  <div>
-    <mat-form-field appearance="outline">
-      <mat-label>Allergy ID</mat-label>
-      <input matInput type="text" formControlName="allergyCode"  required />
-      <!-- <mat-select [(value)]="selectedId"  formControlName="allergyCode"> -->
-      
-     
-    </mat-form-field>
-  </div>
-
-  <!-- <div *ngIf="flag==true">
-    <mat-form-field appearance="outline">
-      <mat-label>Allergy ID </mat-label>
-      <input matInput formControlName="allergyCode">
-    </mat-form-field>
-  </div> -->
-
-  <mat-form-field appearance="outline">
-    <mat-label>Allergy Type</mat-label>
-    <mat-select (selectionChange)="getAllergyDetailsByType()" [(value)]="selectedType" formControlName="allergyType">
-      <mat-option *ngFor="let type of allergyTypes" [value]="type">{{type}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div *ngIf="flag==false">
-    <mat-form-field appearance="outline">
-      <mat-label>Allergy Name</mat-label>
-      <input matInput type="text" formControlName="allergyName"  required />
-        
-    </mat-form-field>
-  </div>
-
-  
-
-  <!-- </div>
-                <div fxLayout ="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column">     -->
-  <mat-form-field appearance="outline">
-    <mat-label>Allergy Description </mat-label>
-    <textarea matInput formControlName="allergyDescription"></textarea>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Allergy Clinical Information </mat-label>
-    <input matInput formControlName="allergyClinicalInfo">
-  </mat-form-field>
-</form>
-
-<div mat-dialog-actions>
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button [disabled]="form.invalid" (click)="add()"  cdkFocusInitial>Ok</button>
-
+      <div fxLayout="row" fxFlex fxLayoutAlign="end center">
+        <button
+          class="btn-sm"
+          mat-raised-button
+          color="warn"
+          (click)="add()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
+
+
+
+

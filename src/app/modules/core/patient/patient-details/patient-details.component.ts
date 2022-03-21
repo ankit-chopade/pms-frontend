@@ -76,7 +76,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
 
     }
-    console.log(demographicDetail);
     this.apiCommonService.patientDetails(demographicDetail).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
@@ -93,7 +92,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
   }
   addAllergies() {
     const dialogRef = this.dialog.open(AllergyDetailsDialogComponent, {
-      width: '300px',
       disableClose: true,
       data: this.allergydatasource,
 
@@ -107,6 +105,9 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
           //  this.allergydatasource.push(resp);
           this.loadGrid();
+        }
+        else{
+          this.form.reset();
         }
       }
     );
@@ -164,26 +165,19 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       
           this.patientAllergyData = this.patientData.patientAllergy;
          
-          console.log(this.patientAllergyData);
           for (let patientAllergy of this.patientAllergyData) {
             this.patientAllergyList.push(patientAllergy.allergyId);    
           }
-          console.log(this.patientAllergyList);
         }
         const patientAllergyIdList = {
           allergyId: this.patientAllergyList
         }
-        console.log(patientAllergyIdList);
           this.apiCommonService.getAllergyListDetails(patientAllergyIdList).subscribe(
             res => {
 
               if (res && res['result'] && res['status'] === 200) {
                  this.allergydatasource = res['result'];
-                 console.log(this.allergydatasource)
-                // if (this.allergyData != null) {
-                //   this.allergydatatemporary.push(this.allergyData);
-                // }
-                // this.allergydatasource = [...this.allergydatatemporary];
+              
               }
             }
           );
@@ -205,16 +199,13 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
     let obj: PatientAllergy = new PatientAllergy();
     obj.allergyId = +data['allergyId'];
     obj.allergyIsFatal= +data['allergyIsFatal'];
-    console.log(obj.allergyIsFatal);
     if (obj.allergyId == 0) {
 
-      // console.log("enter in get allergy")
       this.otherType.allergyCode = data['allergyCode']
       this.otherType.allergyType = data['allergyType']
       this.otherType.allergyName = data['allergyName']
       this.otherType.allergyClinicalInfo = data['allergyClinicalInfo']
       this.otherType.allergyDescription = data['allergyDescription']
-      // console.log(this.otherType);
       this.saveOtherAllergy(this.otherType)
 
     }
@@ -238,7 +229,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
       allergyDetailsEntity.allergyType = this.otherType.allergyType,
       allergyDetailsEntity.allergyDescription = this.otherType.allergyDescription,
       allergyDetailsEntity.allergyClinicalInfo = this.otherType.allergyClinicalInfo,
-      console.log(allergyDetailsEntity);
       this.apiCommonService.saveAllergyDetails(allergyDetailsEntity).subscribe(
         res => {
           if (res && res['result'] && res['status'] === 200) {
@@ -264,7 +254,6 @@ export class PatientDetailsComponent extends FormBaseController<any> implements 
 
       obj.allergyId = Allergy.allergyId
       this.patientAllergy.push(obj);
-      console.log(obj);
 
     }
   }
@@ -330,7 +319,6 @@ public  calculateAge() {
     
     let timeDiff = Math.abs(this.latest_date - this.patientdob);
     this.age=timeDiff;
-   console.log( this.age);
     let patientage = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
     
 
