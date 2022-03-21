@@ -104,6 +104,9 @@ export class AllergyDetailsDialogComponent
         } else {
           this.notifyService.showError('Addition failed', 'Error');
         }
+      },
+      (err)=>{
+        this.notifyService.showError(err['error'].message, 'Error');
       });
     } else {
       const allergy = {
