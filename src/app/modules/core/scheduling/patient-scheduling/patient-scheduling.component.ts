@@ -303,7 +303,8 @@ export class PatientSchedulingComponent implements OnInit {
       (err) => {
         this.notifyService.showError('Please try after some time', 'Error');
       }
-    );    
+    ); 
+    this.getPatientAppintments(parseInt(JSON.parse(JSON.stringify(sessionStorage.getItem('userId')))))   
   }
   getPatientAppintments(Id:Number){
     const appointmentParam : any = {
@@ -349,7 +350,6 @@ export class PatientSchedulingComponent implements OnInit {
       (resp) => {
         if (resp['status'] === 200 && resp['result'] && resp != null) {
           this.allappointments_physician = resp['result'];
-          console.log(resp['result'])
           this.toGreaterCasePhysician();
           this.allappointments =[...this.allappointments_patient,...this.allappointments_physician]
           this.allappointments=  this.allappointments.filter((value, index) => this.allappointments.map(a=>a['appointmentId']).indexOf(value['appointmentId']) === index);
@@ -570,7 +570,6 @@ export class PatientSchedulingComponent implements OnInit {
     //   }
     // });
     // this.allappointments=this.allappointments_patient;
-    console.log(this.allappointments)
   }
 
   saveEditHistory(editHistory: any) {

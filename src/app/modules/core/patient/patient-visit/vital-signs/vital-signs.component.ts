@@ -27,7 +27,7 @@ export class VitalSignsComponent
 
   isEdit:boolean=true
   action:string;
-
+  roleId:any;
   constructor(
     private formConfig: FormUtilService,
     private apiCommonService: ApiService,
@@ -40,8 +40,6 @@ export class VitalSignsComponent
   }
 
   ngOnInit(): void {
-    
-
     if(this.route.snapshot.params["id"]!=undefined){
       let id:any =this.route.snapshot.params["id"]
       let action:any =this.route.snapshot.params["action"]
@@ -60,6 +58,7 @@ export class VitalSignsComponent
     }
 
     this.loadData(this.appointmentId);
+    this.roleId = sessionStorage.getItem("roleId");
   }
 
   loadData(appointmentId: number) {

@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { FormUtilService } from '../../patient/service/form-util.service';
 import { DayAndDate } from '../model/DayAndDate';
@@ -8,7 +10,8 @@ import { ApiService } from '../service/api.service';
 @Component({
   selector: 'app-physician-inbox',
   templateUrl: './physician-inbox.component.html',
-  styleUrls: ['./physician-inbox.component.scss']
+  styleUrls: ['./physician-inbox.component.scss'],
+  providers: [DatePipe]
 })
 export class PhysicianInboxComponent extends FormBaseController<any> implements OnInit {
   physicianname: string;
@@ -16,7 +19,7 @@ export class PhysicianInboxComponent extends FormBaseController<any> implements 
   AppoinmentData: PatientAppointment[]
   selected: Date = new Date();
 
-  constructor(private apiCommonService: ApiService, private formConfig: FormUtilService) {
+  constructor(private apiCommonService: ApiService, private formConfig: FormUtilService,private datePipe:DatePipe,private router: Router) {
     super(formConfig.inboxForm)
   }
 
@@ -67,5 +70,16 @@ export class PhysicianInboxComponent extends FormBaseController<any> implements 
           console.log(this.dataSource);
         }
       })
+  }
+  goToVisit(appointmentId:number){
+    this.router.navigate(['../dashboard/patient/vital-signs/edit',appointmentId],{
+      skipLocationChange:true
+  });
+  }
+
+  compareDate(appointmentDate: Date){
+    let date = this.datePipe.transform(appointmentDate, 'yyyy-MM-dd');
+    let todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    return date==todayDate;
   }
 }

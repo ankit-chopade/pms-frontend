@@ -20,7 +20,7 @@ const routes: Routes = [
       path: 'forgot', component: ForgotPasswordComponent
     },
     { 
-      path: 'change', component: ChangePasswordComponent, canActivate: [NavigationAuthGuardService]
+      path: 'change', component: ChangePasswordComponent, //canActivate: [NavigationAuthGuardService]
     },
     { 
       path: '', component: LoginComponent

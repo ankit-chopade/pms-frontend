@@ -74,7 +74,8 @@ export class EmployeeRegistrationComponent extends FormBaseController<any> imple
      this.apiCommonService.employeeRegistration(this.employee).subscribe(
       res => {
         if (res && res['result'] && res['status'] === 200) {
-              this.notifyService.showSuccess("Employee registered successfully.","Success")     
+              this.notifyService.showSuccess("Employee registered successfully.","Success")  
+              this.resetFormControls();   
         }
         else {
           this.notifyService.showError("Employee registeration failed","Error")     
@@ -82,9 +83,16 @@ export class EmployeeRegistrationComponent extends FormBaseController<any> imple
         }
       }
     );
-    console.log(this.employee);
-    
-   
   }
- 
+
+  resetFormControls(){
+    this.form.reset();
+    this.form.get("title")?.setErrors(null);
+    this.form.get("firstname")?.setErrors(null);
+    this.form.get("lastname")?.setErrors(null);
+    this.form.get("dob")?.setErrors(null);
+    this.form.get("emailid")?.setErrors(null);
+    this.form.get("contactnumber")?.setErrors(null);
+    this.form.get("role")?.setErrors(null);
+  }
 }

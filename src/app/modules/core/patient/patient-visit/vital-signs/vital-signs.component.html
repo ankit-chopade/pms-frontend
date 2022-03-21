@@ -127,7 +127,7 @@
     <div fxFlex="84"></div>
 
     <div fxLayout="row" fxFlex fxLayoutAlign="end center">
-      <button mat-raised-button color="light" (click)="nextButtonClick()">
+      <button mat-raised-button color="light" *ngIf="roleId!='4'"  (click)="nextButtonClick()">
         <mat-icon>arrow_forward</mat-icon>
       </button>
     </div>

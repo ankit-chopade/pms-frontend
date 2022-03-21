@@ -13,12 +13,13 @@ import { ApiService } from '../service/api.service';
 export class VisitHistoryComponent implements OnInit {
   displayedColumns: string[] = ['appointmentId', 'subject', 'dateOfAppointment','startTime', 'physicianName','action'];
   dataSource:MatTableDataSource<any>;
+  userId:any;
   constructor(private apiService: ApiService ,private router: Router) {
 
   }
 
   ngOnInit(): void {
-
+    this.userId = sessionStorage.getItem("userId")
     this.loadData()
   }
 
@@ -30,7 +31,7 @@ export class VisitHistoryComponent implements OnInit {
   loadData() {
 
     const param: any = {
-      id: 19,
+      id: +this.userId,
       date: new Date()
     };
     this.apiService.getAllVisitsDetails(param).subscribe(res => {
@@ -46,7 +47,7 @@ export class VisitHistoryComponent implements OnInit {
     })
   }
   view(appointmentId:Number){
-    this.router.navigate(['../dashboard/patient/vital-signs/edit',appointmentId],{
+    this.router.navigate(['../dashboard/patient/vital-signs/view',appointmentId],{
         skipLocationChange:true
     });
    

@@ -27,13 +27,13 @@
             <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>     
         </ng-container>
         <ng-container matColumnDef="createdDate">
-            <mat-header-cell *matHeaderCellDef>  Date of Joning  </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>  Date of Joining  </mat-header-cell>
             <mat-cell *matCellDef="let element">{{element.createdDate | date: 'dd-MMM-yyyy'}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="status">
-            <mat-header-cell *matHeaderCellDef > status</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef > Status</mat-header-cell>
             <mat-cell *matCellDef="let element"> 
-                {{element.activeStatus == 1 ? "active" : element.activeStatus == 0 ? "in-active" : "blocked" }}   
+                {{element.activeStatus == 1 ? "Active" : element.activeStatus == 0 ? "Inactive" : "Blocked" }}   
                                         
             </mat-cell>
         </ng-container>

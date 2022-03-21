@@ -22,6 +22,9 @@
         <p>Time: {{dataSource.startTime | date:"shortTime"}}</p>
         <p>Patient Name: {{dataSource.patientName}}</p>
         <p>Physician Name: {{physicianname}}</p>
+        <button mat-button *ngIf="compareDate(dataSource.startTime)" (click)="goToVisit(dataSource.appointmentId)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
