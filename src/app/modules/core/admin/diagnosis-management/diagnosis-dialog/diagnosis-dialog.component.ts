@@ -60,7 +60,7 @@ export class DiagnosisDialogComponent
       const diagnosis = {
         diagnosisCode: this.getControlValue('code'),
         diagnosisDescription: this.getControlValue('description'),
-        diagnosisIsDepricated: this.getControlValue('isDepricated'),
+        diagnosisIsDepricated: 1,
       };
 
       this.apiCommonService.saveDiagnosisDetail(diagnosis).subscribe((res) => {

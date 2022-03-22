@@ -1,8 +1,8 @@
 export const ServiceConstants = {
     ROLE:{
         ADMIN:2,
-        PATIENT:3,
-        PHYSICIAN:4,
-        NURSE:5
+        PHYSICIAN:3,
+        NURSE:4,
+        PATIENT:5
     }
 }

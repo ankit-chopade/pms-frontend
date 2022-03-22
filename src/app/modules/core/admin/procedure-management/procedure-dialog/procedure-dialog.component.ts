@@ -55,7 +55,7 @@ export class ProcedureDialogComponent
       const procedure = {
         procedureCode: this.getControlValue('code'),
         procedureDescription: this.getControlValue('description'),
-        procedureIsDepricated: this.getControlValue('isDepricated'),
+        procedureIsDepricated: 1,
         // procedureId:this.getControlValue('selectedId')
       };
       console.log(procedure);

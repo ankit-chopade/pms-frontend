@@ -10,7 +10,7 @@
           </mat-panel-title>
           <mat-panel-description>
             <p>{{dataSource.description}}</p>
-            <button mat-icon-button (click)="deleteAppointmentsByAppointmentId(dataSource.appointmentId)" color="warn">
+            <button mat-icon-button *ngIf="compareFutureDate(dataSource.startTime)" (click)="deleteAppointmentsByAppointmentId(dataSource.appointmentId)" color="warn">
             <div>
             <mat-icon class="v-align-right">delete</mat-icon>
             <span class = "v-align-right"></span>
@@ -23,8 +23,11 @@
         <p>Time: {{dataSource.startTime | date:"shortTime"}}</p>
         <p>Patient Name: {{dataSource.patientName}}</p>
         <p>Physician Name: {{physicianname}}</p>
-        <button mat-button *ngIf="compareDate(dataSource.startTime)" (click)="goToVisit(dataSource.appointmentId)">
-          <mat-icon>remove_red_eye</mat-icon>
+        <button mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToVisit(dataSource.appointmentId)">
+          Visit Detail
+        </button>
+        <button mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToPatientDetails(dataSource.patientId)">
+          Patient Detail
         </button>
       </mat-expansion-panel>
     </mat-accordion>

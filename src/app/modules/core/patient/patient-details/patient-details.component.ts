@@ -2,7 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBaseController } from 'src/app/modules/common/utility/form-base-controller';
 import { formErrorMessages } from 'src/app/modules/default/constant/message.constant';
 import { NotificationService } from 'src/app/modules/default/service/notification.service';
@@ -44,7 +44,8 @@ export class PatientDetailsComponent
     private apiCommonService: ApiService,
     private router: Router,
     private notifyService: NotificationService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private route: ActivatedRoute
   ) {
     super(formConfig.patientDetailsForm);
   }
@@ -138,12 +139,18 @@ export class PatientDetailsComponent
   }
   ngOnInit(): void {
     this.form.reset();
+    let patientId;
+    
+    if (this.route.snapshot.params['id'] != undefined) {
+      let id: any = this.route.snapshot.params['id'];
+      patientId = +id;
+    } else {
+      patientId = Number(sessionStorage.getItem('userId'));
+    }
+
     const userId = {
-      userId: Number(sessionStorage.getItem('userId')),
+      userId: patientId,
     };
-    // const userId = {
-    //         userId: 22
-    //      }
     this.apiCommonService.getuserDetails(userId).subscribe((res) => {
       if (res && res['result'] && res['status'] === 200) {
         //  alert("Success");
@@ -217,7 +224,6 @@ export class PatientDetailsComponent
           }
         });
     });
-
   }
 
   sameAddres() {
@@ -298,8 +304,6 @@ export class PatientDetailsComponent
     this.allergydatasource.forEach((element, index) => {
       if (element.allergyId == id) this.allergydatasource.splice(index, 1);
     });
-
-   
 
     this.patientAllergy.forEach((element, index) => {
       if (element.allergyId == id) this.patientAllergy.splice(index, 1);

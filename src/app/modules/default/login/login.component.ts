@@ -45,8 +45,8 @@ export class LoginComponent extends FormBaseController<any> {
   returnUrl: string;
 
   ngOnInit(): void {
-    this.appService.setUserLoggedIn(false);
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard';
+    // this.appService.setUserLoggedIn(false);
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard';
     this.clearFormControls(); 
   }
 
@@ -64,15 +64,18 @@ export class LoginComponent extends FormBaseController<any> {
           if (res && res['result'] && res['status'] === 200) {
             StorageService.setSessionDetails(res['result']);
             this.appService.setUserLoggedIn(true);
-            this.router.navigate([this.returnUrl]);
             if (sessionStorage.getItem('roleId') == '5') {
-              this.router.navigate(['../dashboard/inbox/patient-inbox']);
+              this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard/inbox/patient-inbox';
+              this.router.navigate([this.returnUrl]);
             } else if (sessionStorage.getItem('roleId') == '4') {
-              this.router.navigate(['../dashboard/inbox/nurse-inbox']);
+              this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard/inbox/nurse-inbox';
+              this.router.navigate([this.returnUrl]);
             } else if (sessionStorage.getItem('roleId') == '3') {
-              this.router.navigate(['../dashboard/inbox/physician-inbox']);
+              this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard/inbox/physician-inbox';
+              this.router.navigate([this.returnUrl]);
             } else if (sessionStorage.getItem('roleId') == '2') {
-              this.router.navigate(['../dashboard/admin']);
+              this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard/admin'
+              this.router.navigate([this.returnUrl]);
             } else {
               this.notifyService.showError(
                 'Please try after some time',

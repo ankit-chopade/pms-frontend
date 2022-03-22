@@ -9,7 +9,7 @@ import { ServiceConstants } from "./service.constants";
 export class PhysicianAuthGuardService implements CanActivate{
     constructor(private router: Router){ }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if(sessionStorage.getItem("role")!= ""+ServiceConstants.ROLE.PHYSICIAN) {
+        if(sessionStorage.getItem("roleId")!= ""+ServiceConstants.ROLE.PHYSICIAN) {
             this.router.navigate(['../unauthorized']);
             return false;
         }

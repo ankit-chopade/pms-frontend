@@ -9,12 +9,13 @@ export class NavigationAuthGuardService implements CanActivate{
 
   constructor(private router:Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if(sessionStorage.getItem("Authorization")==null)
+    if(sessionStorage.getItem("token")==null)
     {
       this.router.navigate([''],{queryParams:{ returnUrl : state.url}})
       return false;
     }
     else{
+
       return true;
     }
   }

@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [PatientAuthGuardService]
   },
   {
-    path: ':details/:userId',
+    path: 'details/:userId',
     component: PatientPortalDetailsComponent,
     canActivate: [!PatientAuthGuardService && !AdminAuthGuardService]
   },
@@ -31,12 +31,17 @@ const routes: Routes = [
   {
     path: 'patient-details',
     component: PatientDetailsComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientAuthGuardService]
   },  
+  {
+    path: 'patient-details/:id',
+    component: PatientDetailsComponent,
+    canActivate: [!AdminAuthGuardService]
+  },
   {
     path: 'visit-history',
     component: VisitHistoryComponent,
-    canActivate: [PatientAuthGuardService]
+    canActivate: [!PatientAuthGuardService && !AdminAuthGuardService]
   },
   {
     path: 'vital-signs/:action/:id',
