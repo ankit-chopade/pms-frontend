@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorsService } from './modules/common/services/http-interceptor.service';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
 import { NavigationAuthGuardService } from './modules/default/service/navigationauthguard.service';
+import { UnauthorizedViewComponent } from './modules/common/unauthorized-view/unauthorized-view.component';
 
 
 
@@ -22,6 +23,7 @@ import { NavigationAuthGuardService } from './modules/default/service/navigation
   declarations: [
     AppComponent,
     ConfirmPasswordDirective,
+    UnauthorizedViewComponent,
   ],
   imports: [
     BrowserModule,
