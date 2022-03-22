@@ -32,7 +32,6 @@ submitforgotPassword()
       }
       else {
         this.notifyService.showError("Please try again","Error")
-        // console.log("Login Failed")
       }
     })
 }
