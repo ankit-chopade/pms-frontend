@@ -24,11 +24,10 @@ submitforgotPassword()
   const param = {
     emailId: this.getControlValue('username'),
   }
-
   this.apiCommonService.forgotPassword(param).subscribe(
     res => {
       if (res && res['result'] && res['status'] === 200) {
-        this.notifyService.showSuccess("Email has been sent","Success")
+        this.notifyService.showSuccess("Password has been sent on your EmailId","Success")
         this.router.navigate(['../'])
       }
       else {
