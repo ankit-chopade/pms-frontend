@@ -1,9 +1,12 @@
 table {
-    width: 100%;
+  width: 100%;
+}
+.stats-card {
+  .mat-card {
+    overflow: hidden;
   }
-  .stats-card {
-    .mat-card {
-      overflow: hidden;
-    }
-  }
-  
+}
+
+.custom-header {
+  background-color: rgb(83, 2, 74);
+}

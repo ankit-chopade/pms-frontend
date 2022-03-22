@@ -1,193 +1,15 @@
-
-<mat-tab-group>
-  <div fxLayoutAlign="strech center" fxFlexFill class="box">
-
-    <mat-tab label="Demographics">
-        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-            class="tabsmargin">
-        </div>
-      <div class="mat-elevation-z8" style="padding: 10px">
-      
-        <div style="padding-right: 10px; padding-left: 10px">
-          <form [formGroup]="form">
-            <div
-              fxLayout="row"
-              fxLayoutGap="10%"
-              fxLayout.xs="column"
-              fxLayout.md="column"
-              fxLayout.lt-lg="column"
-            >
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>First Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="firstname"
-                />
-              </mat-form-field>
-            </div>
-
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Last Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="lastname"              
-                />                  
-              </mat-form-field>
-            </div>
-            
-           
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Gender</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="gender"              
-                />                  
-              </mat-form-field>
-            </div>
-          </div>  
-
-          <div
-            fxLayout="row"
-            fxLayoutGap="10%"
-            fxLayout.xs="column"
-            fxLayout.md="column"
-            fxLayout.lt-lg="column"
-          > 
-           <!-- <br> -->
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>E-mail</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="emailid"
-                />
-              </mat-form-field>
-            </div>
-         
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Contact Number</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  [readonly]="disabled"
-                  formControlName="contactnumber"
-                />
-              </mat-form-field>
-            </div>
-
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>DOB</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="dob"
-                 value="20"
-                  
-                />
-              </mat-form-field>
-            </div>
-          </div>
-            <div
-            fxLayout="row"
-            fxLayoutGap="10%"
-            fxLayout.xs="column"
-            fxLayout.md="column"
-            fxLayout.lt-lg="column"
-          >  
-         <!-- </br> -->
-
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Ethnicity</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="ethnicity"
-                />
-              </mat-form-field>
-            </div>
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Race</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="race" 
-                />
-              </mat-form-field>
-            </div>
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Languages Known</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="languages"
-                />
-              </mat-form-field>
-            </div>  
-          </div>
-            <div
-              fxLayout="row"
-              fxLayoutGap="10%"
-              fxLayout.xs="column"
-              fxLayout.md="column"
-              fxLayout.lt-lg="column"
-            > 
-            <!-- </br> -->
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>Home Address</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="homeaddress"
-                />
-              </mat-form-field>
-            </div>
-            <div fxLayout="column" fxFlex="30"></div>
-          </div>
-        </form>
-      </div>
-      <br />
-      <div fxLayout="row">
+<div class="mat-elevation-z8" style="padding: 10px">
+  <mat-tab-group mat-align-tabs="center">
+    <div fxLayoutAlign="strech center" fxFlexFill class="box">
+      <mat-tab label="Demographics Details">
+        <br />
         <div
           fxLayout="row"
-          fxLayoutAlign="start center"
-          fxFlex="50"
-          fxLayoutGap="5px"
-        >
-        
-        </div>
-        <div fxFlex="84"></div>
-      </div>
-      </div>
-    </mat-tab> 
-
-    <mat-tab label="Emergency Contact Info">
-      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-          class="tabsmargin">
-      </div>
-      <div class="mat-elevation-z8" style="padding: 10px">
-      
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+          fxLayout.xs="column"
+          class="tabsmargin"
+        ></div>
         <div style="padding-right: 10px; padding-left: 10px">
           <form [formGroup]="form">
             <div
@@ -197,17 +19,198 @@
               fxLayout.md="column"
               fxLayout.lt-lg="column"
             >
-            <div fxLayout="column" fxFlex="30">
-              <mat-form-field>
-                <mat-label>First Name</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [readonly]="disabled"
-                  formControlName="emergencycontactfirstname"
-                />
-              </mat-form-field>
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>First Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="firstname"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Last Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="lastname"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Gender</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="gender"
+                  />
+                </mat-form-field>
+              </div>
             </div>
+
+            <div
+              fxLayout="row"
+              fxLayoutGap="10%"
+              fxLayout.xs="column"
+              fxLayout.md="column"
+              fxLayout.lt-lg="column"
+            >
+              <!-- <br> -->
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>E-mail</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="emailid"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Contact Number</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [readonly]="disabled"
+                    formControlName="contactnumber"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>DOB</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="dob"
+                    value="20"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayoutGap="10%"
+              fxLayout.xs="column"
+              fxLayout.md="column"
+              fxLayout.lt-lg="column"
+            >
+              <!-- </br> -->
+
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Ethnicity</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="ethnicity"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Race</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="race"
+                  />
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Languages Known</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="languages"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayoutGap="10%"
+              fxLayout.xs="column"
+              fxLayout.md="column"
+              fxLayout.lt-lg="column"
+            >
+              <!-- </br> -->
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>Home Address</mat-label>
+                  <textarea
+                    matInput
+                    type="text"
+                    rows="1"
+                    [readonly]="disabled"
+                    formControlName="homeaddress"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="30"></div>
+              <div fxLayout="column" fxFlex="30"></div>
+            </div>
+          </form>
+        </div>
+        <br />
+        <div fxLayout="row">
+          <div
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxFlex="50"
+            fxLayoutGap="5px"
+          ></div>
+          <div fxFlex="84"></div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Emergency Contact">
+        <br />
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+          fxLayout.xs="column"
+          class="tabsmargin"
+        ></div>
+
+        <div style="padding-right: 10px; padding-left: 10px">
+          <form [formGroup]="form">
+            <div
+              fxLayout="row"
+              fxLayoutGap="10%"
+              fxLayout.xs="column"
+              fxLayout.md="column"
+              fxLayout.lt-lg="column"
+            >
+              <div fxLayout="column" fxFlex="30">
+                <mat-form-field>
+                  <mat-label>First Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [readonly]="disabled"
+                    formControlName="emergencycontactfirstname"
+                  />
+                </mat-form-field>
+              </div>
 
               <div fxLayout="column" fxFlex="30">
                 <mat-form-field>
@@ -219,7 +222,7 @@
                     formControlName="emergencycontactlastname"
                   />
                 </mat-form-field>
-              </div>   
+              </div>
 
               <div fxLayout="column" fxFlex="30">
                 <mat-form-field>
@@ -232,7 +235,6 @@
                   />
                 </mat-form-field>
               </div>
-             
             </div>
             <div
               fxLayout="row"
@@ -240,8 +242,8 @@
               fxLayout.xs="column"
               fxLayout.md="column"
               fxLayout.lt-lg="column"
-            > 
-            <!-- </br> -->
+            >
+              <!-- </br> -->
 
               <div fxLayout="column" fxFlex="30">
                 <mat-form-field>
@@ -254,8 +256,8 @@
                   />
                 </mat-form-field>
               </div>
-             
-               <div fxLayout="column" fxFlex="30">
+
+              <div fxLayout="column" fxFlex="30">
                 <mat-form-field>
                   <mat-label>Address</mat-label>
                   <input
@@ -266,7 +268,7 @@
                   />
                 </mat-form-field>
               </div>
-             
+
               <div fxLayout="column" fxFlex="30">
                 <mat-form-field>
                   <mat-label>Relationship</mat-label>
@@ -278,10 +280,9 @@
                   />
                 </mat-form-field>
               </div>
-             <div fxLayout="column" fxFlex="30"></div>
             </div>
-          </form> 
-        </div>  
+          </form>
+        </div>
         <br />
         <div fxLayout="row">
           <div
@@ -289,53 +290,68 @@
             fxLayoutAlign="start center"
             fxFlex="50"
             fxLayoutGap="5px"
-          >
-          
-          </div>
+          ></div>
           <div fxFlex="84"></div>
-       </div>
-     </div>
-      
-    </mat-tab> 
-    <mat-tab label="Allergies">
-      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center" fxLayout.xs="column"
-          class="tabsmargin">
-      </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Allergies">
+        <div
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign="center center"
+          fxLayout.xs="column"
+          class="tabsmargin"
+        ></div>
 
         <table mat-table [dataSource]="allergyDataSource">
           <ng-container matColumnDef="allergy_id">
-            <th mat-header-cell  *matHeaderCellDef >Allergy Code</th>
-            <td mat-cell *matCellDef="let element">{{element.allergyCode}}</td>     
+            <th mat-header-cell *matHeaderCellDef>Allergy Code</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.allergyCode }}
+            </td>
           </ng-container>
           <ng-container matColumnDef="allergy_type">
-            <th mat-header-cell  *matHeaderCellDef >Allergy Type</th>
-            <td mat-cell *matCellDef="let element">{{element.allergyType}}</td>     
+            <th mat-header-cell *matHeaderCellDef>Allergy Type</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.allergyType }}
+            </td>
           </ng-container>
           <ng-container matColumnDef="allergy_name">
-            <th mat-header-cell  *matHeaderCellDef >Allergy Name</th>
-            <td mat-cell *matCellDef="let element">{{element.allergyName}}</td>     
+            <th mat-header-cell *matHeaderCellDef>Allergy Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.allergyName }}
+            </td>
           </ng-container>
           <ng-container matColumnDef="allergy_desc">
-            <th mat-header-cell  *matHeaderCellDef >Allergy Description</th>
-            <td mat-cell *matCellDef="let element">{{element.allergyDescription}}</td>     
+            <th mat-header-cell *matHeaderCellDef>Allergy Description</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.allergyDescription }}
+            </td>
           </ng-container>
           <ng-container matColumnDef="info">
-            <th mat-header-cell  *matHeaderCellDef >Allergy Clinical info</th>
-            <td mat-cell *matCellDef="let element">{{element.allergyClinicalInfo}}</td>     
+            <th mat-header-cell *matHeaderCellDef>Allergy Clinical info</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.allergyClinicalInfo }}
+            </td>
           </ng-container>
-          
+
           <tr mat-header-row *matHeaderRowDef="allergiesColumnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let myRowData; columns:allergiesColumnsToDisplay"></tr>
+          <tr
+            mat-row
+            *matRowDef="let myRowData; columns: allergiesColumnsToDisplay"
+          ></tr>
         </table>
-       
-     </mat-tab>     
-  </div>    
- 
-</mat-tab-group>
-<div fxLayout="row wrap" fxLayoutAlign="center end">
-  <button  mat-raised-button color="primary" [routerLink]="['/dashboard/patient/portal-screen']"> Back </button>
-</div> 
-
-
-
-
+        <br>
+      </mat-tab>
+    </div>
+  </mat-tab-group>
+  <div fxLayout="row wrap" fxLayoutAlign="center end">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/dashboard/patient/portal-screen']"
+    >
+      Back
+    </button>
+  </div>
+</div>

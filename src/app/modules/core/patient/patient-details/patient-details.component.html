@@ -195,7 +195,7 @@
               <mat-form-field class="address">
                 <mat-label>Home Address</mat-label>
                 <textarea
-                  rows="3"
+                  rows="1"
                   cols="1"
                   matInput
                   formControlName="homeaddress"
@@ -321,12 +321,14 @@
               </mat-form-field>
             </div>
             <br />
-            <div fxLayout="column" fxFlex="30">
-              <mat-checkbox
+            <div fxLayout="column" fxFlex="30"    >
+              <mat-checkbox style="margin-top: 21px;"
                 formControlName="addrsameaspatient"
                 [(ngModel)]="addrsameaspatient"
                 (change)="sameAddres()"
-                >Address same as Patient
+                >
+                <mat-label>Address same as Patient</mat-label>
+
               </mat-checkbox>
             </div>
           </div>
@@ -348,10 +350,9 @@
                   formControlName="emergencycontacthomeaddress"
                   required
                   type="text"
-                  rows="3"
+                  rows="1"
                   cols="1"
                   class="address"
-
                 ></textarea>
                 <mat-error
                   *ngIf="checkTouchedAndInvalid('emergencycontacthomeaddress')"
@@ -375,6 +376,7 @@
                 <mat-radio-button value="no">No</mat-radio-button>
               </mat-radio-group>
             </div>
+            <div fxLayout="column" fxFlex="30"></div>
           </div>
         </div>
       </mat-tab>

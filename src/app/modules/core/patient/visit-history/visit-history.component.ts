@@ -13,13 +13,13 @@ import { ApiService } from '../service/api.service';
 export class VisitHistoryComponent implements OnInit {
   displayedColumns: string[] = ['appointmentId', 'subject', 'dateOfAppointment','startTime', 'physicianName','action'];
   dataSource:MatTableDataSource<any>;
-  userId:any;
+  userId:any=19;
   constructor(private apiService: ApiService ,private router: Router) {
 
   }
 
   ngOnInit(): void {
-    this.userId = sessionStorage.getItem("userId")
+    //this.userId = sessionStorage.getItem("userId")
     this.loadData()
   }
 

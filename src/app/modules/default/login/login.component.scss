@@ -1,63 +1,68 @@
-.error 
-{   
-    color : Red; font-size: 12px; 
+.error {
+  color: Red;
+  font-size: 12px;
 }
 
 .content-body {
-    min-height: 100%;
-    padding: 0.5% 1rem;
-    background-color: rgb(208, 228, 250);
-    display: block;
-    background-color: #77aa77;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 2 1'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%2377aa77'/%3E%3Cstop offset='1' stop-color='%234fd'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23cf8' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23cf8' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='2' y2='2'%3E%3Cstop offset='0' stop-color='%23cf8' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23cf8' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='2' height='1'/%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23b)' points='0 1 0 0 2 0'/%3E%3Cpolygon fill='url(%23c)' points='2 1 2 0 0 0'/%3E%3C/g%3E%3C/svg%3E");
-    background-attachment: fixed;
-    background-size: cover;
-  }
-  // .mat-card {
-  //   max-width: 80%;
-  //   margin: 1em auto;
-  //   text-align: center;
-  //   height: 450px;
-  //   grid-template-columns: auto auto;
-  //   grid-gap: 10px;
-  // }
+  min-height: 100%;
+  padding: 0.5% 1rem;
+  background-color: rgb(208, 228, 250);
+  display: block;
+  // background-color: #77aa77;
+  // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 2 1'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%2377aa77'/%3E%3Cstop offset='1' stop-color='%234fd'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23cf8' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23cf8' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='2' y2='2'%3E%3Cstop offset='0' stop-color='%23cf8' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23cf8' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='2' height='1'/%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23b)' points='0 1 0 0 2 0'/%3E%3Cpolygon fill='url(%23c)' points='2 1 2 0 0 0'/%3E%3C/g%3E%3C/svg%3E");
+  // background-attachment: fixed;
+  // background-size: cover;
 
-  .full-width {
-    width: 80%;
-  }
+  // background-color: #2e004d;
+  // background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%232E004D' cx='50' cy='0' r='50'/%3E%3Cg fill='%232d0149' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%232c0246' cx='50' cy='100' r='50'/%3E%3Cg fill='%232a0342' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%2329033e' cx='50' cy='200' r='50'/%3E%3Cg fill='%2327043b' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23260537' cx='50' cy='300' r='50'/%3E%3Cg fill='%23240534' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23230531' cx='50' cy='400' r='50'/%3E%3Cg fill='%2321052d' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%2320052a' cx='50' cy='500' r='50'/%3E%3Cg fill='%231f0527' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%231d0424' cx='50' cy='600' r='50'/%3E%3Cg fill='%231c0321' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%231a031e' cx='50' cy='700' r='50'/%3E%3Cg fill='%2318021b' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23150218' cx='50' cy='800' r='50'/%3E%3Cg fill='%23130115' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%230f0111' cx='50' cy='900' r='50'/%3E%3Cg fill='%230c000d' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23070008' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+  // background-attachment: fixed;
+  // background-size: contain;
 
-  .img-login
-  {
-    width: 80%;
-    height: 80%;
-  }
 
-  .username 
-  {
-    width: 100%;
-  }
+  background-color: #B479CC;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23B479CC' cx='50' cy='0' r='50'/%3E%3Cg fill='%23ab73c1' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23a16cb6' cx='50' cy='100' r='50'/%3E%3Cg fill='%239866ac' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%238f60a1' cx='50' cy='200' r='50'/%3E%3Cg fill='%23865997' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%237d538d' cx='50' cy='300' r='50'/%3E%3Cg fill='%23754d83' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%236c4779' cx='50' cy='400' r='50'/%3E%3Cg fill='%2363426f' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%235b3c65' cx='50' cy='500' r='50'/%3E%3Cg fill='%2353365c' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%234a3153' cx='50' cy='600' r='50'/%3E%3Cg fill='%23422b4a' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%233a2641' cx='50' cy='700' r='50'/%3E%3Cg fill='%23332138' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%232b1b30' cx='50' cy='800' r='50'/%3E%3Cg fill='%23241627' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%231d111f' cx='50' cy='900' r='50'/%3E%3Cg fill='%23160a18' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%230D000F' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: contain;
+}
+// .mat-card {
+//   max-width: 80%;
+//   margin: 1em auto;
+//   text-align: center;
+//   height: 450px;
+//   grid-template-columns: auto auto;
+//   grid-gap: 10px;
+// }
 
-  .password 
-  {
-    width: 100%;
-  }
-
- .title{
-    width: 17%;
+.full-width {
+  width: 80%;
 }
 
-.dob
-{
+.img-login {
+  width: 80%;
+  height: 80%;
+}
+
+.username {
+  width: 100%;
+}
+
+.password {
+  width: 100%;
+}
+
+.title {
+  width: 17%;
+}
+
+.dob {
   width: 19%;
 }
 
 @media only screen and (max-width: 600px) {
-  .dob
-  {
+  .dob {
     width: 50%;
   }
-  .title
-  {
+  .title {
     width: 50%;
   }
 }
