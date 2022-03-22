@@ -19,7 +19,7 @@ export class VisitHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId = sessionStorage.getItem("userId")
+  this.userId = sessionStorage.getItem("userId")
     this.loadData()
   }
 
