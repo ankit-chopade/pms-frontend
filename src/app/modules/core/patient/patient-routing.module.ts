@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: 'visit-history',
     component: VisitHistoryComponent,
-    canActivate: [!PatientAuthGuardService && !AdminAuthGuardService]
+    canActivate: [PatientAuthGuardService]
   },
   {
     path: 'vital-signs/:action/:id',
