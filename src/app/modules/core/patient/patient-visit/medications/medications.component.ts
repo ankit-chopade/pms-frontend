@@ -138,11 +138,7 @@ export class MedicationsComponent
     });
   }
 
-  nextButtonClick() {
-    this.router.navigate(['../dashboard/patient/procedures/view',this.action, this.appointmentId], {
-      skipLocationChange: true
-    });
-  }
+  
   previousButtonClick() {
     this.router.navigate(['../dashboard/patient/procedures/',this.action, this.appointmentId], {
       skipLocationChange: true
