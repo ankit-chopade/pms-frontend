@@ -39,13 +39,17 @@ export class LoginComponent extends FormBaseController<any> {
     super(formConfig.loginForm, '');
   }
 
-  user: string = ''; //"chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"//
-  // "kvmanish.chaudhary@gmail.com";
-  password: string = ''; //"Admin@1234"
+  user: string = "";//"chopadeankit1997@gmail.com"//"singhaniaharshths@gmail.com"//
+    // "kvmanish.chaudhary@gmail.com";
+  password: string = ""; //"Admin@1234"
+  returnUrl: string;
 
   ngOnInit(): void {
-    this.clearFormControls();
+    this.appService.setUserLoggedIn(false);
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '../dashboard';
+    this.clearFormControls(); 
   }
+
   submitloginForm() {
     const param = {
       emailId: this.getControlValue('username'),
@@ -60,7 +64,7 @@ export class LoginComponent extends FormBaseController<any> {
           if (res && res['result'] && res['status'] === 200) {
             StorageService.setSessionDetails(res['result']);
             this.appService.setUserLoggedIn(true);
-            this.router.navigate(['../dashboard']);
+            this.router.navigate([this.returnUrl]);
             if (sessionStorage.getItem('roleId') == '5') {
               this.router.navigate(['../dashboard/inbox/patient-inbox']);
             } else if (sessionStorage.getItem('roleId') == '4') {
@@ -79,14 +83,11 @@ export class LoginComponent extends FormBaseController<any> {
             this.notifyService.showError(
               'Invalid Username or Password',
               'Error'
-            );
+            );}
           }
-        },
-        (err) => {
-          // this.notifyService.showError(err['error'].message, '');
-          this.notifyService.showError('Invalid Username or Password', 'Error');
-        }
-      );
+            );
+      password: this.getControlValue('password');
+
     }
   }
 
