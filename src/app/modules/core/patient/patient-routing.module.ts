@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminAuthGuardService } from '../../default/service/admin-auth-guard-service.service';
+import { NurseAuthGuardService } from '../../default/service/nurse-auth-guard-service.service';
 import { PatientAuthGuardService } from '../../default/service/patient-auth-guard-service.service';
+import { PhysicianAuthGuardService } from '../../default/service/physician-auth-guard-service.service';
+import { PhysicianNurseAuthGuardService } from '../../default/service/physician-nurse-auth-guard-service';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
 import { PatientPortalDetailsComponent } from './patient-portal-details/patient-portal-details.component';
@@ -21,12 +24,12 @@ const routes: Routes = [
   {
     path: 'details/:userId',
     component: PatientPortalDetailsComponent,
-    canActivate: [!PatientAuthGuardService && !AdminAuthGuardService]
+    canActivate: [PhysicianNurseAuthGuardService]
   },
   {
     path: 'portal-screen',
     component: PatientPortalScreenComponent,
-    canActivate: [!PatientAuthGuardService && !AdminAuthGuardService]
+    canActivate: [PhysicianNurseAuthGuardService]
   },
   {
     path: 'patient-details',

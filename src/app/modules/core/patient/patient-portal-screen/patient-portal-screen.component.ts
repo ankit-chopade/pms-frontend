@@ -18,7 +18,9 @@ export class PatientPortalScreenComponent implements OnInit {
  columnsToDisplay: string[] = ['userId','title','firstName','lastName','details'];
  @ViewChild('paginator') paginator : MatPaginator ;
  @ViewChild(MatSort, { static: false }) set sort(s: MatSort) {
+   if(this.dataSource!=undefined){
     this.dataSource.sort = s;
+   }
   }
  
   constructor(private matDialog:MatDialog ,private router :Router ,private service :ApiService) { }
@@ -41,6 +43,14 @@ export class PatientPortalScreenComponent implements OnInit {
       
     this.router.navigate(['/dashboard/patient/details',userId])
     
+  }
+  goToPatientDetails(patientId: number) {
+    this.router.navigate(
+      ['../dashboard/patient/patient-details/', patientId],
+      {
+        skipLocationChange: true,
+      }
+    );
   }
 
 }

@@ -32,7 +32,7 @@
     <ng-container matColumnDef="details">
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="popup_click(element.userId)">
+        <button mat-icon-button (click)="goToPatientDetails(element.userId)">
           <mat-icon>launch</mat-icon>
         </button>
       </mat-cell>
