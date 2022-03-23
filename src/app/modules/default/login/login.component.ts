@@ -87,10 +87,11 @@ export class LoginComponent extends FormBaseController<any> {
               'Invalid Username or Password',
               'Error'
             );}
-          }
+          },(err)=>{ this.notifyService.showError(
+            err['error'].message,
+            'Error'
+          );}
             );
-      password: this.getControlValue('password');
-
     }
   }
 

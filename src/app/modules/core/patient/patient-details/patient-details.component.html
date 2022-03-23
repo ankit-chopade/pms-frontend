@@ -322,14 +322,18 @@
             </div>
             <br />
             <div fxLayout="column" fxFlex="30"    >
-              <mat-checkbox style="margin-top: 21px;"
-                formControlName="addrsameaspatient"
-                [(ngModel)]="addrsameaspatient"
-                (change)="sameAddres()"
-                >
-                <mat-label>Address same as Patient</mat-label>
-
-              </mat-checkbox>
+              <mat-radio-group
+              fxLayoutGap="10px"
+              aria-labelledby="access-portal-radio-group"
+              fxLayoutGap="10px"
+              formControlName="accesstopatientportal"
+            >
+              <label id="access-portal-radio-group"
+                >Do you need access to patient portal?</label
+              >
+              <mat-radio-button value="yes">Yes</mat-radio-button>
+              <mat-radio-button value="no">No</mat-radio-button>
+            </mat-radio-group>
             </div>
           </div>
 
@@ -341,6 +345,17 @@
             fxLayout.lt-lg="column"
           >
             <!-- <br> -->
+            <div fxLayout="column" fxFlex="30">
+              <mat-checkbox style="margin-top: 21px;"
+                formControlName="addrsameaspatient"
+                [(ngModel)]="addrsameaspatient"
+                (change)="sameAddres()"
+                >
+                <mat-label>Address same as Patient</mat-label>
+
+              </mat-checkbox>
+            </div>
+            <br />
             <div fxLayout="column" fxFlex="30">
               <mat-form-field class="address">
                 <mat-label>Home Address</mat-label>
@@ -360,21 +375,6 @@
                   >{{ errormessage.HOMEADDRESS_REQUIRED }}
                 </mat-error>
               </mat-form-field>
-            </div>
-            <br />
-            <div fxLayout="column" fxFlex="30">
-              <mat-radio-group
-                fxLayoutGap="10px"
-                aria-labelledby="access-portal-radio-group"
-                fxLayoutGap="10px"
-                formControlName="accesstopatientportal"
-              >
-                <label id="access-portal-radio-group"
-                  >Do you need access to patient portal?</label
-                >
-                <mat-radio-button value="yes">Yes</mat-radio-button>
-                <mat-radio-button value="no">No</mat-radio-button>
-              </mat-radio-group>
             </div>
             <div fxLayout="column" fxFlex="30"></div>
           </div>

@@ -40,12 +40,10 @@ export class VitalSignsComponent
   }
 
   ngOnInit(): void {
+    this.form.reset();
     if(this.route.snapshot.params["id"]!=undefined){
       let id:any =this.route.snapshot.params["id"]
-      let action:any =this.route.snapshot.params["action"]
-
-      console.log(id +"Fetched")
-    
+      let action:any =this.route.snapshot.params["action"]    
       this.appointmentId=id
       this.action=action
       if(this.action=="view"){

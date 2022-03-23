@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminAuthGuardService } from '../../default/service/admin-auth-guard-service.service';
 import { NurseAuthGuardService } from '../../default/service/nurse-auth-guard-service.service';
 import { PatientAuthGuardService } from '../../default/service/patient-auth-guard-service.service';
+import { PatientPhysicianNurseAuthGuardService } from '../../default/service/patient-physician-nurse-auth-guard-service';
 import { PhysicianAuthGuardService } from '../../default/service/physician-auth-guard-service.service';
 import { PhysicianNurseAuthGuardService } from '../../default/service/physician-nurse-auth-guard-service';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
@@ -39,7 +40,7 @@ const routes: Routes = [
   {
     path: 'patient-details/:id',
     component: PatientDetailsComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientPhysicianNurseAuthGuardService]
   },
   {
     path: 'visit-history',
@@ -49,22 +50,22 @@ const routes: Routes = [
   {
     path: 'vital-signs/:action/:id',
     component: VitalSignsComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientPhysicianNurseAuthGuardService]
   },
   {
     path: 'diagnosis/:action/:id',
     component: DiagnosisComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientPhysicianNurseAuthGuardService]
   },
   {
     path: 'medications/:action/:id',
     component: MedicationsComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientPhysicianNurseAuthGuardService]
   },
   {
     path: 'procedures/:action/:id',
     component: ProcedureComponent,
-    canActivate: [!AdminAuthGuardService]
+    canActivate: [PatientPhysicianNurseAuthGuardService]
   }
 ];
 

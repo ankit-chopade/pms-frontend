@@ -21,7 +21,9 @@ export class EmployeeDetailsComponent  extends FormBaseController<any> implement
   employeedata:MatTableDataSource<any>;
   @ViewChild('paginator') paginator : MatPaginator ;
   @ViewChild(MatSort, { static: false }) set sort(s: MatSort) {
-    this.employeedata.sort = s;
+    if(this.employeedata!=undefined){
+      this.employeedata.sort = s;
+    }
   }
   status:string
   param:any ={userId :0 , active:0}

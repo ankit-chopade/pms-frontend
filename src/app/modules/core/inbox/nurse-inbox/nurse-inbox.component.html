@@ -18,12 +18,27 @@
           <p>Time: {{dataSource.startTime | date:"shortTime"}}</p>
           <p>Physician Name: {{dataSource.patientName}}</p>
           <p>Patient Name: {{dataSource.physicianName}}</p>
-          <button  mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToVisit(dataSource.appointmentId)">
-            Visit Detail
-          </button>
-          <button mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToPatientDetails(dataSource.patientId)">
-            Patient Detail
-          </button>
+
+          <div fxLayout="row">
+            <div
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              fxFlex="50"
+              fxLayoutGap="5px"
+            >
+            <button   mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToVisit(dataSource.appointmentId)">
+              Visit Detail
+            </button>
+            </div>
+            <div fxFlex="84"></div>
+      
+            <div fxLayout="row" fxFlex fxLayoutAlign="end center">
+              <button mat-raised-button color="primary" *ngIf="compareDate(dataSource.startTime)" (click)="goToPatientDetails(dataSource.patientId)">
+                Patient Detail
+              </button>
+            </div>
+          </div>
+
         </mat-expansion-panel>
       
       </mat-accordion>
